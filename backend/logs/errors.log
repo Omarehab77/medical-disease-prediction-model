@@ -1,0 +1,90 @@
+2026-06-28 21:07:35 | ERROR    | medical_ai | 2523173986.py:1276 | 
+Errors: 1
+2026-06-28 21:07:35 | ERROR    | medical_ai | 2523173986.py:1278 |    - Dataset for breast not loaded
+2026-06-28 21:15:29 | ERROR    | medical_ai | 821376723.py:2409 | 
+Errors: 1
+2026-06-28 21:15:29 | ERROR    | medical_ai | 821376723.py:2411 |    - Dataset for breast not loaded
+2026-06-28 21:18:14 | ERROR    | medical_ai | 821376723.py:2409 | 
+Errors: 1
+2026-06-28 21:18:14 | ERROR    | medical_ai | 821376723.py:2411 |    - Dataset for breast not loaded
+2026-06-28 21:20:04 | ERROR    | medical_ai | 821376723.py:2864 | Fuzzy extraction error: too many values to unpack (expected 2)
+2026-06-28 21:20:39 | ERROR    | medical_ai | 821376723.py:2864 | Fuzzy extraction error: too many values to unpack (expected 2)
+2026-06-28 21:20:51 | ERROR    | medical_ai | 821376723.py:2864 | Fuzzy extraction error: too many values to unpack (expected 2)
+2026-06-28 21:33:23 | ERROR    | medical_ai | 176502245.py:2422 | 
+Errors: 1
+2026-06-28 21:33:23 | ERROR    | medical_ai | 176502245.py:2424 |    - Dataset for breast not loaded
+2026-06-28 21:44:19 | ERROR    | medical_ai | 1015325776.py:2422 | 
+Errors: 1
+2026-06-28 21:44:19 | ERROR    | medical_ai | 1015325776.py:2424 |    - Dataset for breast not loaded
+2026-06-28 22:04:17 | ERROR    | medical_ai | 1015325776.py:2422 | 
+Errors: 1
+2026-06-28 22:04:17 | ERROR    | medical_ai | 1015325776.py:2424 |    - Dataset for breast not loaded
+2026-06-28 22:11:08 | ERROR    | medical_ai | 1015325776.py:2422 | 
+Errors: 1
+2026-06-28 22:11:08 | ERROR    | medical_ai | 1015325776.py:2424 |    - Dataset for breast not loaded
+2026-06-28 22:36:39 | ERROR    | medical_ai | 1015325776.py:2422 | 
+Errors: 1
+2026-06-28 22:36:39 | ERROR    | medical_ai | 1015325776.py:2424 |    - Dataset for breast not loaded
+2026-06-28 22:42:09 | ERROR    | medical_ai | 1015325776.py:2422 | 
+Errors: 1
+2026-06-28 22:42:09 | ERROR    | medical_ai | 1015325776.py:2424 |    - Dataset for breast not loaded
+2026-06-28 22:50:38 | ERROR    | medical_ai | 1015325776.py:2422 | 
+Errors: 1
+2026-06-28 22:50:38 | ERROR    | medical_ai | 1015325776.py:2424 |    - Dataset for breast not loaded
+2026-06-28 23:04:18 | ERROR    | medical_ai | 1015325776.py:2422 | 
+Errors: 1
+2026-06-28 23:04:18 | ERROR    | medical_ai | 1015325776.py:2424 |    - Dataset for breast not loaded
+2026-06-28 23:12:11 | ERROR    | medical_ai | 1015325776.py:2422 | 
+Errors: 1
+2026-06-28 23:12:11 | ERROR    | medical_ai | 1015325776.py:2424 |    - Dataset for breast not loaded
+2026-06-28 23:54:13 | ERROR    | medical_ai | 3326620415.py:422 | SYMPTOM_INDEX is empty or invalid! Using fallback symptom list.
+2026-06-28 23:54:13 | ERROR    | medical_ai | 3326620415.py:438 | SYMPTOM_SYNONYMS missing. Generating from fallback list.
+2026-06-29 17:44:45 | ERROR    | medical_ai | 90466227.py:299 | Prediction error for diabetes: 'LogisticRegression' object has no attribute 'multi_class'
+2026-06-29 17:44:51 | ERROR    | medical_ai | 90466227.py:299 | Prediction error for diabetes: 'LogisticRegression' object has no attribute 'multi_class'
+2026-06-29 18:56:13 | ERROR    | medical_ai | 3821946375.py:555 | Failed to load model from models\breast_cancer_model.pkl: 
+2026-06-30 03:51:55 | ERROR    | medical_ai | 3821946375.py:555 | Failed to load model from models\breast_cancer_model.pkl: 
+2026-06-30 04:08:01 | ERROR    | medical_ai | 3821946375.py:555 | Failed to load model from models\breast_cancer_model.pkl: 
+2026-06-30 04:08:23 | ERROR    | medical_ai | 623239494.py:26 | Failed to load lung NLP model: 'NoneType' object has no attribute 'classes_'
+2026-06-30 04:08:35 | ERROR    | medical_ai | 623239494.py:26 | Failed to load lung NLP model: 'NoneType' object has no attribute 'classes_'
+2026-06-30 04:09:34 | ERROR    | medical_ai | 3574910136.py:33 | Failed to load lung NLP model: Error no file named model.safetensors, or pytorch_model.bin, found in directory models\Lung_Model.
+2026-06-30 04:25:33 | ERROR    | medical_ai | 3574910136.py:33 | Failed to load lung NLP model: Error no file named model.safetensors, or pytorch_model.bin, found in directory models\Lung_Model.
+2026-06-30 04:29:38 | ERROR    | medical_ai | 3574910136.py:33 | Failed to load lung NLP model: Error no file named model.safetensors, or pytorch_model.bin, found in directory models\Lung_Model.
+2026-06-30 04:37:22 | ERROR    | medical_ai | 3821946375.py:555 | Failed to load model from models\breast_cancer_model.pkl: 
+2026-06-30 05:59:30 | ERROR    | medical_ai | 3821946375.py:555 | Failed to load model from models\breast_cancer_model.pkl: 
+2026-06-30 18:34:43 | ERROR    | medical_ai | 3821946375.py:555 | Failed to load model from models\breast_cancer_model.pkl: 
+2026-06-30 19:17:44 | ERROR    | medical_ai | 3821946375.py:555 | Failed to load model from models\breast_cancer_model.pkl: 
+2026-06-30 19:18:56 | ERROR    | medical_ai | 3717426781.py:18 | Failed to load brain model: Error when deserializing class 'Dense' using config={'name': 'dense_11', 'trainable': True, 'dtype': 'float32', 'units': 4, 'activation': {'module': 'builtins', 'class_name': 'function', 'config': 'softmax_v2', 'registered_name': 'function'}, 'use_bias': True, 'kernel_initializer': {'module': 'keras.initializers', 'class_name': 'GlorotUniform', 'config': {'seed': None}, 'registered_name': None}, 'bias_initializer': {'module': 'keras.initializers', 'class_name': 'Zeros', 'config': {}, 'registered_name': None}, 'kernel_regularizer': None, 'bias_regularizer': None, 'kernel_constraint': None, 'bias_constraint': None, 'quantization_config': None}.
+
+Exception encountered: Could not locate function 'softmax_v2'. Make sure custom classes and functions are decorated with `@keras.saving.register_keras_serializable()`. If they are already decorated, make sure they are all imported so that the decorator is run before trying to load them. Full object config: {'module': 'builtins', 'class_name': 'function', 'config': 'softmax_v2', 'registered_name': 'function'}
+2026-06-30 19:21:48 | ERROR    | medical_ai | 1011466527.py:21 | Failed to load brain model: Error when deserializing class 'Dense' using config={'name': 'dense_11', 'trainable': True, 'dtype': 'float32', 'units': 4, 'activation': {'module': 'builtins', 'class_name': 'function', 'config': 'softmax_v2', 'registered_name': 'function'}, 'use_bias': True, 'kernel_initializer': {'module': 'keras.initializers', 'class_name': 'GlorotUniform', 'config': {'seed': None}, 'registered_name': None}, 'bias_initializer': {'module': 'keras.initializers', 'class_name': 'Zeros', 'config': {}, 'registered_name': None}, 'kernel_regularizer': None, 'bias_regularizer': None, 'kernel_constraint': None, 'bias_constraint': None, 'quantization_config': None}.
+
+Exception encountered: Could not locate function 'softmax_v2'. Make sure custom classes and functions are decorated with `@keras.saving.register_keras_serializable()`. If they are already decorated, make sure they are all imported so that the decorator is run before trying to load them. Full object config: {'module': 'builtins', 'class_name': 'function', 'config': 'softmax_v2', 'registered_name': 'function'}
+2026-06-30 19:37:58 | ERROR    | medical_ai | 4091504367.py:514 | Failed to load model from models\breast_cancer_model.pkl: 
+2026-06-30 19:44:58 | ERROR    | medical_ai | 4091504367.py:514 | Failed to load model from models\breast_cancer_model.pkl: 
+2026-06-30 19:53:40 | ERROR    | medical_ai | 4091504367.py:514 | Failed to load model from models\breast_cancer_model.pkl: 
+2026-06-30 20:04:53 | ERROR    | medical_ai | 4091504367.py:514 | Failed to load model from models\breast_cancer_model.pkl: 
+2026-06-30 20:19:50 | ERROR    | medical_ai | 2124621760.py:514 | Failed to load model from models\breast_cancer_model.pkl: 
+2026-06-30 20:38:39 | ERROR    | medical_ai | main.py:1393 | Failed to load model from models\breast_cancer_model.pkl: 
+2026-06-30 21:17:24 | ERROR    | medical_ai | main.py:2780 |  Preprocessor transform failed: columns are missing: {'concave points_se', 'concave points_worst', 'concave points_mean'}. Using raw features.
+2026-06-30 21:17:24 | ERROR    | medical_ai | main.py:2780 |  Preprocessor transform failed: columns are missing: {'concave points_se', 'concave points_worst', 'concave points_mean'}. Using raw features.
+2026-06-30 21:17:24 | ERROR    | medical_ai | main.py:2780 |  Preprocessor transform failed: columns are missing: {'concave points_se', 'concave points_worst', 'concave points_mean'}. Using raw features.
+2026-06-30 21:17:29 | ERROR    | medical_ai | main.py:2780 |  Preprocessor transform failed: columns are missing: {'concave points_se', 'concave points_worst', 'concave points_mean'}. Using raw features.
+2026-06-30 21:17:34 | ERROR    | medical_ai | main.py:2780 |  Preprocessor transform failed: columns are missing: {'concave points_se', 'concave points_worst', 'concave points_mean'}. Using raw features.
+2026-06-30 21:17:40 | ERROR    | medical_ai | main.py:2780 |  Preprocessor transform failed: columns are missing: {'concave points_se', 'concave points_worst', 'concave points_mean'}. Using raw features.
+2026-06-30 21:17:44 | ERROR    | medical_ai | main.py:2780 |  Preprocessor transform failed: columns are missing: {'concave points_se', 'concave points_worst', 'concave points_mean'}. Using raw features.
+2026-06-30 21:17:48 | ERROR    | medical_ai | main.py:2780 |  Preprocessor transform failed: columns are missing: {'concave points_se', 'concave points_worst', 'concave points_mean'}. Using raw features.
+2026-06-30 21:17:51 | ERROR    | medical_ai | main.py:2780 |  Preprocessor transform failed: columns are missing: {'concave points_se', 'concave points_worst', 'concave points_mean'}. Using raw features.
+2026-06-30 21:17:54 | ERROR    | medical_ai | main.py:2780 |  Preprocessor transform failed: columns are missing: {'concave points_se', 'concave points_worst', 'concave points_mean'}. Using raw features.
+2026-06-30 21:18:01 | ERROR    | medical_ai | main.py:2780 |  Preprocessor transform failed: columns are missing: {'concave points_se', 'concave points_worst', 'concave points_mean'}. Using raw features.
+2026-06-30 21:18:16 | ERROR    | medical_ai | main.py:2780 |  Preprocessor transform failed: columns are missing: {'concave points_se', 'concave points_worst', 'concave points_mean'}. Using raw features.
+2026-07-01 05:09:26 | ERROR    | medical_ai | main.py:2822 |  Preprocessor transform failed: columns are missing: {'concave points_worst', 'concave points_mean', 'concave points_se'}. Falling back to raw features.
+2026-07-01 05:09:37 | ERROR    | medical_ai | main.py:2822 |  Preprocessor transform failed: columns are missing: {'concave points_worst', 'concave points_mean', 'concave points_se'}. Falling back to raw features.
+2026-07-01 05:09:44 | ERROR    | medical_ai | main.py:2822 |  Preprocessor transform failed: columns are missing: {'concave points_worst', 'concave points_mean', 'concave points_se'}. Falling back to raw features.
+2026-07-01 05:09:44 | ERROR    | medical_ai | main.py:2822 |  Preprocessor transform failed: columns are missing: {'concave points_worst', 'concave points_mean', 'concave points_se'}. Falling back to raw features.
+2026-07-01 05:09:44 | ERROR    | medical_ai | main.py:2822 |  Preprocessor transform failed: columns are missing: {'concave points_worst', 'concave points_mean', 'concave points_se'}. Falling back to raw features.
+2026-07-01 05:09:54 | ERROR    | medical_ai | main.py:2822 |  Preprocessor transform failed: columns are missing: {'concave points_worst', 'concave points_mean', 'concave points_se'}. Falling back to raw features.
+2026-07-01 05:10:04 | ERROR    | medical_ai | main.py:2822 |  Preprocessor transform failed: columns are missing: {'concave points_worst', 'concave points_mean', 'concave points_se'}. Falling back to raw features.
+2026-07-01 05:10:17 | ERROR    | medical_ai | main.py:2822 |  Preprocessor transform failed: columns are missing: {'concave points_worst', 'concave points_mean', 'concave points_se'}. Falling back to raw features.
+2026-07-01 05:16:48 | ERROR    | medical_ai | main.py:2822 |  Preprocessor transform failed: columns are missing: {'concave points_worst', 'concave points_mean', 'concave points_se'}. Falling back to raw features.
+2026-07-01 05:18:02 | ERROR    | medical_ai | main.py:2822 |  Preprocessor transform failed: columns are missing: {'concave points_worst', 'concave points_mean', 'concave points_se'}. Falling back to raw features.
+2026-07-01 05:18:18 | ERROR    | medical_ai | main.py:2822 |  Preprocessor transform failed: columns are missing: {'concave points_worst', 'concave points_mean', 'concave points_se'}. Falling back to raw features.

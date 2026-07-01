@@ -1,0 +1,371 @@
+2026-06-28 21:07:27 | WARNING  | medical_ai | 2523173986.py:623 |    Model compatibility issues found
+2026-06-28 21:07:27 | WARNING  | medical_ai | 2523173986.py:623 |    Model compatibility issues found
+2026-06-28 21:07:34 | WARNING  | medical_ai | 2523173986.py:1183 | Found 46 integrity issues:
+2026-06-28 21:07:34 | WARNING  | medical_ai | 2523173986.py:1185 |    - Disease 'Anemia' has no description
+2026-06-28 21:07:34 | WARNING  | medical_ai | 2523173986.py:1185 |    - Disease 'Anemia' has no precautions
+2026-06-28 21:07:34 | WARNING  | medical_ai | 2523173986.py:1185 |    - Disease 'Anxiety' has no description
+2026-06-28 21:07:34 | WARNING  | medical_ai | 2523173986.py:1185 |    - Disease 'Anxiety' has no precautions
+2026-06-28 21:07:34 | WARNING  | medical_ai | 2523173986.py:1185 |    - Disease 'Asthma' has no description
+2026-06-28 21:07:34 | WARNING  | medical_ai | 2523173986.py:1185 |    - Disease 'Asthma' has no precautions
+2026-06-28 21:07:34 | WARNING  | medical_ai | 2523173986.py:1185 |    - Disease 'Bronchitis' has no description
+2026-06-28 21:07:34 | WARNING  | medical_ai | 2523173986.py:1185 |    - Disease 'Bronchitis' has no precautions
+2026-06-28 21:07:34 | WARNING  | medical_ai | 2523173986.py:1185 |    - Disease 'COVID-19' has no description
+2026-06-28 21:07:34 | WARNING  | medical_ai | 2523173986.py:1185 |    - Disease 'COVID-19' has no precautions
+2026-06-28 21:07:34 | WARNING  | medical_ai | 2523173986.py:1187 |    ... and 36 more
+2026-06-28 21:07:35 | WARNING  | medical_ai | 2523173986.py:1269 | 
+Warnings: 4
+2026-06-28 21:07:35 | WARNING  | medical_ai | 2523173986.py:1271 |    - Preprocessor test failed: 'ColumnTransformer' object has no attribute '_name_to_fitted_passthrough'
+2026-06-28 21:07:35 | WARNING  | medical_ai | 2523173986.py:1271 |    - Prediction test failed: 'ColumnTransformer' object has no attribute '_name_to_fitted_passthrough'
+2026-06-28 21:07:35 | WARNING  | medical_ai | 2523173986.py:1271 |    - Preprocessor test failed: 'ColumnTransformer' object has no attribute '_name_to_fitted_passthrough'
+2026-06-28 21:07:35 | WARNING  | medical_ai | 2523173986.py:1271 |    - Prediction test failed: 'ColumnTransformer' object has no attribute '_name_to_fitted_passthrough'
+2026-06-28 21:07:35 | ERROR    | medical_ai | 2523173986.py:1276 | 
+Errors: 1
+2026-06-28 21:07:35 | ERROR    | medical_ai | 2523173986.py:1278 |    - Dataset for breast not loaded
+2026-06-28 21:15:28 | WARNING  | medical_ai | 821376723.py:1756 |    Model compatibility issues found
+2026-06-28 21:15:28 | WARNING  | medical_ai | 821376723.py:1756 |    Model compatibility issues found
+2026-06-28 21:15:29 | WARNING  | medical_ai | 821376723.py:2316 | Found 46 integrity issues:
+2026-06-28 21:15:29 | WARNING  | medical_ai | 821376723.py:2318 |    - Disease 'Anemia' has no description
+2026-06-28 21:15:29 | WARNING  | medical_ai | 821376723.py:2318 |    - Disease 'Anemia' has no precautions
+2026-06-28 21:15:29 | WARNING  | medical_ai | 821376723.py:2318 |    - Disease 'Anxiety' has no description
+2026-06-28 21:15:29 | WARNING  | medical_ai | 821376723.py:2318 |    - Disease 'Anxiety' has no precautions
+2026-06-28 21:15:29 | WARNING  | medical_ai | 821376723.py:2318 |    - Disease 'Asthma' has no description
+2026-06-28 21:15:29 | WARNING  | medical_ai | 821376723.py:2318 |    - Disease 'Asthma' has no precautions
+2026-06-28 21:15:29 | WARNING  | medical_ai | 821376723.py:2318 |    - Disease 'Bronchitis' has no description
+2026-06-28 21:15:29 | WARNING  | medical_ai | 821376723.py:2318 |    - Disease 'Bronchitis' has no precautions
+2026-06-28 21:15:29 | WARNING  | medical_ai | 821376723.py:2318 |    - Disease 'COVID-19' has no description
+2026-06-28 21:15:29 | WARNING  | medical_ai | 821376723.py:2318 |    - Disease 'COVID-19' has no precautions
+2026-06-28 21:15:29 | WARNING  | medical_ai | 821376723.py:2320 |    ... and 36 more
+2026-06-28 21:15:29 | WARNING  | medical_ai | 821376723.py:2402 | 
+Warnings: 4
+2026-06-28 21:15:29 | WARNING  | medical_ai | 821376723.py:2404 |    - Preprocessor test failed: 'ColumnTransformer' object has no attribute '_name_to_fitted_passthrough'
+2026-06-28 21:15:29 | WARNING  | medical_ai | 821376723.py:2404 |    - Prediction test failed: 'ColumnTransformer' object has no attribute '_name_to_fitted_passthrough'
+2026-06-28 21:15:29 | WARNING  | medical_ai | 821376723.py:2404 |    - Preprocessor test failed: 'ColumnTransformer' object has no attribute '_name_to_fitted_passthrough'
+2026-06-28 21:15:29 | WARNING  | medical_ai | 821376723.py:2404 |    - Prediction test failed: 'ColumnTransformer' object has no attribute '_name_to_fitted_passthrough'
+2026-06-28 21:15:29 | ERROR    | medical_ai | 821376723.py:2409 | 
+Errors: 1
+2026-06-28 21:15:29 | ERROR    | medical_ai | 821376723.py:2411 |    - Dataset for breast not loaded
+2026-06-28 21:18:12 | WARNING  | medical_ai | 821376723.py:1756 |    Model compatibility issues found
+2026-06-28 21:18:12 | WARNING  | medical_ai | 821376723.py:1756 |    Model compatibility issues found
+2026-06-28 21:18:14 | WARNING  | medical_ai | 821376723.py:2316 | Found 46 integrity issues:
+2026-06-28 21:18:14 | WARNING  | medical_ai | 821376723.py:2318 |    - Disease 'Anemia' has no description
+2026-06-28 21:18:14 | WARNING  | medical_ai | 821376723.py:2318 |    - Disease 'Anemia' has no precautions
+2026-06-28 21:18:14 | WARNING  | medical_ai | 821376723.py:2318 |    - Disease 'Anxiety' has no description
+2026-06-28 21:18:14 | WARNING  | medical_ai | 821376723.py:2318 |    - Disease 'Anxiety' has no precautions
+2026-06-28 21:18:14 | WARNING  | medical_ai | 821376723.py:2318 |    - Disease 'Asthma' has no description
+2026-06-28 21:18:14 | WARNING  | medical_ai | 821376723.py:2318 |    - Disease 'Asthma' has no precautions
+2026-06-28 21:18:14 | WARNING  | medical_ai | 821376723.py:2318 |    - Disease 'Bronchitis' has no description
+2026-06-28 21:18:14 | WARNING  | medical_ai | 821376723.py:2318 |    - Disease 'Bronchitis' has no precautions
+2026-06-28 21:18:14 | WARNING  | medical_ai | 821376723.py:2318 |    - Disease 'COVID-19' has no description
+2026-06-28 21:18:14 | WARNING  | medical_ai | 821376723.py:2318 |    - Disease 'COVID-19' has no precautions
+2026-06-28 21:18:14 | WARNING  | medical_ai | 821376723.py:2320 |    ... and 36 more
+2026-06-28 21:18:14 | WARNING  | medical_ai | 821376723.py:2402 | 
+Warnings: 4
+2026-06-28 21:18:14 | WARNING  | medical_ai | 821376723.py:2404 |    - Preprocessor test failed: 'ColumnTransformer' object has no attribute '_name_to_fitted_passthrough'
+2026-06-28 21:18:14 | WARNING  | medical_ai | 821376723.py:2404 |    - Prediction test failed: 'ColumnTransformer' object has no attribute '_name_to_fitted_passthrough'
+2026-06-28 21:18:14 | WARNING  | medical_ai | 821376723.py:2404 |    - Preprocessor test failed: 'ColumnTransformer' object has no attribute '_name_to_fitted_passthrough'
+2026-06-28 21:18:14 | WARNING  | medical_ai | 821376723.py:2404 |    - Prediction test failed: 'ColumnTransformer' object has no attribute '_name_to_fitted_passthrough'
+2026-06-28 21:18:14 | ERROR    | medical_ai | 821376723.py:2409 | 
+Errors: 1
+2026-06-28 21:18:14 | ERROR    | medical_ai | 821376723.py:2411 |    - Dataset for breast not loaded
+2026-06-28 21:20:04 | ERROR    | medical_ai | 821376723.py:2864 | Fuzzy extraction error: too many values to unpack (expected 2)
+2026-06-28 21:20:39 | ERROR    | medical_ai | 821376723.py:2864 | Fuzzy extraction error: too many values to unpack (expected 2)
+2026-06-28 21:20:51 | ERROR    | medical_ai | 821376723.py:2864 | Fuzzy extraction error: too many values to unpack (expected 2)
+2026-06-28 21:33:22 | WARNING  | medical_ai | 176502245.py:1769 |    Model compatibility issues found
+2026-06-28 21:33:22 | WARNING  | medical_ai | 176502245.py:1769 |    Model compatibility issues found
+2026-06-28 21:33:23 | WARNING  | medical_ai | 176502245.py:2329 | Found 46 integrity issues:
+2026-06-28 21:33:23 | WARNING  | medical_ai | 176502245.py:2331 |    - Disease 'Anemia' has no description
+2026-06-28 21:33:23 | WARNING  | medical_ai | 176502245.py:2331 |    - Disease 'Anemia' has no precautions
+2026-06-28 21:33:23 | WARNING  | medical_ai | 176502245.py:2331 |    - Disease 'Anxiety' has no description
+2026-06-28 21:33:23 | WARNING  | medical_ai | 176502245.py:2331 |    - Disease 'Anxiety' has no precautions
+2026-06-28 21:33:23 | WARNING  | medical_ai | 176502245.py:2331 |    - Disease 'Asthma' has no description
+2026-06-28 21:33:23 | WARNING  | medical_ai | 176502245.py:2331 |    - Disease 'Asthma' has no precautions
+2026-06-28 21:33:23 | WARNING  | medical_ai | 176502245.py:2331 |    - Disease 'Bronchitis' has no description
+2026-06-28 21:33:23 | WARNING  | medical_ai | 176502245.py:2331 |    - Disease 'Bronchitis' has no precautions
+2026-06-28 21:33:23 | WARNING  | medical_ai | 176502245.py:2331 |    - Disease 'COVID-19' has no description
+2026-06-28 21:33:23 | WARNING  | medical_ai | 176502245.py:2331 |    - Disease 'COVID-19' has no precautions
+2026-06-28 21:33:23 | WARNING  | medical_ai | 176502245.py:2333 |    ... and 36 more
+2026-06-28 21:33:23 | WARNING  | medical_ai | 176502245.py:2415 | 
+Warnings: 4
+2026-06-28 21:33:23 | WARNING  | medical_ai | 176502245.py:2417 |    - Preprocessor test failed: 'ColumnTransformer' object has no attribute '_name_to_fitted_passthrough'
+2026-06-28 21:33:23 | WARNING  | medical_ai | 176502245.py:2417 |    - Prediction test failed: 'ColumnTransformer' object has no attribute '_name_to_fitted_passthrough'
+2026-06-28 21:33:23 | WARNING  | medical_ai | 176502245.py:2417 |    - Preprocessor test failed: 'ColumnTransformer' object has no attribute '_name_to_fitted_passthrough'
+2026-06-28 21:33:23 | WARNING  | medical_ai | 176502245.py:2417 |    - Prediction test failed: 'ColumnTransformer' object has no attribute '_name_to_fitted_passthrough'
+2026-06-28 21:33:23 | ERROR    | medical_ai | 176502245.py:2422 | 
+Errors: 1
+2026-06-28 21:33:23 | ERROR    | medical_ai | 176502245.py:2424 |    - Dataset for breast not loaded
+2026-06-28 21:44:17 | WARNING  | medical_ai | 1015325776.py:1769 |    Model compatibility issues found
+2026-06-28 21:44:17 | WARNING  | medical_ai | 1015325776.py:1769 |    Model compatibility issues found
+2026-06-28 21:44:18 | WARNING  | medical_ai | 1015325776.py:2329 | Found 46 integrity issues:
+2026-06-28 21:44:18 | WARNING  | medical_ai | 1015325776.py:2331 |    - Disease 'Anemia' has no description
+2026-06-28 21:44:18 | WARNING  | medical_ai | 1015325776.py:2331 |    - Disease 'Anemia' has no precautions
+2026-06-28 21:44:18 | WARNING  | medical_ai | 1015325776.py:2331 |    - Disease 'Anxiety' has no description
+2026-06-28 21:44:18 | WARNING  | medical_ai | 1015325776.py:2331 |    - Disease 'Anxiety' has no precautions
+2026-06-28 21:44:18 | WARNING  | medical_ai | 1015325776.py:2331 |    - Disease 'Asthma' has no description
+2026-06-28 21:44:18 | WARNING  | medical_ai | 1015325776.py:2331 |    - Disease 'Asthma' has no precautions
+2026-06-28 21:44:18 | WARNING  | medical_ai | 1015325776.py:2331 |    - Disease 'Bronchitis' has no description
+2026-06-28 21:44:18 | WARNING  | medical_ai | 1015325776.py:2331 |    - Disease 'Bronchitis' has no precautions
+2026-06-28 21:44:18 | WARNING  | medical_ai | 1015325776.py:2331 |    - Disease 'COVID-19' has no description
+2026-06-28 21:44:18 | WARNING  | medical_ai | 1015325776.py:2331 |    - Disease 'COVID-19' has no precautions
+2026-06-28 21:44:18 | WARNING  | medical_ai | 1015325776.py:2333 |    ... and 36 more
+2026-06-28 21:44:19 | WARNING  | medical_ai | 1015325776.py:2415 | 
+Warnings: 4
+2026-06-28 21:44:19 | WARNING  | medical_ai | 1015325776.py:2417 |    - Preprocessor test failed: 'ColumnTransformer' object has no attribute '_name_to_fitted_passthrough'
+2026-06-28 21:44:19 | WARNING  | medical_ai | 1015325776.py:2417 |    - Prediction test failed: 'ColumnTransformer' object has no attribute '_name_to_fitted_passthrough'
+2026-06-28 21:44:19 | WARNING  | medical_ai | 1015325776.py:2417 |    - Preprocessor test failed: 'ColumnTransformer' object has no attribute '_name_to_fitted_passthrough'
+2026-06-28 21:44:19 | WARNING  | medical_ai | 1015325776.py:2417 |    - Prediction test failed: 'ColumnTransformer' object has no attribute '_name_to_fitted_passthrough'
+2026-06-28 21:44:19 | ERROR    | medical_ai | 1015325776.py:2422 | 
+Errors: 1
+2026-06-28 21:44:19 | ERROR    | medical_ai | 1015325776.py:2424 |    - Dataset for breast not loaded
+2026-06-28 22:04:15 | WARNING  | medical_ai | 1015325776.py:1769 |    Model compatibility issues found
+2026-06-28 22:04:15 | WARNING  | medical_ai | 1015325776.py:1769 |    Model compatibility issues found
+2026-06-28 22:04:16 | WARNING  | medical_ai | 1015325776.py:2329 | Found 46 integrity issues:
+2026-06-28 22:04:16 | WARNING  | medical_ai | 1015325776.py:2331 |    - Disease 'Anemia' has no description
+2026-06-28 22:04:16 | WARNING  | medical_ai | 1015325776.py:2331 |    - Disease 'Anemia' has no precautions
+2026-06-28 22:04:16 | WARNING  | medical_ai | 1015325776.py:2331 |    - Disease 'Anxiety' has no description
+2026-06-28 22:04:16 | WARNING  | medical_ai | 1015325776.py:2331 |    - Disease 'Anxiety' has no precautions
+2026-06-28 22:04:16 | WARNING  | medical_ai | 1015325776.py:2331 |    - Disease 'Asthma' has no description
+2026-06-28 22:04:16 | WARNING  | medical_ai | 1015325776.py:2331 |    - Disease 'Asthma' has no precautions
+2026-06-28 22:04:16 | WARNING  | medical_ai | 1015325776.py:2331 |    - Disease 'Bronchitis' has no description
+2026-06-28 22:04:16 | WARNING  | medical_ai | 1015325776.py:2331 |    - Disease 'Bronchitis' has no precautions
+2026-06-28 22:04:16 | WARNING  | medical_ai | 1015325776.py:2331 |    - Disease 'COVID-19' has no description
+2026-06-28 22:04:16 | WARNING  | medical_ai | 1015325776.py:2331 |    - Disease 'COVID-19' has no precautions
+2026-06-28 22:04:16 | WARNING  | medical_ai | 1015325776.py:2333 |    ... and 36 more
+2026-06-28 22:04:17 | WARNING  | medical_ai | 1015325776.py:2415 | 
+Warnings: 4
+2026-06-28 22:04:17 | WARNING  | medical_ai | 1015325776.py:2417 |    - Preprocessor test failed: 'ColumnTransformer' object has no attribute '_name_to_fitted_passthrough'
+2026-06-28 22:04:17 | WARNING  | medical_ai | 1015325776.py:2417 |    - Prediction test failed: 'ColumnTransformer' object has no attribute '_name_to_fitted_passthrough'
+2026-06-28 22:04:17 | WARNING  | medical_ai | 1015325776.py:2417 |    - Preprocessor test failed: 'ColumnTransformer' object has no attribute '_name_to_fitted_passthrough'
+2026-06-28 22:04:17 | WARNING  | medical_ai | 1015325776.py:2417 |    - Prediction test failed: 'ColumnTransformer' object has no attribute '_name_to_fitted_passthrough'
+2026-06-28 22:04:17 | ERROR    | medical_ai | 1015325776.py:2422 | 
+Errors: 1
+2026-06-28 22:04:17 | ERROR    | medical_ai | 1015325776.py:2424 |    - Dataset for breast not loaded
+2026-06-28 22:11:06 | WARNING  | medical_ai | 1015325776.py:1769 |    Model compatibility issues found
+2026-06-28 22:11:07 | WARNING  | medical_ai | 1015325776.py:1769 |    Model compatibility issues found
+2026-06-28 22:11:07 | WARNING  | medical_ai | 1015325776.py:2329 | Found 46 integrity issues:
+2026-06-28 22:11:07 | WARNING  | medical_ai | 1015325776.py:2331 |    - Disease 'Anemia' has no description
+2026-06-28 22:11:07 | WARNING  | medical_ai | 1015325776.py:2331 |    - Disease 'Anemia' has no precautions
+2026-06-28 22:11:07 | WARNING  | medical_ai | 1015325776.py:2331 |    - Disease 'Anxiety' has no description
+2026-06-28 22:11:07 | WARNING  | medical_ai | 1015325776.py:2331 |    - Disease 'Anxiety' has no precautions
+2026-06-28 22:11:07 | WARNING  | medical_ai | 1015325776.py:2331 |    - Disease 'Asthma' has no description
+2026-06-28 22:11:07 | WARNING  | medical_ai | 1015325776.py:2331 |    - Disease 'Asthma' has no precautions
+2026-06-28 22:11:07 | WARNING  | medical_ai | 1015325776.py:2331 |    - Disease 'Bronchitis' has no description
+2026-06-28 22:11:07 | WARNING  | medical_ai | 1015325776.py:2331 |    - Disease 'Bronchitis' has no precautions
+2026-06-28 22:11:07 | WARNING  | medical_ai | 1015325776.py:2331 |    - Disease 'COVID-19' has no description
+2026-06-28 22:11:07 | WARNING  | medical_ai | 1015325776.py:2331 |    - Disease 'COVID-19' has no precautions
+2026-06-28 22:11:07 | WARNING  | medical_ai | 1015325776.py:2333 |    ... and 36 more
+2026-06-28 22:11:08 | WARNING  | medical_ai | 1015325776.py:2415 | 
+Warnings: 4
+2026-06-28 22:11:08 | WARNING  | medical_ai | 1015325776.py:2417 |    - Preprocessor test failed: 'ColumnTransformer' object has no attribute '_name_to_fitted_passthrough'
+2026-06-28 22:11:08 | WARNING  | medical_ai | 1015325776.py:2417 |    - Prediction test failed: 'ColumnTransformer' object has no attribute '_name_to_fitted_passthrough'
+2026-06-28 22:11:08 | WARNING  | medical_ai | 1015325776.py:2417 |    - Preprocessor test failed: 'ColumnTransformer' object has no attribute '_name_to_fitted_passthrough'
+2026-06-28 22:11:08 | WARNING  | medical_ai | 1015325776.py:2417 |    - Prediction test failed: 'ColumnTransformer' object has no attribute '_name_to_fitted_passthrough'
+2026-06-28 22:11:08 | ERROR    | medical_ai | 1015325776.py:2422 | 
+Errors: 1
+2026-06-28 22:11:08 | ERROR    | medical_ai | 1015325776.py:2424 |    - Dataset for breast not loaded
+2026-06-28 22:36:38 | WARNING  | medical_ai | 1015325776.py:1769 |    Model compatibility issues found
+2026-06-28 22:36:38 | WARNING  | medical_ai | 1015325776.py:1769 |    Model compatibility issues found
+2026-06-28 22:36:39 | WARNING  | medical_ai | 1015325776.py:2329 | Found 46 integrity issues:
+2026-06-28 22:36:39 | WARNING  | medical_ai | 1015325776.py:2331 |    - Disease 'Anemia' has no description
+2026-06-28 22:36:39 | WARNING  | medical_ai | 1015325776.py:2331 |    - Disease 'Anemia' has no precautions
+2026-06-28 22:36:39 | WARNING  | medical_ai | 1015325776.py:2331 |    - Disease 'Anxiety' has no description
+2026-06-28 22:36:39 | WARNING  | medical_ai | 1015325776.py:2331 |    - Disease 'Anxiety' has no precautions
+2026-06-28 22:36:39 | WARNING  | medical_ai | 1015325776.py:2331 |    - Disease 'Asthma' has no description
+2026-06-28 22:36:39 | WARNING  | medical_ai | 1015325776.py:2331 |    - Disease 'Asthma' has no precautions
+2026-06-28 22:36:39 | WARNING  | medical_ai | 1015325776.py:2331 |    - Disease 'Bronchitis' has no description
+2026-06-28 22:36:39 | WARNING  | medical_ai | 1015325776.py:2331 |    - Disease 'Bronchitis' has no precautions
+2026-06-28 22:36:39 | WARNING  | medical_ai | 1015325776.py:2331 |    - Disease 'COVID-19' has no description
+2026-06-28 22:36:39 | WARNING  | medical_ai | 1015325776.py:2331 |    - Disease 'COVID-19' has no precautions
+2026-06-28 22:36:39 | WARNING  | medical_ai | 1015325776.py:2333 |    ... and 36 more
+2026-06-28 22:36:39 | WARNING  | medical_ai | 1015325776.py:2415 | 
+Warnings: 4
+2026-06-28 22:36:39 | WARNING  | medical_ai | 1015325776.py:2417 |    - Preprocessor test failed: 'ColumnTransformer' object has no attribute '_name_to_fitted_passthrough'
+2026-06-28 22:36:39 | WARNING  | medical_ai | 1015325776.py:2417 |    - Prediction test failed: 'ColumnTransformer' object has no attribute '_name_to_fitted_passthrough'
+2026-06-28 22:36:39 | WARNING  | medical_ai | 1015325776.py:2417 |    - Preprocessor test failed: 'ColumnTransformer' object has no attribute '_name_to_fitted_passthrough'
+2026-06-28 22:36:39 | WARNING  | medical_ai | 1015325776.py:2417 |    - Prediction test failed: 'ColumnTransformer' object has no attribute '_name_to_fitted_passthrough'
+2026-06-28 22:36:39 | ERROR    | medical_ai | 1015325776.py:2422 | 
+Errors: 1
+2026-06-28 22:36:39 | ERROR    | medical_ai | 1015325776.py:2424 |    - Dataset for breast not loaded
+2026-06-28 22:42:08 | WARNING  | medical_ai | 1015325776.py:1769 |    Model compatibility issues found
+2026-06-28 22:42:08 | WARNING  | medical_ai | 1015325776.py:1769 |    Model compatibility issues found
+2026-06-28 22:42:08 | WARNING  | medical_ai | 1015325776.py:2329 | Found 46 integrity issues:
+2026-06-28 22:42:08 | WARNING  | medical_ai | 1015325776.py:2331 |    - Disease 'Anemia' has no description
+2026-06-28 22:42:08 | WARNING  | medical_ai | 1015325776.py:2331 |    - Disease 'Anemia' has no precautions
+2026-06-28 22:42:08 | WARNING  | medical_ai | 1015325776.py:2331 |    - Disease 'Anxiety' has no description
+2026-06-28 22:42:08 | WARNING  | medical_ai | 1015325776.py:2331 |    - Disease 'Anxiety' has no precautions
+2026-06-28 22:42:08 | WARNING  | medical_ai | 1015325776.py:2331 |    - Disease 'Asthma' has no description
+2026-06-28 22:42:08 | WARNING  | medical_ai | 1015325776.py:2331 |    - Disease 'Asthma' has no precautions
+2026-06-28 22:42:08 | WARNING  | medical_ai | 1015325776.py:2331 |    - Disease 'Bronchitis' has no description
+2026-06-28 22:42:08 | WARNING  | medical_ai | 1015325776.py:2331 |    - Disease 'Bronchitis' has no precautions
+2026-06-28 22:42:08 | WARNING  | medical_ai | 1015325776.py:2331 |    - Disease 'COVID-19' has no description
+2026-06-28 22:42:08 | WARNING  | medical_ai | 1015325776.py:2331 |    - Disease 'COVID-19' has no precautions
+2026-06-28 22:42:08 | WARNING  | medical_ai | 1015325776.py:2333 |    ... and 36 more
+2026-06-28 22:42:09 | WARNING  | medical_ai | 1015325776.py:2415 | 
+Warnings: 4
+2026-06-28 22:42:09 | WARNING  | medical_ai | 1015325776.py:2417 |    - Preprocessor test failed: 'ColumnTransformer' object has no attribute '_name_to_fitted_passthrough'
+2026-06-28 22:42:09 | WARNING  | medical_ai | 1015325776.py:2417 |    - Prediction test failed: 'ColumnTransformer' object has no attribute '_name_to_fitted_passthrough'
+2026-06-28 22:42:09 | WARNING  | medical_ai | 1015325776.py:2417 |    - Preprocessor test failed: 'ColumnTransformer' object has no attribute '_name_to_fitted_passthrough'
+2026-06-28 22:42:09 | WARNING  | medical_ai | 1015325776.py:2417 |    - Prediction test failed: 'ColumnTransformer' object has no attribute '_name_to_fitted_passthrough'
+2026-06-28 22:42:09 | ERROR    | medical_ai | 1015325776.py:2422 | 
+Errors: 1
+2026-06-28 22:42:09 | ERROR    | medical_ai | 1015325776.py:2424 |    - Dataset for breast not loaded
+2026-06-28 22:50:37 | WARNING  | medical_ai | 1015325776.py:1769 |    Model compatibility issues found
+2026-06-28 22:50:37 | WARNING  | medical_ai | 1015325776.py:1769 |    Model compatibility issues found
+2026-06-28 22:50:37 | WARNING  | medical_ai | 1015325776.py:2329 | Found 46 integrity issues:
+2026-06-28 22:50:37 | WARNING  | medical_ai | 1015325776.py:2331 |    - Disease 'Anemia' has no description
+2026-06-28 22:50:37 | WARNING  | medical_ai | 1015325776.py:2331 |    - Disease 'Anemia' has no precautions
+2026-06-28 22:50:37 | WARNING  | medical_ai | 1015325776.py:2331 |    - Disease 'Anxiety' has no description
+2026-06-28 22:50:37 | WARNING  | medical_ai | 1015325776.py:2331 |    - Disease 'Anxiety' has no precautions
+2026-06-28 22:50:37 | WARNING  | medical_ai | 1015325776.py:2331 |    - Disease 'Asthma' has no description
+2026-06-28 22:50:37 | WARNING  | medical_ai | 1015325776.py:2331 |    - Disease 'Asthma' has no precautions
+2026-06-28 22:50:37 | WARNING  | medical_ai | 1015325776.py:2331 |    - Disease 'Bronchitis' has no description
+2026-06-28 22:50:37 | WARNING  | medical_ai | 1015325776.py:2331 |    - Disease 'Bronchitis' has no precautions
+2026-06-28 22:50:37 | WARNING  | medical_ai | 1015325776.py:2331 |    - Disease 'COVID-19' has no description
+2026-06-28 22:50:37 | WARNING  | medical_ai | 1015325776.py:2331 |    - Disease 'COVID-19' has no precautions
+2026-06-28 22:50:37 | WARNING  | medical_ai | 1015325776.py:2333 |    ... and 36 more
+2026-06-28 22:50:38 | WARNING  | medical_ai | 1015325776.py:2415 | 
+Warnings: 4
+2026-06-28 22:50:38 | WARNING  | medical_ai | 1015325776.py:2417 |    - Preprocessor test failed: 'ColumnTransformer' object has no attribute '_name_to_fitted_passthrough'
+2026-06-28 22:50:38 | WARNING  | medical_ai | 1015325776.py:2417 |    - Prediction test failed: 'ColumnTransformer' object has no attribute '_name_to_fitted_passthrough'
+2026-06-28 22:50:38 | WARNING  | medical_ai | 1015325776.py:2417 |    - Preprocessor test failed: 'ColumnTransformer' object has no attribute '_name_to_fitted_passthrough'
+2026-06-28 22:50:38 | WARNING  | medical_ai | 1015325776.py:2417 |    - Prediction test failed: 'ColumnTransformer' object has no attribute '_name_to_fitted_passthrough'
+2026-06-28 22:50:38 | ERROR    | medical_ai | 1015325776.py:2422 | 
+Errors: 1
+2026-06-28 22:50:38 | ERROR    | medical_ai | 1015325776.py:2424 |    - Dataset for breast not loaded
+2026-06-28 23:04:16 | WARNING  | medical_ai | 1015325776.py:1769 |    Model compatibility issues found
+2026-06-28 23:04:16 | WARNING  | medical_ai | 1015325776.py:1769 |    Model compatibility issues found
+2026-06-28 23:04:17 | WARNING  | medical_ai | 1015325776.py:2329 | Found 46 integrity issues:
+2026-06-28 23:04:17 | WARNING  | medical_ai | 1015325776.py:2331 |    - Disease 'Anemia' has no description
+2026-06-28 23:04:17 | WARNING  | medical_ai | 1015325776.py:2331 |    - Disease 'Anemia' has no precautions
+2026-06-28 23:04:17 | WARNING  | medical_ai | 1015325776.py:2331 |    - Disease 'Anxiety' has no description
+2026-06-28 23:04:17 | WARNING  | medical_ai | 1015325776.py:2331 |    - Disease 'Anxiety' has no precautions
+2026-06-28 23:04:17 | WARNING  | medical_ai | 1015325776.py:2331 |    - Disease 'Asthma' has no description
+2026-06-28 23:04:17 | WARNING  | medical_ai | 1015325776.py:2331 |    - Disease 'Asthma' has no precautions
+2026-06-28 23:04:17 | WARNING  | medical_ai | 1015325776.py:2331 |    - Disease 'Bronchitis' has no description
+2026-06-28 23:04:17 | WARNING  | medical_ai | 1015325776.py:2331 |    - Disease 'Bronchitis' has no precautions
+2026-06-28 23:04:17 | WARNING  | medical_ai | 1015325776.py:2331 |    - Disease 'COVID-19' has no description
+2026-06-28 23:04:17 | WARNING  | medical_ai | 1015325776.py:2331 |    - Disease 'COVID-19' has no precautions
+2026-06-28 23:04:17 | WARNING  | medical_ai | 1015325776.py:2333 |    ... and 36 more
+2026-06-28 23:04:18 | WARNING  | medical_ai | 1015325776.py:2415 | 
+Warnings: 4
+2026-06-28 23:04:18 | WARNING  | medical_ai | 1015325776.py:2417 |    - Preprocessor test failed: 'ColumnTransformer' object has no attribute '_name_to_fitted_passthrough'
+2026-06-28 23:04:18 | WARNING  | medical_ai | 1015325776.py:2417 |    - Prediction test failed: 'ColumnTransformer' object has no attribute '_name_to_fitted_passthrough'
+2026-06-28 23:04:18 | WARNING  | medical_ai | 1015325776.py:2417 |    - Preprocessor test failed: 'ColumnTransformer' object has no attribute '_name_to_fitted_passthrough'
+2026-06-28 23:04:18 | WARNING  | medical_ai | 1015325776.py:2417 |    - Prediction test failed: 'ColumnTransformer' object has no attribute '_name_to_fitted_passthrough'
+2026-06-28 23:04:18 | ERROR    | medical_ai | 1015325776.py:2422 | 
+Errors: 1
+2026-06-28 23:04:18 | ERROR    | medical_ai | 1015325776.py:2424 |    - Dataset for breast not loaded
+2026-06-28 23:12:09 | WARNING  | medical_ai | 1015325776.py:1769 |    Model compatibility issues found
+2026-06-28 23:12:09 | WARNING  | medical_ai | 1015325776.py:1769 |    Model compatibility issues found
+2026-06-28 23:12:11 | WARNING  | medical_ai | 1015325776.py:2329 | Found 46 integrity issues:
+2026-06-28 23:12:11 | WARNING  | medical_ai | 1015325776.py:2331 |    - Disease 'Anemia' has no description
+2026-06-28 23:12:11 | WARNING  | medical_ai | 1015325776.py:2331 |    - Disease 'Anemia' has no precautions
+2026-06-28 23:12:11 | WARNING  | medical_ai | 1015325776.py:2331 |    - Disease 'Anxiety' has no description
+2026-06-28 23:12:11 | WARNING  | medical_ai | 1015325776.py:2331 |    - Disease 'Anxiety' has no precautions
+2026-06-28 23:12:11 | WARNING  | medical_ai | 1015325776.py:2331 |    - Disease 'Asthma' has no description
+2026-06-28 23:12:11 | WARNING  | medical_ai | 1015325776.py:2331 |    - Disease 'Asthma' has no precautions
+2026-06-28 23:12:11 | WARNING  | medical_ai | 1015325776.py:2331 |    - Disease 'Bronchitis' has no description
+2026-06-28 23:12:11 | WARNING  | medical_ai | 1015325776.py:2331 |    - Disease 'Bronchitis' has no precautions
+2026-06-28 23:12:11 | WARNING  | medical_ai | 1015325776.py:2331 |    - Disease 'COVID-19' has no description
+2026-06-28 23:12:11 | WARNING  | medical_ai | 1015325776.py:2331 |    - Disease 'COVID-19' has no precautions
+2026-06-28 23:12:11 | WARNING  | medical_ai | 1015325776.py:2333 |    ... and 36 more
+2026-06-28 23:12:11 | WARNING  | medical_ai | 1015325776.py:2415 | 
+Warnings: 4
+2026-06-28 23:12:11 | WARNING  | medical_ai | 1015325776.py:2417 |    - Preprocessor test failed: 'ColumnTransformer' object has no attribute '_name_to_fitted_passthrough'
+2026-06-28 23:12:11 | WARNING  | medical_ai | 1015325776.py:2417 |    - Prediction test failed: 'ColumnTransformer' object has no attribute '_name_to_fitted_passthrough'
+2026-06-28 23:12:11 | WARNING  | medical_ai | 1015325776.py:2417 |    - Preprocessor test failed: 'ColumnTransformer' object has no attribute '_name_to_fitted_passthrough'
+2026-06-28 23:12:11 | WARNING  | medical_ai | 1015325776.py:2417 |    - Prediction test failed: 'ColumnTransformer' object has no attribute '_name_to_fitted_passthrough'
+2026-06-28 23:12:11 | ERROR    | medical_ai | 1015325776.py:2422 | 
+Errors: 1
+2026-06-28 23:12:11 | ERROR    | medical_ai | 1015325776.py:2424 |    - Dataset for breast not loaded
+2026-06-28 23:54:13 | ERROR    | medical_ai | 3326620415.py:422 | SYMPTOM_INDEX is empty or invalid! Using fallback symptom list.
+2026-06-28 23:54:13 | ERROR    | medical_ai | 3326620415.py:438 | SYMPTOM_SYNONYMS missing. Generating from fallback list.
+2026-06-29 17:44:45 | WARNING  | medical_ai | 90466227.py:267 | Preprocessor transform failed: 'ColumnTransformer' object has no attribute '_name_to_fitted_passthrough'
+2026-06-29 17:44:45 | ERROR    | medical_ai | 90466227.py:299 | Prediction error for diabetes: 'LogisticRegression' object has no attribute 'multi_class'
+2026-06-29 17:44:51 | WARNING  | medical_ai | 90466227.py:267 | Preprocessor transform failed: 'ColumnTransformer' object has no attribute '_name_to_fitted_passthrough'
+2026-06-29 17:44:51 | ERROR    | medical_ai | 90466227.py:299 | Prediction error for diabetes: 'LogisticRegression' object has no attribute 'multi_class'
+2026-06-29 17:48:26 | WARNING  | medical_ai | 2303753046.py:273 | Preprocessor transform failed: 'ColumnTransformer' object has no attribute '_name_to_fitted_passthrough'. Attempting to extract scaler.
+2026-06-29 17:48:26 | WARNING  | medical_ai | 2303753046.py:306 | predict_proba failed: 'LogisticRegression' object has no attribute 'multi_class'. Using predict and default confidence.
+2026-06-29 17:49:44 | WARNING  | medical_ai | 2303753046.py:273 | Preprocessor transform failed: 'ColumnTransformer' object has no attribute '_name_to_fitted_passthrough'. Attempting to extract scaler.
+2026-06-29 17:54:41 | WARNING  | medical_ai | 2303753046.py:273 | Preprocessor transform failed: 'ColumnTransformer' object has no attribute '_name_to_fitted_passthrough'. Attempting to extract scaler.
+2026-06-29 17:56:41 | WARNING  | medical_ai | 2303753046.py:273 | Preprocessor transform failed: 'ColumnTransformer' object has no attribute '_name_to_fitted_passthrough'. Attempting to extract scaler.
+2026-06-29 18:47:35 | WARNING  | medical_ai | 2303753046.py:273 | Preprocessor transform failed: 'ColumnTransformer' object has no attribute '_name_to_fitted_passthrough'. Attempting to extract scaler.
+2026-06-29 18:47:41 | WARNING  | medical_ai | 2303753046.py:273 | Preprocessor transform failed: 'ColumnTransformer' object has no attribute '_name_to_fitted_passthrough'. Attempting to extract scaler.
+2026-06-29 18:47:57 | WARNING  | medical_ai | 2303753046.py:273 | Preprocessor transform failed: 'ColumnTransformer' object has no attribute '_name_to_fitted_passthrough'. Attempting to extract scaler.
+2026-06-29 18:48:04 | WARNING  | medical_ai | 2303753046.py:273 | Preprocessor transform failed: 'ColumnTransformer' object has no attribute '_name_to_fitted_passthrough'. Attempting to extract scaler.
+2026-06-29 18:48:10 | WARNING  | medical_ai | 2303753046.py:273 | Preprocessor transform failed: 'ColumnTransformer' object has no attribute '_name_to_fitted_passthrough'. Attempting to extract scaler.
+2026-06-29 18:48:17 | WARNING  | medical_ai | 2303753046.py:273 | Preprocessor transform failed: 'ColumnTransformer' object has no attribute '_name_to_fitted_passthrough'. Attempting to extract scaler.
+2026-06-29 18:50:52 | WARNING  | medical_ai | 2303753046.py:273 | Preprocessor transform failed: 'ColumnTransformer' object has no attribute '_name_to_fitted_passthrough'. Attempting to extract scaler.
+2026-06-29 18:50:52 | WARNING  | medical_ai | 2303753046.py:306 | predict_proba failed: 'LogisticRegression' object has no attribute 'multi_class'. Using predict and default confidence.
+2026-06-29 18:56:13 | ERROR    | medical_ai | 3821946375.py:555 | Failed to load model from models\breast_cancer_model.pkl: 
+2026-06-29 18:57:22 | WARNING  | medical_ai | 3386211404.py:296 | predict_proba failed: 'LogisticRegression' object has no attribute 'multi_class'. Using default.
+2026-06-30 03:51:55 | ERROR    | medical_ai | 3821946375.py:555 | Failed to load model from models\breast_cancer_model.pkl: 
+2026-06-30 03:52:26 | WARNING  | medical_ai | 623239494.py:28 | Lung model files not found at models\Lung_Model
+2026-06-30 04:08:01 | ERROR    | medical_ai | 3821946375.py:555 | Failed to load model from models\breast_cancer_model.pkl: 
+2026-06-30 04:08:23 | ERROR    | medical_ai | 623239494.py:26 | Failed to load lung NLP model: 'NoneType' object has no attribute 'classes_'
+2026-06-30 04:08:35 | ERROR    | medical_ai | 623239494.py:26 | Failed to load lung NLP model: 'NoneType' object has no attribute 'classes_'
+2026-06-30 04:09:34 | ERROR    | medical_ai | 3574910136.py:33 | Failed to load lung NLP model: Error no file named model.safetensors, or pytorch_model.bin, found in directory models\Lung_Model.
+2026-06-30 04:25:33 | ERROR    | medical_ai | 3574910136.py:33 | Failed to load lung NLP model: Error no file named model.safetensors, or pytorch_model.bin, found in directory models\Lung_Model.
+2026-06-30 04:29:38 | ERROR    | medical_ai | 3574910136.py:33 | Failed to load lung NLP model: Error no file named model.safetensors, or pytorch_model.bin, found in directory models\Lung_Model.
+2026-06-30 04:37:22 | ERROR    | medical_ai | 3821946375.py:555 | Failed to load model from models\breast_cancer_model.pkl: 
+2026-06-30 05:59:30 | ERROR    | medical_ai | 3821946375.py:555 | Failed to load model from models\breast_cancer_model.pkl: 
+2026-06-30 18:34:43 | ERROR    | medical_ai | 3821946375.py:555 | Failed to load model from models\breast_cancer_model.pkl: 
+2026-06-30 19:17:44 | ERROR    | medical_ai | 3821946375.py:555 | Failed to load model from models\breast_cancer_model.pkl: 
+2026-06-30 19:18:56 | ERROR    | medical_ai | 3717426781.py:18 | Failed to load brain model: Error when deserializing class 'Dense' using config={'name': 'dense_11', 'trainable': True, 'dtype': 'float32', 'units': 4, 'activation': {'module': 'builtins', 'class_name': 'function', 'config': 'softmax_v2', 'registered_name': 'function'}, 'use_bias': True, 'kernel_initializer': {'module': 'keras.initializers', 'class_name': 'GlorotUniform', 'config': {'seed': None}, 'registered_name': None}, 'bias_initializer': {'module': 'keras.initializers', 'class_name': 'Zeros', 'config': {}, 'registered_name': None}, 'kernel_regularizer': None, 'bias_regularizer': None, 'kernel_constraint': None, 'bias_constraint': None, 'quantization_config': None}.
+
+Exception encountered: Could not locate function 'softmax_v2'. Make sure custom classes and functions are decorated with `@keras.saving.register_keras_serializable()`. If they are already decorated, make sure they are all imported so that the decorator is run before trying to load them. Full object config: {'module': 'builtins', 'class_name': 'function', 'config': 'softmax_v2', 'registered_name': 'function'}
+2026-06-30 19:21:48 | ERROR    | medical_ai | 1011466527.py:21 | Failed to load brain model: Error when deserializing class 'Dense' using config={'name': 'dense_11', 'trainable': True, 'dtype': 'float32', 'units': 4, 'activation': {'module': 'builtins', 'class_name': 'function', 'config': 'softmax_v2', 'registered_name': 'function'}, 'use_bias': True, 'kernel_initializer': {'module': 'keras.initializers', 'class_name': 'GlorotUniform', 'config': {'seed': None}, 'registered_name': None}, 'bias_initializer': {'module': 'keras.initializers', 'class_name': 'Zeros', 'config': {}, 'registered_name': None}, 'kernel_regularizer': None, 'bias_regularizer': None, 'kernel_constraint': None, 'bias_constraint': None, 'quantization_config': None}.
+
+Exception encountered: Could not locate function 'softmax_v2'. Make sure custom classes and functions are decorated with `@keras.saving.register_keras_serializable()`. If they are already decorated, make sure they are all imported so that the decorator is run before trying to load them. Full object config: {'module': 'builtins', 'class_name': 'function', 'config': 'softmax_v2', 'registered_name': 'function'}
+2026-06-30 19:37:58 | ERROR    | medical_ai | 4091504367.py:514 | Failed to load model from models\breast_cancer_model.pkl: 
+2026-06-30 19:44:58 | ERROR    | medical_ai | 4091504367.py:514 | Failed to load model from models\breast_cancer_model.pkl: 
+2026-06-30 19:53:40 | ERROR    | medical_ai | 4091504367.py:514 | Failed to load model from models\breast_cancer_model.pkl: 
+2026-06-30 20:04:53 | ERROR    | medical_ai | 4091504367.py:514 | Failed to load model from models\breast_cancer_model.pkl: 
+2026-06-30 20:19:50 | ERROR    | medical_ai | 2124621760.py:514 | Failed to load model from models\breast_cancer_model.pkl: 
+2026-06-30 20:38:39 | ERROR    | medical_ai | main.py:1393 | Failed to load model from models\breast_cancer_model.pkl: 
+2026-06-30 21:17:24 | WARNING  | medical_ai | main.py:2723 | Missing features for breast: ['radius_se', 'texture_se', 'perimeter_se', 'area_se', 'smoothness_se', 'compactness_se', 'concavity_se', 'concave_points_se', 'symmetry_se', 'fractal_dimension_se', 'radius_worst', 'texture_worst', 'perimeter_worst', 'area_worst', 'smoothness_worst', 'compactness_worst', 'concavity_worst', 'concave_points_worst', 'symmetry_worst', 'fractal_dimension_worst'] – using defaults (medians).
+2026-06-30 21:17:24 | ERROR    | medical_ai | main.py:2780 |  Preprocessor transform failed: columns are missing: {'concave points_se', 'concave points_worst', 'concave points_mean'}. Using raw features.
+2026-06-30 21:17:24 | WARNING  | medical_ai | main.py:2723 | Missing features for breast: ['radius_se', 'texture_se', 'perimeter_se', 'area_se', 'smoothness_se', 'compactness_se', 'concavity_se', 'concave_points_se', 'symmetry_se', 'fractal_dimension_se', 'radius_worst', 'texture_worst', 'perimeter_worst', 'area_worst', 'smoothness_worst', 'compactness_worst', 'concavity_worst', 'concave_points_worst', 'symmetry_worst', 'fractal_dimension_worst'] – using defaults (medians).
+2026-06-30 21:17:24 | ERROR    | medical_ai | main.py:2780 |  Preprocessor transform failed: columns are missing: {'concave points_se', 'concave points_worst', 'concave points_mean'}. Using raw features.
+2026-06-30 21:17:24 | WARNING  | medical_ai | main.py:2723 | Missing features for breast: ['radius_se', 'texture_se', 'perimeter_se', 'area_se', 'smoothness_se', 'compactness_se', 'concavity_se', 'concave_points_se', 'symmetry_se', 'fractal_dimension_se', 'radius_worst', 'texture_worst', 'perimeter_worst', 'area_worst', 'smoothness_worst', 'compactness_worst', 'concavity_worst', 'concave_points_worst', 'symmetry_worst', 'fractal_dimension_worst'] – using defaults (medians).
+2026-06-30 21:17:24 | ERROR    | medical_ai | main.py:2780 |  Preprocessor transform failed: columns are missing: {'concave points_se', 'concave points_worst', 'concave points_mean'}. Using raw features.
+2026-06-30 21:17:29 | WARNING  | medical_ai | main.py:2723 | Missing features for breast: ['radius_se', 'texture_se', 'perimeter_se', 'area_se', 'smoothness_se', 'compactness_se', 'concavity_se', 'concave_points_se', 'symmetry_se', 'fractal_dimension_se', 'radius_worst', 'texture_worst', 'perimeter_worst', 'area_worst', 'smoothness_worst', 'compactness_worst', 'concavity_worst', 'concave_points_worst', 'symmetry_worst', 'fractal_dimension_worst'] – using defaults (medians).
+2026-06-30 21:17:29 | ERROR    | medical_ai | main.py:2780 |  Preprocessor transform failed: columns are missing: {'concave points_se', 'concave points_worst', 'concave points_mean'}. Using raw features.
+2026-06-30 21:17:34 | WARNING  | medical_ai | main.py:2723 | Missing features for breast: ['radius_se', 'texture_se', 'perimeter_se', 'area_se', 'smoothness_se', 'compactness_se', 'concavity_se', 'concave_points_se', 'symmetry_se', 'fractal_dimension_se', 'radius_worst', 'texture_worst', 'perimeter_worst', 'area_worst', 'smoothness_worst', 'compactness_worst', 'concavity_worst', 'concave_points_worst', 'symmetry_worst', 'fractal_dimension_worst'] – using defaults (medians).
+2026-06-30 21:17:34 | ERROR    | medical_ai | main.py:2780 |  Preprocessor transform failed: columns are missing: {'concave points_se', 'concave points_worst', 'concave points_mean'}. Using raw features.
+2026-06-30 21:17:40 | WARNING  | medical_ai | main.py:2723 | Missing features for breast: ['radius_se', 'texture_se', 'perimeter_se', 'area_se', 'smoothness_se', 'compactness_se', 'concavity_se', 'concave_points_se', 'symmetry_se', 'fractal_dimension_se', 'radius_worst', 'texture_worst', 'perimeter_worst', 'area_worst', 'smoothness_worst', 'compactness_worst', 'concavity_worst', 'concave_points_worst', 'symmetry_worst', 'fractal_dimension_worst'] – using defaults (medians).
+2026-06-30 21:17:40 | ERROR    | medical_ai | main.py:2780 |  Preprocessor transform failed: columns are missing: {'concave points_se', 'concave points_worst', 'concave points_mean'}. Using raw features.
+2026-06-30 21:17:44 | WARNING  | medical_ai | main.py:2723 | Missing features for breast: ['radius_se', 'texture_se', 'perimeter_se', 'area_se', 'smoothness_se', 'compactness_se', 'concavity_se', 'concave_points_se', 'symmetry_se', 'fractal_dimension_se', 'radius_worst', 'texture_worst', 'perimeter_worst', 'area_worst', 'smoothness_worst', 'compactness_worst', 'concavity_worst', 'concave_points_worst', 'symmetry_worst', 'fractal_dimension_worst'] – using defaults (medians).
+2026-06-30 21:17:44 | ERROR    | medical_ai | main.py:2780 |  Preprocessor transform failed: columns are missing: {'concave points_se', 'concave points_worst', 'concave points_mean'}. Using raw features.
+2026-06-30 21:17:48 | WARNING  | medical_ai | main.py:2723 | Missing features for breast: ['radius_se', 'texture_se', 'perimeter_se', 'area_se', 'smoothness_se', 'compactness_se', 'concavity_se', 'concave_points_se', 'symmetry_se', 'fractal_dimension_se', 'radius_worst', 'texture_worst', 'perimeter_worst', 'area_worst', 'smoothness_worst', 'compactness_worst', 'concavity_worst', 'concave_points_worst', 'symmetry_worst', 'fractal_dimension_worst'] – using defaults (medians).
+2026-06-30 21:17:48 | ERROR    | medical_ai | main.py:2780 |  Preprocessor transform failed: columns are missing: {'concave points_se', 'concave points_worst', 'concave points_mean'}. Using raw features.
+2026-06-30 21:17:51 | WARNING  | medical_ai | main.py:2723 | Missing features for breast: ['radius_se', 'texture_se', 'perimeter_se', 'area_se', 'smoothness_se', 'compactness_se', 'concavity_se', 'concave_points_se', 'symmetry_se', 'fractal_dimension_se', 'radius_worst', 'texture_worst', 'perimeter_worst', 'area_worst', 'smoothness_worst', 'compactness_worst', 'concavity_worst', 'concave_points_worst', 'symmetry_worst', 'fractal_dimension_worst'] – using defaults (medians).
+2026-06-30 21:17:51 | ERROR    | medical_ai | main.py:2780 |  Preprocessor transform failed: columns are missing: {'concave points_se', 'concave points_worst', 'concave points_mean'}. Using raw features.
+2026-06-30 21:17:54 | WARNING  | medical_ai | main.py:2723 | Missing features for breast: ['radius_se', 'texture_se', 'perimeter_se', 'area_se', 'smoothness_se', 'compactness_se', 'concavity_se', 'concave_points_se', 'symmetry_se', 'fractal_dimension_se', 'radius_worst', 'texture_worst', 'perimeter_worst', 'area_worst', 'smoothness_worst', 'compactness_worst', 'concavity_worst', 'concave_points_worst', 'symmetry_worst', 'fractal_dimension_worst'] – using defaults (medians).
+2026-06-30 21:17:54 | ERROR    | medical_ai | main.py:2780 |  Preprocessor transform failed: columns are missing: {'concave points_se', 'concave points_worst', 'concave points_mean'}. Using raw features.
+2026-06-30 21:18:01 | WARNING  | medical_ai | main.py:2723 | Missing features for breast: ['radius_se', 'texture_se', 'perimeter_se', 'area_se', 'smoothness_se', 'compactness_se', 'concavity_se', 'concave_points_se', 'symmetry_se', 'fractal_dimension_se', 'radius_worst', 'texture_worst', 'perimeter_worst', 'area_worst', 'smoothness_worst', 'compactness_worst', 'concavity_worst', 'concave_points_worst', 'symmetry_worst', 'fractal_dimension_worst'] – using defaults (medians).
+2026-06-30 21:18:01 | ERROR    | medical_ai | main.py:2780 |  Preprocessor transform failed: columns are missing: {'concave points_se', 'concave points_worst', 'concave points_mean'}. Using raw features.
+2026-06-30 21:18:16 | WARNING  | medical_ai | main.py:2723 | Missing features for breast: ['radius_se', 'texture_se', 'perimeter_se', 'area_se', 'smoothness_se', 'compactness_se', 'concavity_se', 'concave_points_se', 'symmetry_se', 'fractal_dimension_se', 'radius_worst', 'texture_worst', 'perimeter_worst', 'area_worst', 'smoothness_worst', 'compactness_worst', 'concavity_worst', 'concave_points_worst', 'symmetry_worst', 'fractal_dimension_worst'] – using defaults (medians).
+2026-06-30 21:18:16 | ERROR    | medical_ai | main.py:2780 |  Preprocessor transform failed: columns are missing: {'concave points_se', 'concave points_worst', 'concave points_mean'}. Using raw features.
+2026-06-30 21:33:03 | WARNING  | medical_ai | main.py:2748 | Missing features for breast: ['radius_se', 'texture_se', 'perimeter_se', 'area_se', 'smoothness_se', 'compactness_se', 'concavity_se', 'concave_points_se', 'symmetry_se', 'fractal_dimension_se', 'radius_worst', 'texture_worst', 'perimeter_worst', 'area_worst', 'smoothness_worst', 'compactness_worst', 'concavity_worst', 'concave_points_worst', 'symmetry_worst', 'fractal_dimension_worst'] – using defaults (medians).
+2026-07-01 05:09:26 | WARNING  | medical_ai | main.py:2750 | Missing features for breast: ['radius_se', 'texture_se', 'perimeter_se', 'area_se', 'smoothness_se', 'compactness_se', 'concavity_se', 'concave_points_se', 'symmetry_se', 'fractal_dimension_se', 'radius_worst', 'texture_worst', 'perimeter_worst', 'area_worst', 'smoothness_worst', 'compactness_worst', 'concavity_worst', 'concave_points_worst', 'symmetry_worst', 'fractal_dimension_worst'] – using defaults (medians).
+2026-07-01 05:09:26 | ERROR    | medical_ai | main.py:2822 |  Preprocessor transform failed: columns are missing: {'concave points_worst', 'concave points_mean', 'concave points_se'}. Falling back to raw features.
+2026-07-01 05:09:37 | WARNING  | medical_ai | main.py:2750 | Missing features for breast: ['radius_se', 'texture_se', 'perimeter_se', 'area_se', 'smoothness_se', 'compactness_se', 'concavity_se', 'concave_points_se', 'symmetry_se', 'fractal_dimension_se', 'radius_worst', 'texture_worst', 'perimeter_worst', 'area_worst', 'smoothness_worst', 'compactness_worst', 'concavity_worst', 'concave_points_worst', 'symmetry_worst', 'fractal_dimension_worst'] – using defaults (medians).
+2026-07-01 05:09:37 | ERROR    | medical_ai | main.py:2822 |  Preprocessor transform failed: columns are missing: {'concave points_worst', 'concave points_mean', 'concave points_se'}. Falling back to raw features.
+2026-07-01 05:09:44 | WARNING  | medical_ai | main.py:2750 | Missing features for breast: ['radius_se', 'texture_se', 'perimeter_se', 'area_se', 'smoothness_se', 'compactness_se', 'concavity_se', 'concave_points_se', 'symmetry_se', 'fractal_dimension_se', 'radius_worst', 'texture_worst', 'perimeter_worst', 'area_worst', 'smoothness_worst', 'compactness_worst', 'concavity_worst', 'concave_points_worst', 'symmetry_worst', 'fractal_dimension_worst'] – using defaults (medians).
+2026-07-01 05:09:44 | ERROR    | medical_ai | main.py:2822 |  Preprocessor transform failed: columns are missing: {'concave points_worst', 'concave points_mean', 'concave points_se'}. Falling back to raw features.
+2026-07-01 05:09:44 | WARNING  | medical_ai | main.py:2750 | Missing features for breast: ['radius_se', 'texture_se', 'perimeter_se', 'area_se', 'smoothness_se', 'compactness_se', 'concavity_se', 'concave_points_se', 'symmetry_se', 'fractal_dimension_se', 'radius_worst', 'texture_worst', 'perimeter_worst', 'area_worst', 'smoothness_worst', 'compactness_worst', 'concavity_worst', 'concave_points_worst', 'symmetry_worst', 'fractal_dimension_worst'] – using defaults (medians).
+2026-07-01 05:09:44 | ERROR    | medical_ai | main.py:2822 |  Preprocessor transform failed: columns are missing: {'concave points_worst', 'concave points_mean', 'concave points_se'}. Falling back to raw features.
+2026-07-01 05:09:44 | WARNING  | medical_ai | main.py:2750 | Missing features for breast: ['radius_se', 'texture_se', 'perimeter_se', 'area_se', 'smoothness_se', 'compactness_se', 'concavity_se', 'concave_points_se', 'symmetry_se', 'fractal_dimension_se', 'radius_worst', 'texture_worst', 'perimeter_worst', 'area_worst', 'smoothness_worst', 'compactness_worst', 'concavity_worst', 'concave_points_worst', 'symmetry_worst', 'fractal_dimension_worst'] – using defaults (medians).
+2026-07-01 05:09:44 | ERROR    | medical_ai | main.py:2822 |  Preprocessor transform failed: columns are missing: {'concave points_worst', 'concave points_mean', 'concave points_se'}. Falling back to raw features.
+2026-07-01 05:09:54 | WARNING  | medical_ai | main.py:2750 | Missing features for breast: ['radius_se', 'texture_se', 'perimeter_se', 'area_se', 'smoothness_se', 'compactness_se', 'concavity_se', 'concave_points_se', 'symmetry_se', 'fractal_dimension_se', 'radius_worst', 'texture_worst', 'perimeter_worst', 'area_worst', 'smoothness_worst', 'compactness_worst', 'concavity_worst', 'concave_points_worst', 'symmetry_worst', 'fractal_dimension_worst'] – using defaults (medians).
+2026-07-01 05:09:54 | ERROR    | medical_ai | main.py:2822 |  Preprocessor transform failed: columns are missing: {'concave points_worst', 'concave points_mean', 'concave points_se'}. Falling back to raw features.
+2026-07-01 05:10:04 | WARNING  | medical_ai | main.py:2750 | Missing features for breast: ['radius_se', 'texture_se', 'perimeter_se', 'area_se', 'smoothness_se', 'compactness_se', 'concavity_se', 'concave_points_se', 'symmetry_se', 'fractal_dimension_se', 'radius_worst', 'texture_worst', 'perimeter_worst', 'area_worst', 'smoothness_worst', 'compactness_worst', 'concavity_worst', 'concave_points_worst', 'symmetry_worst', 'fractal_dimension_worst'] – using defaults (medians).
+2026-07-01 05:10:04 | ERROR    | medical_ai | main.py:2822 |  Preprocessor transform failed: columns are missing: {'concave points_worst', 'concave points_mean', 'concave points_se'}. Falling back to raw features.
+2026-07-01 05:10:17 | WARNING  | medical_ai | main.py:2750 | Missing features for breast: ['radius_se', 'texture_se', 'perimeter_se', 'area_se', 'smoothness_se', 'compactness_se', 'concavity_se', 'concave_points_se', 'symmetry_se', 'fractal_dimension_se', 'radius_worst', 'texture_worst', 'perimeter_worst', 'area_worst', 'smoothness_worst', 'compactness_worst', 'concavity_worst', 'concave_points_worst', 'symmetry_worst', 'fractal_dimension_worst'] – using defaults (medians).
+2026-07-01 05:10:17 | ERROR    | medical_ai | main.py:2822 |  Preprocessor transform failed: columns are missing: {'concave points_worst', 'concave points_mean', 'concave points_se'}. Falling back to raw features.
+2026-07-01 05:16:48 | WARNING  | medical_ai | main.py:2750 | Missing features for breast: ['radius_se', 'texture_se', 'perimeter_se', 'area_se', 'smoothness_se', 'compactness_se', 'concavity_se', 'concave_points_se', 'symmetry_se', 'fractal_dimension_se', 'radius_worst', 'texture_worst', 'perimeter_worst', 'area_worst', 'smoothness_worst', 'compactness_worst', 'concavity_worst', 'concave_points_worst', 'symmetry_worst', 'fractal_dimension_worst'] – using defaults (medians).
+2026-07-01 05:16:48 | ERROR    | medical_ai | main.py:2822 |  Preprocessor transform failed: columns are missing: {'concave points_worst', 'concave points_mean', 'concave points_se'}. Falling back to raw features.
+2026-07-01 05:18:02 | WARNING  | medical_ai | main.py:2750 | Missing features for breast: ['radius_se', 'texture_se', 'perimeter_se', 'area_se', 'smoothness_se', 'compactness_se', 'concavity_se', 'concave_points_se', 'symmetry_se', 'fractal_dimension_se', 'radius_worst', 'texture_worst', 'perimeter_worst', 'area_worst', 'smoothness_worst', 'compactness_worst', 'concavity_worst', 'concave_points_worst', 'symmetry_worst', 'fractal_dimension_worst'] – using defaults (medians).
+2026-07-01 05:18:02 | ERROR    | medical_ai | main.py:2822 |  Preprocessor transform failed: columns are missing: {'concave points_worst', 'concave points_mean', 'concave points_se'}. Falling back to raw features.
+2026-07-01 05:18:18 | WARNING  | medical_ai | main.py:2750 | Missing features for breast: ['radius_se', 'texture_se', 'perimeter_se', 'area_se', 'smoothness_se', 'compactness_se', 'concavity_se', 'concave_points_se', 'symmetry_se', 'fractal_dimension_se', 'radius_worst', 'texture_worst', 'perimeter_worst', 'area_worst', 'smoothness_worst', 'compactness_worst', 'concavity_worst', 'concave_points_worst', 'symmetry_worst', 'fractal_dimension_worst'] – using defaults (medians).
+2026-07-01 05:18:18 | ERROR    | medical_ai | main.py:2822 |  Preprocessor transform failed: columns are missing: {'concave points_worst', 'concave points_mean', 'concave points_se'}. Falling back to raw features.

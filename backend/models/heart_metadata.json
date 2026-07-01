@@ -1,0 +1,40 @@
+{
+  "disease": "heart",
+  "model_name": "XGBoost",
+  "best_params": {
+    "C": 72.99857444807583,
+    "class_weight": null
+  },
+  "validation_metrics": {
+    "accuracy": 1.0,
+    "precision": 1.0,
+    "recall": 1.0,
+    "f1": 1.0,
+    "roc_auc": 1.0
+  },
+  "test_metrics": {
+    "accuracy": 0.9805194805194806,
+    "precision": 1.0,
+    "recall": 0.9620253164556962,
+    "f1": 0.9806451612903225,
+    "roc_auc": 0.9893670886075949
+  },
+  "feature_names": [
+    "age",
+    "sex",
+    "cp",
+    "trestbps",
+    "chol",
+    "fbs",
+    "restecg",
+    "thalach",
+    "exang",
+    "oldpeak",
+    "slope",
+    "ca",
+    "thal"
+  ],
+  "train_size": 717,
+  "val_size": 154,
+  "test_size": 154
+}
