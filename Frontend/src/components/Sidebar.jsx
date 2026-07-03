@@ -5,10 +5,8 @@ import {
   FaRobot, 
   FaHeart, 
   FaLungs, 
-  FaBolt,
   FaBars,
   FaTimes,
-  FaUserMd,
   FaAppleAlt,
   FaHeartbeat,
 } from 'react-icons/fa';

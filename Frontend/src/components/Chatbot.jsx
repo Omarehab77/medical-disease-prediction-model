@@ -1,4 +1,4 @@
-import React, { useState, useRef, useEffect } from 'react';
+import React, { useState, useRef, useEffect, useCallback } from 'react';
 import './Chatbot.css';
 import { FaPaperPlane, FaMicrophone, FaRobot, FaUser, FaStop, FaRedo } from 'react-icons/fa';
 import { motion, AnimatePresence } from 'framer-motion';
@@ -20,7 +20,7 @@ const Chatbot = () => {
   const [input, setInput] = useState('');
   const [isLoading, setIsLoading] = useState(false);
   const [isRecording, setIsRecording] = useState(false);
-  const [patientId, setPatientId] = useState(() => {
+  const [patientId] = useState(() => {
     return localStorage.getItem('patientId') || `patient_${Date.now()}`;
   });
   const [sessionId, setSessionId] = useState(() => {
@@ -28,7 +28,6 @@ const Chatbot = () => {
   });
   const [isConnected, setIsConnected] = useState(true);
   const [conversationState, setConversationState] = useState('initial');
-  const [predictionComplete, setPredictionComplete] = useState(false);
   const [riskLevel, setRiskLevel] = useState('LOW');
   const [symptoms, setSymptoms] = useState([]);
 
@@ -60,9 +59,8 @@ const Chatbot = () => {
     if (sessionId) localStorage.setItem('sessionId', sessionId);
   }, [sessionId]);
 
+  // Initialize speech recognition only once
   useEffect(() => {
-    scrollToBottom();
-    // Initialize speech recognition
     if ('webkitSpeechRecognition' in window || 'SpeechRecognition' in window) {
       const SpeechRecognition = window.SpeechRecognition || window.webkitSpeechRecognition;
       const recognitionInstance = new SpeechRecognition();
@@ -97,21 +95,18 @@ const Chatbot = () => {
 
       setRecognition(recognitionInstance);
     }
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, []);
 
-    return () => {
-      if (recognition) recognition.abort();
-    };
+  const scrollToBottom = useCallback(() => {
+    messagesEndRef.current?.scrollIntoView({ behavior: 'smooth' });
   }, []);
 
   useEffect(() => {
     scrollToBottom();
-  }, [messages]);
+  }, [messages, scrollToBottom]);
 
-  const scrollToBottom = () => {
-    messagesEndRef.current?.scrollIntoView({ behavior: 'smooth' });
-  };
-
-  const handleSendMessage = async () => {
+  const handleSendMessage = useCallback(async () => {
     if (!input.trim() || isLoading) return;
     if (!isConnected) {
       toast.error('Cannot send message: Not connected to server');
@@ -140,7 +135,6 @@ const Chatbot = () => {
       if (response.status === 200 && response.data) {
         if (response.data.session_id) setSessionId(response.data.session_id);
         if (response.data.state) setConversationState(response.data.state);
-        if (response.data.prediction_complete) setPredictionComplete(true);
         if (response.data.risk_level) setRiskLevel(response.data.risk_level);
         if (response.data.symptoms) setSymptoms(response.data.symptoms);
 
@@ -189,7 +183,7 @@ const Chatbot = () => {
     } finally {
       setIsLoading(false);
     }
-  };
+  }, [input, isLoading, isConnected, patientId, sessionId]);
 
   const handleKeyPress = (e) => {
     if (e.key === 'Enter' && !e.shiftKey) {
@@ -218,12 +212,10 @@ const Chatbot = () => {
     }
   };
 
-  // NEW: Handle image upload with preview
   const handleFileUpload = async (event) => {
     const file = event.target.files[0];
     if (!file) return;
 
-    // Text file handling (legacy)
     if (file.type.startsWith('text/') || file.name.match(/\.(txt|csv|json)$/)) {
       const reader = new FileReader();
       reader.onload = (e) => {
@@ -237,36 +229,29 @@ const Chatbot = () => {
       return;
     }
 
-    // Image upload – show preview in user message, then send to API
     if (!isConnected) {
       toast.error('Not connected to server');
       event.target.value = '';
       return;
     }
 
-    // Read image as data URL for preview
     const reader = new FileReader();
     reader.onload = (e) => {
       const imageDataUrl = e.target.result;
-
-      // Create user message with image preview
       const userMsg = {
         id: Date.now(),
         type: 'user',
         text: `📤 Uploaded image: ${file.name}`,
-        image: imageDataUrl,  // store the image data for rendering
+        image: imageDataUrl,
         timestamp: new Date().toLocaleTimeString(),
       };
       setMessages((prev) => [...prev, userMsg]);
-
-      // Now send to backend
       sendImageToBackend(file);
     };
     reader.readAsDataURL(file);
     event.target.value = '';
   };
 
-  // Separate function to send image to backend
   const sendImageToBackend = async (file) => {
     const loadingMsgId = Date.now() + 1;
     const loadingMsg = {
@@ -329,7 +314,6 @@ const Chatbot = () => {
     localStorage.removeItem('sessionId');
     setMessages([messages[0]]);
     setConversationState('initial');
-    setPredictionComplete(false);
     setRiskLevel('LOW');
     setSymptoms([]);
     toast.info('Started a new conversation');
@@ -428,7 +412,6 @@ const Chatbot = () => {
     return <div className="state-indicator">{stateLabels[conversationState] || '🟢 Active'}</div>;
   };
 
-  // Status bar
   const StatusBar = () => (
     <div className="status-bar">
       <div className="status-item">
@@ -481,7 +464,6 @@ const Chatbot = () => {
               <div className="message-content">
                 <div className="message-text">
                   {formatMessageText(message.text)}
-                  {/* Display image if present */}
                   {message.image && (
                     <div className="message-image">
                       <img src={message.image} alt="Uploaded" />

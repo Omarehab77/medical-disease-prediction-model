@@ -151,10 +151,9 @@ const LandingPage = () => {
               alt="Health"
               className="landing-img"
               whileHover={{ scale: 1.08, rotate: 2, y: -4 }}
-              transition={{ type: 'spring', stiffness: 300 }}
+              transition={{ type: 'spring', stiffness: 300, delay: 1.8 + i * 0.15 }}
               initial={{ y: 30, opacity: 0 }}
               animate={{ y: 0, opacity: 1 }}
-              transition={{ delay: 1.2 + i * 0.1 }}
             />
           ))}
         </div>
