@@ -1,19 +1,12 @@
-// src/components/Chatbot.jsx
 import React, { useState, useRef, useEffect } from 'react';
 import './Chatbot.css';
 import { FaPaperPlane, FaMicrophone, FaRobot, FaUser, FaStop, FaRedo } from 'react-icons/fa';
 import { motion, AnimatePresence } from 'framer-motion';
-import axios from 'axios';
+import api from '../api';
 import { toast } from 'react-toastify';
 import { ThreeDots } from 'react-loader-spinner';
 
-const API_BASE_URL = 'http://localhost:8000';
-
-const api = axios.create({
-  baseURL: API_BASE_URL,
-  timeout: 30000,
-  headers: { 'Content-Type': 'application/json' },
-});
+console.log("API URL:", process.env.REACT_APP_API_URL);
 
 const Chatbot = () => {
   const [messages, setMessages] = useState([
