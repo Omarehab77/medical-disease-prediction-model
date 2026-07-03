@@ -1,12 +1,7 @@
-// src/api.js
-import axios from 'axios';
-
-const API_BASE_URL = 'http://localhost:8000'; // change to your backend URL
+import axios from "axios";
 
 const api = axios.create({
-  baseURL: API_BASE_URL,
-  timeout: 30000,
-  headers: { 'Content-Type': 'application/json' },
+  baseURL: "https://omar7987-one-health.hf.space",
 });
 
 export default api;
