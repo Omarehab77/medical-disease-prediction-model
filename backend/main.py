@@ -1604,7 +1604,7 @@ def predict_brain_tumor(image_bytes: bytes) -> dict:
     }
 
 # ============================================================================
-# 7. LUNG NLP MODEL (BERT) – with improved error handling
+# 7. LUNG NLP MODEL (BERT) – SILENT FAILURE (no warning)
 # ============================================================================
 
 import torch
@@ -1618,18 +1618,34 @@ LUNG_ENCODER = None
 
 if LUNG_MODEL_PATH.exists() and LUNG_LABEL_ENCODER_PATH.exists():
     try:
+        logger.info("Loading Lung Tokenizer...")
         LUNG_TOKENIZER = AutoTokenizer.from_pretrained(str(LUNG_MODEL_PATH))
+        logger.info("✅ Tokenizer loaded")
+
+        logger.info("Loading Lung Model...")
         LUNG_MODEL = AutoModelForSequenceClassification.from_pretrained(str(LUNG_MODEL_PATH))
+        logger.info("✅ Model loaded")
+
+        logger.info("Loading Label Encoder...")
         LUNG_ENCODER = joblib.load(LUNG_LABEL_ENCODER_PATH)
+        logger.info("✅ Label Encoder loaded")
+
         if torch.cuda.is_available():
             LUNG_MODEL.to("cuda")
+
         logger.info(f"✅ Lung NLP model loaded from {LUNG_MODEL_PATH}")
-        logger.info(f"   Classes: {len(LUNG_ENCODER.classes_)}")
+        logger.info(f"Classes: {len(LUNG_ENCODER.classes_)}")
+
     except Exception as e:
+        import traceback
+        logger.error(traceback.format_exc())
         logger.error(f"Failed to load lung NLP model: {e}")
         LUNG_MODEL = None
+        LUNG_TOKENIZER = None
+        LUNG_ENCODER = None
 else:
-    logger.warning(f"Lung model files not found at {LUNG_MODEL_PATH} or label_encoder.pkl missing")
+    # Use debug level to avoid warning noise
+    logger.debug(f"Lung model files not found at {LUNG_MODEL_PATH} or label_encoder.pkl missing")
     LUNG_MODEL = None
 
 def predict_lung_disease(text: str, top_k: int = 3) -> list:
@@ -1656,8 +1672,6 @@ def predict_lung_disease(text: str, top_k: int = 3) -> list:
             "confidence": float(probs[idx])
         })
     return results
-
-logger.info("✅ All models loaded (Brain TF + Lung NLP)")
 
 # ============================================================================
 # BLOCK 3: Medical Chat Engine - FINAL WITH FORCED RESET (UPDATED)
@@ -2239,47 +2253,60 @@ class ChatSessionManager:
 
     # ----- Handlers -----
     def _handle_disease_info(self, message: str, session: ChatSession) -> Dict[str, Any]:
-        disease_name = self._extract_disease_name(message)
-        # Fallback descriptions
-        fallback = {
-            "diabetes": "Diabetes is a chronic condition that affects how your body turns food into energy. There are two main types: Type 1 and Type 2.",
-            "heart disease": "Heart disease refers to several types of heart conditions, including coronary artery disease, heart attacks, and heart failure.",
-            "breast cancer": "Breast cancer is a type of cancer that forms in the cells of the breast. Early detection through screening is important.",
-            "covid-19": "COVID-19 is a disease caused by the SARS-CoV-2 virus. Symptoms include fever, cough, and loss of taste or smell.",
-            "influenza": "Influenza (flu) is a contagious respiratory illness caused by influenza viruses. It can cause mild to severe illness.",
-            "pneumonia": "Pneumonia is an infection that inflames the air sacs in one or both lungs, which may fill with fluid.",
-            "tuberculosis": "Tuberculosis (TB) is a bacterial infection that primarily affects the lungs. It spreads through the air.",
-            "common cold": "The common cold is a viral infection of your nose and throat. It's usually harmless.",
-            "migraine": "A migraine is a headache that can cause severe throbbing pain or a pulsing sensation, usually on one side of the head.",
-            "urinary tract infection": "A urinary tract infection (UTI) is an infection in any part of your urinary system — your kidneys, ureters, bladder and urethra.",
-            "gastroenteritis": "Gastroenteritis is inflammation of the digestive tract, often causing diarrhea, vomiting, and abdominal pain.",
-            "bronchitis": "Bronchitis is an inflammation of the lining of your bronchial tubes, which carry air to and from your lungs.",
-        }
-        if disease_name:
-            description = DISEASE_DESCRIPTIONS.get(disease_name) or fallback.get(disease_name)
-            if description:
-                response = f"**{disease_name.title()}**\n\n{description}\n\n"
-                symptoms = DISEASE_SYMPTOMS.get(disease_name, [])
-                if symptoms:
-                    response += "**Common Symptoms:**\n" + "\n".join(f"• {s}" for s in symptoms[:5]) + "\n\n"
-                precautions = DISEASE_PRECAUTIONS.get(disease_name, [])
-                if precautions:
-                    response += "**Precautions:**\n" + "\n".join(f"• {p}" for p in precautions[:3]) + "\n\n"
-                response += "---\n*This information is for educational purposes only.*"
+        try:
+            disease_name = self._extract_disease_name(message)
+            # Fallback descriptions (used if CSV fails)
+            fallback = {
+                "diabetes": "Diabetes is a chronic condition that affects how your body turns food into energy. There are two main types: Type 1 and Type 2.",
+                "heart disease": "Heart disease refers to several types of heart conditions, including coronary artery disease, heart attacks, and heart failure.",
+                "breast cancer": "Breast cancer is a type of cancer that forms in the cells of the breast. Early detection through screening is important.",
+                "covid-19": "COVID-19 is a disease caused by the SARS-CoV-2 virus. Symptoms include fever, cough, and loss of taste or smell.",
+                "influenza": "Influenza (flu) is a contagious respiratory illness caused by influenza viruses. It can cause mild to severe illness.",
+                "pneumonia": "Pneumonia is an infection that inflames the air sacs in one or both lungs, which may fill with fluid.",
+                "tuberculosis": "Tuberculosis (TB) is a bacterial infection that primarily affects the lungs. It spreads through the air.",
+                "common cold": "The common cold is a viral infection of your nose and throat. It's usually harmless.",
+                "migraine": "A migraine is a headache that can cause severe throbbing pain or a pulsing sensation, usually on one side of the head.",
+                "urinary tract infection": "A urinary tract infection (UTI) is an infection in any part of your urinary system — your kidneys, ureters, bladder and urethra.",
+                "gastroenteritis": "Gastroenteritis is inflammation of the digestive tract, often causing diarrhea, vomiting, and abdominal pain.",
+                "bronchitis": "Bronchitis is an inflammation of the lining of your bronchial tubes, which carry air to and from your lungs.",
+            }
+            if disease_name:
+                description = DISEASE_DESCRIPTIONS.get(disease_name) or fallback.get(disease_name)
+                if description:
+                    response = f"**{disease_name.title()}**\n\n{description}\n\n"
+                    symptoms = DISEASE_SYMPTOMS.get(disease_name, [])
+                    if symptoms:
+                        response += "**Common Symptoms:**\n" + "\n".join(f"• {s}" for s in symptoms[:5]) + "\n\n"
+                    precautions = DISEASE_PRECAUTIONS.get(disease_name, [])
+                    if precautions:
+                        response += "**Precautions:**\n" + "\n".join(f"• {p}" for p in precautions[:3]) + "\n\n"
+                    response += "---\n*This information is for educational purposes only.*"
+                else:
+                    response = "I don't have detailed information about that condition. Would you like to describe your symptoms instead?"
             else:
                 response = "I don't have detailed information about that condition. Would you like to describe your symptoms instead?"
-        else:
-            response = "I don't have detailed information about that condition. Would you like to describe your symptoms instead?"
 
-        self._add_message(session, 'assistant', response)
-        session.state = ConversationState.DISEASE_INFO
-        return {
-            'text': response,
-            'intent': 'disease_info',
-            'is_emergency': False,
-            'session_id': session.session_id,
-            'state': session.state
-        }
+            self._add_message(session, 'assistant', response)
+            session.state = ConversationState.DISEASE_INFO
+            return {
+                'text': response,
+                'intent': 'disease_info',
+                'is_emergency': False,
+                'session_id': session.session_id,
+                'state': session.state
+            }
+        except Exception as e:
+            logger.error(f"Error in disease info: {e}")
+            response = "I'm sorry, I couldn't process your request. Please try describing your symptoms instead."
+            self._add_message(session, 'assistant', response)
+            session.state = ConversationState.DISEASE_INFO
+            return {
+                'text': response,
+                'intent': 'disease_info',
+                'is_emergency': False,
+                'session_id': session.session_id,
+                'state': session.state
+            }
 
     def _extract_disease_name(self, text: str) -> Optional[str]:
         text_lower = text.lower().strip()
@@ -2288,13 +2315,12 @@ class ChatSessionManager:
             text_lower = text_lower.replace(word, "")
         text_lower = text_lower.strip()
 
-        # Check exact match in DISEASE_DESCRIPTIONS and fallback keys
-        all_diseases = set(DISEASE_DESCRIPTIONS.keys()).union(set(fallback.keys()))
-        for disease in all_diseases:
+        # Check exact match in DISEASE_DESCRIPTIONS (loaded from CSV)
+        for disease in DISEASE_DESCRIPTIONS.keys():
             if disease.lower() in text_lower:
                 return disease
 
-        # Hardcoded aliases
+        # Hardcoded aliases (fallback if CSV is missing)
         aliases = {
             "diabetes": ["diabetes", "sugar", "high sugar", "diabetic"],
             "heart disease": ["heart disease", "cardiac", "cardiovascular", "coronary", "heart attack"],
@@ -2313,22 +2339,6 @@ class ChatSessionManager:
             if any(alias in text_lower for alias in alias_list):
                 return disease
         return None
-
-    # Define fallback dict for use in _extract_disease_name
-    fallback = {
-        "diabetes": "",
-        "heart disease": "",
-        "breast cancer": "",
-        "covid-19": "",
-        "influenza": "",
-        "pneumonia": "",
-        "tuberculosis": "",
-        "common cold": "",
-        "migraine": "",
-        "urinary tract infection": "",
-        "gastroenteritis": "",
-        "bronchitis": "",
-    }
 
     def _handle_confirmation_yes(self, message: str, session: ChatSession) -> Dict[str, Any]:
         if session.last_question_symptom:

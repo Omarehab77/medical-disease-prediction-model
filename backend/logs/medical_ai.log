@@ -12511,3 +12511,620 @@ Computing feature defaults for missing values...
 2026-07-01 05:18:18 | ERROR    | medical_ai | main.py:2822 |  Preprocessor transform failed: columns are missing: {'concave points_worst', 'concave points_mean', 'concave points_se'}. Falling back to raw features.
 2026-07-01 05:18:18 | INFO     | medical_ai | main.py:2839 | Prediction probabilities: [0.05619425 0.94380575]
 2026-07-01 05:18:18 | INFO     | medical_ai | main.py:2847 | Prediction result: 1
+2026-07-04 20:23:57 | INFO     | medical_ai | main.py:179 | ================================================================================
+2026-07-04 20:23:57 | INFO     | medical_ai | main.py:180 | Medical AI Assistant v4.0 - Initializing
+2026-07-04 20:23:57 | INFO     | medical_ai | main.py:181 | ================================================================================
+2026-07-04 20:23:57 | INFO     | medical_ai | main.py:182 |    Python Version: 3.11.9
+2026-07-04 20:23:57 | INFO     | medical_ai | main.py:183 |    Working Directory: E:\downloads\Multiple-Disease-Prediction-Webapp-main\Multiple-Disease-Prediction-Webapp-main\backend
+2026-07-04 20:23:57 | INFO     | medical_ai | main.py:184 |    Operating System: Windows 10
+2026-07-04 20:23:57 | INFO     | medical_ai | main.py:185 |    CPU Cores: 8
+2026-07-04 20:23:57 | INFO     | medical_ai | main.py:186 |    Start Time: 2026-07-04T20:23:57.170321
+2026-07-04 20:23:57 | INFO     | medical_ai | main.py:187 | ================================================================================
+2026-07-04 20:23:57 | INFO     | medical_ai | main.py:204 | Random seed set to: 42
+2026-07-04 20:23:57 | INFO     | medical_ai | main.py:317 | Settings loaded successfully
+2026-07-04 20:23:57 | INFO     | medical_ai | main.py:407 | Disease configuration loaded: 3 diseases
+2026-07-04 20:23:57 | INFO     | medical_ai | main.py:456 | Database configuration loaded: 7 files
+2026-07-04 20:23:57 | INFO     | medical_ai | main.py:474 | Global paths configured
+2026-07-04 20:23:57 | INFO     | medical_ai | main.py:496 | Global containers initialized (empty)
+2026-07-04 20:23:57 | INFO     | medical_ai | main.py:620 | NLP configuration loaded: 17 parameters
+2026-07-04 20:23:57 | INFO     | medical_ai | main.py:637 | Session configuration loaded: 10 parameters
+2026-07-04 20:23:57 | INFO     | medical_ai | main.py:658 | FastAPI configuration loaded: 14 parameters
+2026-07-04 20:23:58 | INFO     | medical_ai | main.py:720 | Project validation PASSED
+2026-07-04 20:23:58 | INFO     | medical_ai | main.py:723 |    Database: 7 found, 0 missing
+2026-07-04 20:23:58 | INFO     | medical_ai | main.py:724 |    Models: 7 found, 0 missing
+2026-07-04 20:23:58 | INFO     | medical_ai | main.py:725 |    Summary: 14/14 files found
+2026-07-04 20:23:58 | INFO     | medical_ai | main.py:859 | Dependencies: {'sentence_transformers': True, 'rapidfuzz': True, 'nltk': True, 'uvicorn': True, 'nest_asyncio': True}
+2026-07-04 20:23:58 | INFO     | medical_ai | main.py:863 | Memory Usage: 466.3 MB
+2026-07-04 20:23:58 | INFO     | medical_ai | main.py:865 | ================================================================================
+2026-07-04 20:23:58 | INFO     | medical_ai | main.py:866 | BLOCK 1: Project Setup Complete
+2026-07-04 20:23:58 | INFO     | medical_ai | main.py:867 | ================================================================================
+2026-07-04 20:23:58 | INFO     | medical_ai | main.py:868 |    Base Directory: E:\downloads\Multiple-Disease-Prediction-Webapp-main\Multiple-Disease-Prediction-Webapp-main\backend
+2026-07-04 20:23:58 | INFO     | medical_ai | main.py:869 |    Models Directory: models
+2026-07-04 20:23:58 | INFO     | medical_ai | main.py:870 |    Database Directory: database
+2026-07-04 20:23:58 | INFO     | medical_ai | main.py:871 |    Log Directory: logs
+2026-07-04 20:23:58 | INFO     | medical_ai | main.py:872 |    Cache Directory: cache
+2026-07-04 20:23:58 | INFO     | medical_ai | main.py:873 |    Supported Diseases: ['diabetes', 'heart', 'breast']
+2026-07-04 20:23:58 | INFO     | medical_ai | main.py:874 |    Database Files: 7
+2026-07-04 20:23:58 | INFO     | medical_ai | main.py:875 |    Disease Configs: 3
+2026-07-04 20:23:58 | INFO     | medical_ai | main.py:876 | ================================================================================
+2026-07-04 20:23:58 | INFO     | medical_ai | main.py:877 | Block 2 will load all data and models
+2026-07-04 20:23:58 | INFO     | medical_ai | main.py:878 | Block 3 will implement the chat engine
+2026-07-04 20:23:58 | INFO     | medical_ai | main.py:879 | Block 4 will create FastAPI endpoints
+2026-07-04 20:23:58 | INFO     | medical_ai | main.py:880 | ================================================================================
+2026-07-04 20:23:58 | INFO     | medical_ai | main.py:1216 | ================================================================================
+2026-07-04 20:23:58 | INFO     | medical_ai | main.py:1217 | BLOCK 2: Initializing Medical AI Assistant (DATA-DRIVEN VERSION)
+2026-07-04 20:23:58 | INFO     | medical_ai | main.py:1218 | ================================================================================
+2026-07-04 20:23:58 | INFO     | medical_ai | main.py:1232 | 
+Loading Datasets...
+2026-07-04 20:23:58 | INFO     | medical_ai | main.py:956 | Loading dataset: healthcare
+2026-07-04 20:23:58 | INFO     | medical_ai | main.py:962 |    Loaded 25000 rows, 6 columns
+2026-07-04 20:23:58 | INFO     | medical_ai | main.py:987 |    Target: None
+2026-07-04 20:23:58 | INFO     | medical_ai | main.py:956 | Loading dataset: disease_description
+2026-07-04 20:23:58 | INFO     | medical_ai | main.py:962 |    Loaded 42 rows, 2 columns
+2026-07-04 20:23:58 | INFO     | medical_ai | main.py:987 |    Target: None
+2026-07-04 20:23:58 | INFO     | medical_ai | main.py:956 | Loading dataset: disease_precaution
+2026-07-04 20:23:58 | INFO     | medical_ai | main.py:962 |    Loaded 42 rows, 5 columns
+2026-07-04 20:23:58 | INFO     | medical_ai | main.py:987 |    Target: None
+2026-07-04 20:23:58 | INFO     | medical_ai | main.py:956 | Loading dataset: symptom_severity
+2026-07-04 20:23:58 | INFO     | medical_ai | main.py:962 |    Loaded 134 rows, 2 columns
+2026-07-04 20:23:58 | INFO     | medical_ai | main.py:987 |    Target: None
+2026-07-04 20:23:58 | INFO     | medical_ai | main.py:956 | Loading dataset: heart
+2026-07-04 20:23:58 | INFO     | medical_ai | main.py:962 |    Loaded 1025 rows, 14 columns
+2026-07-04 20:23:58 | INFO     | medical_ai | main.py:987 |    Target: target
+2026-07-04 20:23:58 | INFO     | medical_ai | main.py:956 | Loading dataset: diabetes
+2026-07-04 20:23:58 | INFO     | medical_ai | main.py:962 |    Loaded 768 rows, 9 columns
+2026-07-04 20:23:58 | INFO     | medical_ai | main.py:987 |    Target: Outcome
+2026-07-04 20:23:58 | INFO     | medical_ai | main.py:956 | Loading dataset: breast_cancer
+2026-07-04 20:23:58 | INFO     | medical_ai | main.py:962 |    Loaded 569 rows, 32 columns
+2026-07-04 20:23:58 | INFO     | medical_ai | main.py:987 |    Target: diagnosis
+2026-07-04 20:23:58 | INFO     | medical_ai | main.py:1252 | 
+Building Knowledge Base...
+2026-07-04 20:23:59 | INFO     | medical_ai | main.py:1058 | Built symptom index: 0 symptoms, 0 diseases
+2026-07-04 20:23:59 | INFO     | medical_ai | main.py:1147 |    Added 9 common diseases with symptoms.
+2026-07-04 20:23:59 | INFO     | medical_ai | main.py:1154 | Generating symptom synonyms...
+2026-07-04 20:23:59 | INFO     | medical_ai | main.py:1201 |    Synonyms generated for 44 symptoms
+2026-07-04 20:23:59 | INFO     | medical_ai | main.py:1353 | 
+Loading Models...
+2026-07-04 20:23:59 | INFO     | medical_ai | main.py:1377 |    Model loaded: diabetes
+2026-07-04 20:23:59 | INFO     | medical_ai | main.py:1401 |    Preprocessor loaded: diabetes
+2026-07-04 20:23:59 | INFO     | medical_ai | main.py:1408 |    Scaler loaded: diabetes
+2026-07-04 20:23:59 | INFO     | medical_ai | main.py:1377 |    Model loaded: heart
+2026-07-04 20:23:59 | INFO     | medical_ai | main.py:1401 |    Preprocessor loaded: heart
+2026-07-04 20:23:59 | INFO     | medical_ai | main.py:1408 |    Scaler loaded: heart
+2026-07-04 20:23:59 | INFO     | medical_ai | main.py:1413 |    Scanning for additional models...
+2026-07-04 20:23:59 | INFO     | medical_ai | main.py:1421 |    Model loaded from file: breast
+2026-07-04 20:23:59 | INFO     | medical_ai | main.py:1447 |    Preprocessor loaded from file: breast
+2026-07-04 20:23:59 | INFO     | medical_ai | main.py:1459 |    Scaler loaded from file: breast
+2026-07-04 20:23:59 | INFO     | medical_ai | main.py:1471 | 
+Generating Embeddings...
+2026-07-04 20:25:09 | INFO     | medical_ai | main.py:1478 |    Embedding model loaded
+2026-07-04 20:25:09 | INFO     | medical_ai | main.py:1484 | 
+Computing feature defaults for missing values...
+2026-07-04 20:25:09 | INFO     | medical_ai | main.py:1499 |    Defaults for diabetes: 8 features
+2026-07-04 20:25:09 | INFO     | medical_ai | main.py:1499 |    Defaults for heart: 13 features
+2026-07-04 20:25:09 | INFO     | medical_ai | main.py:1502 | 
+================================================================================
+2026-07-04 20:25:09 | INFO     | medical_ai | main.py:1503 | BLOCK 2: Initialization Complete (DATA-DRIVEN VERSION)
+2026-07-04 20:25:09 | INFO     | medical_ai | main.py:1504 | ================================================================================
+2026-07-04 20:25:09 | INFO     | medical_ai | main.py:1505 |    DATASETS LOADED: 7
+2026-07-04 20:25:09 | INFO     | medical_ai | main.py:1506 |    MODELS LOADED: 3
+2026-07-04 20:25:09 | INFO     | medical_ai | main.py:1507 |    SCALERS LOADED: 3
+2026-07-04 20:25:09 | INFO     | medical_ai | main.py:1508 |    SYMPTOMS INDEXED: 44
+2026-07-04 20:25:09 | INFO     | medical_ai | main.py:1509 |    DISEASES INDEXED: 9
+2026-07-04 20:25:09 | INFO     | medical_ai | main.py:1510 |    SYNONYMS: 44
+2026-07-04 20:25:09 | INFO     | medical_ai | main.py:1511 |    FEATURE DEFAULTS: 2 diseases
+2026-07-04 20:25:09 | INFO     | medical_ai | main.py:1512 |    INITIALIZATION TIME: 71.56s
+2026-07-04 20:25:09 | INFO     | medical_ai | main.py:1513 | ================================================================================
+2026-07-04 20:25:09 | INFO     | medical_ai | main.py:1550 | Final SYMPTOM_INDEX symptom count: 44
+2026-07-04 20:25:09 | INFO     | medical_ai | main.py:1551 | Final SYMPTOM_SYNONYMS keys: 44
+2026-07-04 20:25:49 | INFO     | medical_ai | main.py:1571 |  Brain tumor model loaded from models\Brain_Tumor_Detection_model.h5
+2026-07-04 20:25:49 | INFO     | medical_ai | main.py:1621 | Loading Lung Tokenizer...
+2026-07-04 20:25:49 | INFO     | medical_ai | main.py:1623 |  Tokenizer loaded
+2026-07-04 20:25:49 | INFO     | medical_ai | main.py:1625 | Loading Lung Model...
+2026-07-04 20:25:50 | INFO     | medical_ai | main.py:1627 |  Model loaded
+2026-07-04 20:25:50 | INFO     | medical_ai | main.py:1629 | Loading Label Encoder...
+2026-07-04 20:25:50 | INFO     | medical_ai | main.py:1631 |  Label Encoder loaded
+2026-07-04 20:25:50 | INFO     | medical_ai | main.py:1636 |  Lung NLP model loaded from models\Lung_Model
+2026-07-04 20:25:50 | INFO     | medical_ai | main.py:1637 | Classes: 19
+2026-07-04 20:25:50 | INFO     | medical_ai.chat_engine | main.py:2106 | ChatSessionManager initialized (FINAL WITH FORCED RESET)
+2026-07-04 20:25:50 | INFO     | medical_ai.chat_engine | main.py:2625 | Medical Chat Engine initialized (FINAL WITH FORCED RESET)
+2026-07-04 20:25:50 | INFO     | medical_ai.chat_engine | main.py:2676 | Medical Chat Engine is ready (FINAL WITH FORCED RESET)
+2026-07-04 20:26:11 | INFO     | medical_ai | main.py:179 | ================================================================================
+2026-07-04 20:26:11 | INFO     | medical_ai | main.py:180 | Medical AI Assistant v4.0 - Initializing
+2026-07-04 20:26:11 | INFO     | medical_ai | main.py:181 | ================================================================================
+2026-07-04 20:26:11 | INFO     | medical_ai | main.py:182 |    Python Version: 3.11.9
+2026-07-04 20:26:11 | INFO     | medical_ai | main.py:183 |    Working Directory: E:\downloads\Multiple-Disease-Prediction-Webapp-main\Multiple-Disease-Prediction-Webapp-main\backend
+2026-07-04 20:26:11 | INFO     | medical_ai | main.py:184 |    Operating System: Windows 10
+2026-07-04 20:26:11 | INFO     | medical_ai | main.py:185 |    CPU Cores: 8
+2026-07-04 20:26:11 | INFO     | medical_ai | main.py:186 |    Start Time: 2026-07-04T20:26:11.536760
+2026-07-04 20:26:11 | INFO     | medical_ai | main.py:187 | ================================================================================
+2026-07-04 20:26:11 | INFO     | medical_ai | main.py:204 | Random seed set to: 42
+2026-07-04 20:26:11 | INFO     | medical_ai | main.py:317 | Settings loaded successfully
+2026-07-04 20:26:11 | INFO     | medical_ai | main.py:407 | Disease configuration loaded: 3 diseases
+2026-07-04 20:26:11 | INFO     | medical_ai | main.py:456 | Database configuration loaded: 7 files
+2026-07-04 20:26:11 | INFO     | medical_ai | main.py:474 | Global paths configured
+2026-07-04 20:26:11 | INFO     | medical_ai | main.py:496 | Global containers initialized (empty)
+2026-07-04 20:26:11 | INFO     | medical_ai | main.py:620 | NLP configuration loaded: 17 parameters
+2026-07-04 20:26:11 | INFO     | medical_ai | main.py:637 | Session configuration loaded: 10 parameters
+2026-07-04 20:26:11 | INFO     | medical_ai | main.py:658 | FastAPI configuration loaded: 14 parameters
+2026-07-04 20:26:11 | INFO     | medical_ai | main.py:720 | Project validation PASSED
+2026-07-04 20:26:11 | INFO     | medical_ai | main.py:723 |    Database: 7 found, 0 missing
+2026-07-04 20:26:11 | INFO     | medical_ai | main.py:724 |    Models: 7 found, 0 missing
+2026-07-04 20:26:11 | INFO     | medical_ai | main.py:725 |    Summary: 14/14 files found
+2026-07-04 20:26:11 | INFO     | medical_ai | main.py:859 | Dependencies: {'sentence_transformers': True, 'rapidfuzz': True, 'nltk': True, 'uvicorn': True, 'nest_asyncio': True}
+2026-07-04 20:26:11 | INFO     | medical_ai | main.py:863 | Memory Usage: 460.4 MB
+2026-07-04 20:26:11 | INFO     | medical_ai | main.py:865 | ================================================================================
+2026-07-04 20:26:11 | INFO     | medical_ai | main.py:866 | BLOCK 1: Project Setup Complete
+2026-07-04 20:26:11 | INFO     | medical_ai | main.py:867 | ================================================================================
+2026-07-04 20:26:11 | INFO     | medical_ai | main.py:868 |    Base Directory: E:\downloads\Multiple-Disease-Prediction-Webapp-main\Multiple-Disease-Prediction-Webapp-main\backend
+2026-07-04 20:26:11 | INFO     | medical_ai | main.py:869 |    Models Directory: models
+2026-07-04 20:26:11 | INFO     | medical_ai | main.py:870 |    Database Directory: database
+2026-07-04 20:26:11 | INFO     | medical_ai | main.py:871 |    Log Directory: logs
+2026-07-04 20:26:11 | INFO     | medical_ai | main.py:872 |    Cache Directory: cache
+2026-07-04 20:26:11 | INFO     | medical_ai | main.py:873 |    Supported Diseases: ['diabetes', 'heart', 'breast']
+2026-07-04 20:26:11 | INFO     | medical_ai | main.py:874 |    Database Files: 7
+2026-07-04 20:26:11 | INFO     | medical_ai | main.py:875 |    Disease Configs: 3
+2026-07-04 20:26:11 | INFO     | medical_ai | main.py:876 | ================================================================================
+2026-07-04 20:26:11 | INFO     | medical_ai | main.py:877 | Block 2 will load all data and models
+2026-07-04 20:26:11 | INFO     | medical_ai | main.py:878 | Block 3 will implement the chat engine
+2026-07-04 20:26:11 | INFO     | medical_ai | main.py:879 | Block 4 will create FastAPI endpoints
+2026-07-04 20:26:11 | INFO     | medical_ai | main.py:880 | ================================================================================
+2026-07-04 20:26:11 | INFO     | medical_ai | main.py:1216 | ================================================================================
+2026-07-04 20:26:11 | INFO     | medical_ai | main.py:1217 | BLOCK 2: Initializing Medical AI Assistant (DATA-DRIVEN VERSION)
+2026-07-04 20:26:11 | INFO     | medical_ai | main.py:1218 | ================================================================================
+2026-07-04 20:26:11 | INFO     | medical_ai | main.py:1232 | 
+Loading Datasets...
+2026-07-04 20:26:11 | INFO     | medical_ai | main.py:956 | Loading dataset: healthcare
+2026-07-04 20:26:11 | INFO     | medical_ai | main.py:962 |    Loaded 25000 rows, 6 columns
+2026-07-04 20:26:11 | INFO     | medical_ai | main.py:987 |    Target: None
+2026-07-04 20:26:11 | INFO     | medical_ai | main.py:956 | Loading dataset: disease_description
+2026-07-04 20:26:11 | INFO     | medical_ai | main.py:962 |    Loaded 42 rows, 2 columns
+2026-07-04 20:26:11 | INFO     | medical_ai | main.py:987 |    Target: None
+2026-07-04 20:26:11 | INFO     | medical_ai | main.py:956 | Loading dataset: disease_precaution
+2026-07-04 20:26:11 | INFO     | medical_ai | main.py:962 |    Loaded 42 rows, 5 columns
+2026-07-04 20:26:11 | INFO     | medical_ai | main.py:987 |    Target: None
+2026-07-04 20:26:11 | INFO     | medical_ai | main.py:956 | Loading dataset: symptom_severity
+2026-07-04 20:26:11 | INFO     | medical_ai | main.py:962 |    Loaded 134 rows, 2 columns
+2026-07-04 20:26:11 | INFO     | medical_ai | main.py:987 |    Target: None
+2026-07-04 20:26:11 | INFO     | medical_ai | main.py:956 | Loading dataset: heart
+2026-07-04 20:26:11 | INFO     | medical_ai | main.py:962 |    Loaded 1025 rows, 14 columns
+2026-07-04 20:26:11 | INFO     | medical_ai | main.py:987 |    Target: target
+2026-07-04 20:26:11 | INFO     | medical_ai | main.py:956 | Loading dataset: diabetes
+2026-07-04 20:26:11 | INFO     | medical_ai | main.py:962 |    Loaded 768 rows, 9 columns
+2026-07-04 20:26:11 | INFO     | medical_ai | main.py:987 |    Target: Outcome
+2026-07-04 20:26:11 | INFO     | medical_ai | main.py:956 | Loading dataset: breast_cancer
+2026-07-04 20:26:11 | INFO     | medical_ai | main.py:962 |    Loaded 569 rows, 32 columns
+2026-07-04 20:26:11 | INFO     | medical_ai | main.py:987 |    Target: diagnosis
+2026-07-04 20:26:11 | INFO     | medical_ai | main.py:1252 | 
+Building Knowledge Base...
+2026-07-04 20:26:14 | INFO     | medical_ai | main.py:1058 | Built symptom index: 0 symptoms, 0 diseases
+2026-07-04 20:26:14 | INFO     | medical_ai | main.py:1147 |    Added 9 common diseases with symptoms.
+2026-07-04 20:26:14 | INFO     | medical_ai | main.py:1154 | Generating symptom synonyms...
+2026-07-04 20:26:14 | INFO     | medical_ai | main.py:1201 |    Synonyms generated for 44 symptoms
+2026-07-04 20:26:14 | INFO     | medical_ai | main.py:1353 | 
+Loading Models...
+2026-07-04 20:26:14 | INFO     | medical_ai | main.py:1377 |    Model loaded: diabetes
+2026-07-04 20:26:14 | INFO     | medical_ai | main.py:1401 |    Preprocessor loaded: diabetes
+2026-07-04 20:26:14 | INFO     | medical_ai | main.py:1408 |    Scaler loaded: diabetes
+2026-07-04 20:26:14 | INFO     | medical_ai | main.py:1377 |    Model loaded: heart
+2026-07-04 20:26:14 | INFO     | medical_ai | main.py:1401 |    Preprocessor loaded: heart
+2026-07-04 20:26:14 | INFO     | medical_ai | main.py:1408 |    Scaler loaded: heart
+2026-07-04 20:26:14 | INFO     | medical_ai | main.py:1413 |    Scanning for additional models...
+2026-07-04 20:26:14 | INFO     | medical_ai | main.py:1421 |    Model loaded from file: breast
+2026-07-04 20:26:14 | INFO     | medical_ai | main.py:1447 |    Preprocessor loaded from file: breast
+2026-07-04 20:26:14 | INFO     | medical_ai | main.py:1459 |    Scaler loaded from file: breast
+2026-07-04 20:26:14 | INFO     | medical_ai | main.py:1471 | 
+Generating Embeddings...
+2026-07-04 20:26:20 | INFO     | medical_ai | main.py:1478 |    Embedding model loaded
+2026-07-04 20:26:20 | INFO     | medical_ai | main.py:1484 | 
+Computing feature defaults for missing values...
+2026-07-04 20:26:20 | INFO     | medical_ai | main.py:1499 |    Defaults for diabetes: 8 features
+2026-07-04 20:26:20 | INFO     | medical_ai | main.py:1499 |    Defaults for heart: 13 features
+2026-07-04 20:26:20 | INFO     | medical_ai | main.py:1502 | 
+================================================================================
+2026-07-04 20:26:20 | INFO     | medical_ai | main.py:1503 | BLOCK 2: Initialization Complete (DATA-DRIVEN VERSION)
+2026-07-04 20:26:20 | INFO     | medical_ai | main.py:1504 | ================================================================================
+2026-07-04 20:26:20 | INFO     | medical_ai | main.py:1505 |    DATASETS LOADED: 7
+2026-07-04 20:26:20 | INFO     | medical_ai | main.py:1506 |    MODELS LOADED: 3
+2026-07-04 20:26:20 | INFO     | medical_ai | main.py:1507 |    SCALERS LOADED: 3
+2026-07-04 20:26:20 | INFO     | medical_ai | main.py:1508 |    SYMPTOMS INDEXED: 44
+2026-07-04 20:26:20 | INFO     | medical_ai | main.py:1509 |    DISEASES INDEXED: 9
+2026-07-04 20:26:20 | INFO     | medical_ai | main.py:1510 |    SYNONYMS: 44
+2026-07-04 20:26:20 | INFO     | medical_ai | main.py:1511 |    FEATURE DEFAULTS: 2 diseases
+2026-07-04 20:26:20 | INFO     | medical_ai | main.py:1512 |    INITIALIZATION TIME: 8.63s
+2026-07-04 20:26:20 | INFO     | medical_ai | main.py:1513 | ================================================================================
+2026-07-04 20:26:20 | INFO     | medical_ai | main.py:1550 | Final SYMPTOM_INDEX symptom count: 44
+2026-07-04 20:26:20 | INFO     | medical_ai | main.py:1551 | Final SYMPTOM_SYNONYMS keys: 44
+2026-07-04 20:26:29 | INFO     | medical_ai | main.py:1571 |  Brain tumor model loaded from models\Brain_Tumor_Detection_model.h5
+2026-07-04 20:26:29 | INFO     | medical_ai | main.py:1621 | Loading Lung Tokenizer...
+2026-07-04 20:26:30 | INFO     | medical_ai | main.py:1623 |  Tokenizer loaded
+2026-07-04 20:26:30 | INFO     | medical_ai | main.py:1625 | Loading Lung Model...
+2026-07-04 20:26:30 | INFO     | medical_ai | main.py:1627 |  Model loaded
+2026-07-04 20:26:30 | INFO     | medical_ai | main.py:1629 | Loading Label Encoder...
+2026-07-04 20:26:30 | INFO     | medical_ai | main.py:1631 |  Label Encoder loaded
+2026-07-04 20:26:30 | INFO     | medical_ai | main.py:1636 |  Lung NLP model loaded from models\Lung_Model
+2026-07-04 20:26:30 | INFO     | medical_ai | main.py:1637 | Classes: 19
+2026-07-04 20:26:30 | INFO     | medical_ai.chat_engine | main.py:2106 | ChatSessionManager initialized (FINAL WITH FORCED RESET)
+2026-07-04 20:26:30 | INFO     | medical_ai.chat_engine | main.py:2625 | Medical Chat Engine initialized (FINAL WITH FORCED RESET)
+2026-07-04 20:26:30 | INFO     | medical_ai.chat_engine | main.py:2676 | Medical Chat Engine is ready (FINAL WITH FORCED RESET)
+2026-07-04 20:35:30 | INFO     | medical_ai | main.py:179 | ================================================================================
+2026-07-04 20:35:30 | INFO     | medical_ai | main.py:180 | Medical AI Assistant v4.0 - Initializing
+2026-07-04 20:35:30 | INFO     | medical_ai | main.py:181 | ================================================================================
+2026-07-04 20:35:30 | INFO     | medical_ai | main.py:182 |    Python Version: 3.11.9
+2026-07-04 20:35:30 | INFO     | medical_ai | main.py:183 |    Working Directory: E:\downloads\Multiple-Disease-Prediction-Webapp-main\Multiple-Disease-Prediction-Webapp-main\backend
+2026-07-04 20:35:30 | INFO     | medical_ai | main.py:184 |    Operating System: Windows 10
+2026-07-04 20:35:30 | INFO     | medical_ai | main.py:185 |    CPU Cores: 8
+2026-07-04 20:35:30 | INFO     | medical_ai | main.py:186 |    Start Time: 2026-07-04T20:35:30.414929
+2026-07-04 20:35:30 | INFO     | medical_ai | main.py:187 | ================================================================================
+2026-07-04 20:35:30 | INFO     | medical_ai | main.py:204 | Random seed set to: 42
+2026-07-04 20:35:30 | INFO     | medical_ai | main.py:317 | Settings loaded successfully
+2026-07-04 20:35:30 | INFO     | medical_ai | main.py:407 | Disease configuration loaded: 3 diseases
+2026-07-04 20:35:30 | INFO     | medical_ai | main.py:456 | Database configuration loaded: 7 files
+2026-07-04 20:35:30 | INFO     | medical_ai | main.py:474 | Global paths configured
+2026-07-04 20:35:30 | INFO     | medical_ai | main.py:496 | Global containers initialized (empty)
+2026-07-04 20:35:30 | INFO     | medical_ai | main.py:620 | NLP configuration loaded: 17 parameters
+2026-07-04 20:35:30 | INFO     | medical_ai | main.py:637 | Session configuration loaded: 10 parameters
+2026-07-04 20:35:30 | INFO     | medical_ai | main.py:658 | FastAPI configuration loaded: 14 parameters
+2026-07-04 20:35:30 | INFO     | medical_ai | main.py:720 | Project validation PASSED
+2026-07-04 20:35:30 | INFO     | medical_ai | main.py:723 |    Database: 7 found, 0 missing
+2026-07-04 20:35:30 | INFO     | medical_ai | main.py:724 |    Models: 7 found, 0 missing
+2026-07-04 20:35:30 | INFO     | medical_ai | main.py:725 |    Summary: 14/14 files found
+2026-07-04 20:35:30 | INFO     | medical_ai | main.py:859 | Dependencies: {'sentence_transformers': True, 'rapidfuzz': True, 'nltk': True, 'uvicorn': True, 'nest_asyncio': True}
+2026-07-04 20:35:30 | INFO     | medical_ai | main.py:863 | Memory Usage: 462.6 MB
+2026-07-04 20:35:30 | INFO     | medical_ai | main.py:865 | ================================================================================
+2026-07-04 20:35:30 | INFO     | medical_ai | main.py:866 | BLOCK 1: Project Setup Complete
+2026-07-04 20:35:30 | INFO     | medical_ai | main.py:867 | ================================================================================
+2026-07-04 20:35:30 | INFO     | medical_ai | main.py:868 |    Base Directory: E:\downloads\Multiple-Disease-Prediction-Webapp-main\Multiple-Disease-Prediction-Webapp-main\backend
+2026-07-04 20:35:30 | INFO     | medical_ai | main.py:869 |    Models Directory: models
+2026-07-04 20:35:30 | INFO     | medical_ai | main.py:870 |    Database Directory: database
+2026-07-04 20:35:30 | INFO     | medical_ai | main.py:871 |    Log Directory: logs
+2026-07-04 20:35:30 | INFO     | medical_ai | main.py:872 |    Cache Directory: cache
+2026-07-04 20:35:30 | INFO     | medical_ai | main.py:873 |    Supported Diseases: ['diabetes', 'heart', 'breast']
+2026-07-04 20:35:30 | INFO     | medical_ai | main.py:874 |    Database Files: 7
+2026-07-04 20:35:30 | INFO     | medical_ai | main.py:875 |    Disease Configs: 3
+2026-07-04 20:35:30 | INFO     | medical_ai | main.py:876 | ================================================================================
+2026-07-04 20:35:30 | INFO     | medical_ai | main.py:877 | Block 2 will load all data and models
+2026-07-04 20:35:30 | INFO     | medical_ai | main.py:878 | Block 3 will implement the chat engine
+2026-07-04 20:35:30 | INFO     | medical_ai | main.py:879 | Block 4 will create FastAPI endpoints
+2026-07-04 20:35:30 | INFO     | medical_ai | main.py:880 | ================================================================================
+2026-07-04 20:35:30 | INFO     | medical_ai | main.py:1216 | ================================================================================
+2026-07-04 20:35:30 | INFO     | medical_ai | main.py:1217 | BLOCK 2: Initializing Medical AI Assistant (DATA-DRIVEN VERSION)
+2026-07-04 20:35:30 | INFO     | medical_ai | main.py:1218 | ================================================================================
+2026-07-04 20:35:30 | INFO     | medical_ai | main.py:1232 | 
+Loading Datasets...
+2026-07-04 20:35:30 | INFO     | medical_ai | main.py:956 | Loading dataset: healthcare
+2026-07-04 20:35:30 | INFO     | medical_ai | main.py:962 |    Loaded 25000 rows, 6 columns
+2026-07-04 20:35:30 | INFO     | medical_ai | main.py:987 |    Target: None
+2026-07-04 20:35:30 | INFO     | medical_ai | main.py:956 | Loading dataset: disease_description
+2026-07-04 20:35:30 | INFO     | medical_ai | main.py:962 |    Loaded 42 rows, 2 columns
+2026-07-04 20:35:30 | INFO     | medical_ai | main.py:987 |    Target: None
+2026-07-04 20:35:30 | INFO     | medical_ai | main.py:956 | Loading dataset: disease_precaution
+2026-07-04 20:35:30 | INFO     | medical_ai | main.py:962 |    Loaded 42 rows, 5 columns
+2026-07-04 20:35:30 | INFO     | medical_ai | main.py:987 |    Target: None
+2026-07-04 20:35:30 | INFO     | medical_ai | main.py:956 | Loading dataset: symptom_severity
+2026-07-04 20:35:30 | INFO     | medical_ai | main.py:962 |    Loaded 134 rows, 2 columns
+2026-07-04 20:35:30 | INFO     | medical_ai | main.py:987 |    Target: None
+2026-07-04 20:35:30 | INFO     | medical_ai | main.py:956 | Loading dataset: heart
+2026-07-04 20:35:30 | INFO     | medical_ai | main.py:962 |    Loaded 1025 rows, 14 columns
+2026-07-04 20:35:30 | INFO     | medical_ai | main.py:987 |    Target: target
+2026-07-04 20:35:30 | INFO     | medical_ai | main.py:956 | Loading dataset: diabetes
+2026-07-04 20:35:30 | INFO     | medical_ai | main.py:962 |    Loaded 768 rows, 9 columns
+2026-07-04 20:35:30 | INFO     | medical_ai | main.py:987 |    Target: Outcome
+2026-07-04 20:35:30 | INFO     | medical_ai | main.py:956 | Loading dataset: breast_cancer
+2026-07-04 20:35:30 | INFO     | medical_ai | main.py:962 |    Loaded 569 rows, 32 columns
+2026-07-04 20:35:30 | INFO     | medical_ai | main.py:987 |    Target: diagnosis
+2026-07-04 20:35:30 | INFO     | medical_ai | main.py:1252 | 
+Building Knowledge Base...
+2026-07-04 20:35:32 | INFO     | medical_ai | main.py:1058 | Built symptom index: 0 symptoms, 0 diseases
+2026-07-04 20:35:32 | INFO     | medical_ai | main.py:1147 |    Added 9 common diseases with symptoms.
+2026-07-04 20:35:32 | INFO     | medical_ai | main.py:1154 | Generating symptom synonyms...
+2026-07-04 20:35:32 | INFO     | medical_ai | main.py:1201 |    Synonyms generated for 44 symptoms
+2026-07-04 20:35:32 | INFO     | medical_ai | main.py:1353 | 
+Loading Models...
+2026-07-04 20:35:32 | INFO     | medical_ai | main.py:1377 |    Model loaded: diabetes
+2026-07-04 20:35:32 | INFO     | medical_ai | main.py:1401 |    Preprocessor loaded: diabetes
+2026-07-04 20:35:32 | INFO     | medical_ai | main.py:1408 |    Scaler loaded: diabetes
+2026-07-04 20:35:32 | INFO     | medical_ai | main.py:1377 |    Model loaded: heart
+2026-07-04 20:35:32 | INFO     | medical_ai | main.py:1401 |    Preprocessor loaded: heart
+2026-07-04 20:35:32 | INFO     | medical_ai | main.py:1408 |    Scaler loaded: heart
+2026-07-04 20:35:32 | INFO     | medical_ai | main.py:1413 |    Scanning for additional models...
+2026-07-04 20:35:32 | INFO     | medical_ai | main.py:1421 |    Model loaded from file: breast
+2026-07-04 20:35:32 | INFO     | medical_ai | main.py:1447 |    Preprocessor loaded from file: breast
+2026-07-04 20:35:32 | INFO     | medical_ai | main.py:1459 |    Scaler loaded from file: breast
+2026-07-04 20:35:32 | INFO     | medical_ai | main.py:1471 | 
+Generating Embeddings...
+2026-07-04 20:35:38 | INFO     | medical_ai | main.py:1478 |    Embedding model loaded
+2026-07-04 20:35:38 | INFO     | medical_ai | main.py:1484 | 
+Computing feature defaults for missing values...
+2026-07-04 20:35:39 | INFO     | medical_ai | main.py:1499 |    Defaults for diabetes: 8 features
+2026-07-04 20:35:39 | INFO     | medical_ai | main.py:1499 |    Defaults for heart: 13 features
+2026-07-04 20:35:39 | INFO     | medical_ai | main.py:1502 | 
+================================================================================
+2026-07-04 20:35:39 | INFO     | medical_ai | main.py:1503 | BLOCK 2: Initialization Complete (DATA-DRIVEN VERSION)
+2026-07-04 20:35:39 | INFO     | medical_ai | main.py:1504 | ================================================================================
+2026-07-04 20:35:39 | INFO     | medical_ai | main.py:1505 |    DATASETS LOADED: 7
+2026-07-04 20:35:39 | INFO     | medical_ai | main.py:1506 |    MODELS LOADED: 3
+2026-07-04 20:35:39 | INFO     | medical_ai | main.py:1507 |    SCALERS LOADED: 3
+2026-07-04 20:35:39 | INFO     | medical_ai | main.py:1508 |    SYMPTOMS INDEXED: 44
+2026-07-04 20:35:39 | INFO     | medical_ai | main.py:1509 |    DISEASES INDEXED: 9
+2026-07-04 20:35:39 | INFO     | medical_ai | main.py:1510 |    SYNONYMS: 44
+2026-07-04 20:35:39 | INFO     | medical_ai | main.py:1511 |    FEATURE DEFAULTS: 2 diseases
+2026-07-04 20:35:39 | INFO     | medical_ai | main.py:1512 |    INITIALIZATION TIME: 8.38s
+2026-07-04 20:35:39 | INFO     | medical_ai | main.py:1513 | ================================================================================
+2026-07-04 20:35:39 | INFO     | medical_ai | main.py:1550 | Final SYMPTOM_INDEX symptom count: 44
+2026-07-04 20:35:39 | INFO     | medical_ai | main.py:1551 | Final SYMPTOM_SYNONYMS keys: 44
+2026-07-04 20:35:48 | INFO     | medical_ai | main.py:1571 |  Brain tumor model loaded from models\Brain_Tumor_Detection_model.h5
+2026-07-04 20:35:48 | INFO     | medical_ai | main.py:1621 | Loading Lung Tokenizer...
+2026-07-04 20:35:48 | INFO     | medical_ai | main.py:1623 |  Tokenizer loaded
+2026-07-04 20:35:48 | INFO     | medical_ai | main.py:1625 | Loading Lung Model...
+2026-07-04 20:35:49 | INFO     | medical_ai | main.py:1627 |  Model loaded
+2026-07-04 20:35:49 | INFO     | medical_ai | main.py:1629 | Loading Label Encoder...
+2026-07-04 20:35:49 | INFO     | medical_ai | main.py:1631 |  Label Encoder loaded
+2026-07-04 20:35:49 | INFO     | medical_ai | main.py:1636 |  Lung NLP model loaded from models\Lung_Model
+2026-07-04 20:35:49 | INFO     | medical_ai | main.py:1637 | Classes: 19
+2026-07-04 20:35:49 | INFO     | medical_ai.chat_engine | main.py:2106 | ChatSessionManager initialized (FINAL WITH FORCED RESET)
+2026-07-04 20:35:49 | INFO     | medical_ai.chat_engine | main.py:2625 | Medical Chat Engine initialized (FINAL WITH FORCED RESET)
+2026-07-04 20:35:49 | INFO     | medical_ai.chat_engine | main.py:2676 | Medical Chat Engine is ready (FINAL WITH FORCED RESET)
+2026-07-04 20:36:10 | INFO     | medical_ai | main.py:179 | ================================================================================
+2026-07-04 20:36:10 | INFO     | medical_ai | main.py:180 | Medical AI Assistant v4.0 - Initializing
+2026-07-04 20:36:10 | INFO     | medical_ai | main.py:181 | ================================================================================
+2026-07-04 20:36:10 | INFO     | medical_ai | main.py:182 |    Python Version: 3.11.9
+2026-07-04 20:36:10 | INFO     | medical_ai | main.py:183 |    Working Directory: E:\downloads\Multiple-Disease-Prediction-Webapp-main\Multiple-Disease-Prediction-Webapp-main\backend
+2026-07-04 20:36:10 | INFO     | medical_ai | main.py:184 |    Operating System: Windows 10
+2026-07-04 20:36:10 | INFO     | medical_ai | main.py:185 |    CPU Cores: 8
+2026-07-04 20:36:10 | INFO     | medical_ai | main.py:186 |    Start Time: 2026-07-04T20:36:10.606394
+2026-07-04 20:36:10 | INFO     | medical_ai | main.py:187 | ================================================================================
+2026-07-04 20:36:10 | INFO     | medical_ai | main.py:204 | Random seed set to: 42
+2026-07-04 20:36:10 | INFO     | medical_ai | main.py:317 | Settings loaded successfully
+2026-07-04 20:36:10 | INFO     | medical_ai | main.py:407 | Disease configuration loaded: 3 diseases
+2026-07-04 20:36:10 | INFO     | medical_ai | main.py:456 | Database configuration loaded: 7 files
+2026-07-04 20:36:10 | INFO     | medical_ai | main.py:474 | Global paths configured
+2026-07-04 20:36:10 | INFO     | medical_ai | main.py:496 | Global containers initialized (empty)
+2026-07-04 20:36:10 | INFO     | medical_ai | main.py:620 | NLP configuration loaded: 17 parameters
+2026-07-04 20:36:10 | INFO     | medical_ai | main.py:637 | Session configuration loaded: 10 parameters
+2026-07-04 20:36:10 | INFO     | medical_ai | main.py:658 | FastAPI configuration loaded: 14 parameters
+2026-07-04 20:36:10 | INFO     | medical_ai | main.py:720 | Project validation PASSED
+2026-07-04 20:36:10 | INFO     | medical_ai | main.py:723 |    Database: 7 found, 0 missing
+2026-07-04 20:36:10 | INFO     | medical_ai | main.py:724 |    Models: 7 found, 0 missing
+2026-07-04 20:36:10 | INFO     | medical_ai | main.py:725 |    Summary: 14/14 files found
+2026-07-04 20:36:10 | INFO     | medical_ai | main.py:859 | Dependencies: {'sentence_transformers': True, 'rapidfuzz': True, 'nltk': True, 'uvicorn': True, 'nest_asyncio': True}
+2026-07-04 20:36:10 | INFO     | medical_ai | main.py:863 | Memory Usage: 461.3 MB
+2026-07-04 20:36:10 | INFO     | medical_ai | main.py:865 | ================================================================================
+2026-07-04 20:36:10 | INFO     | medical_ai | main.py:866 | BLOCK 1: Project Setup Complete
+2026-07-04 20:36:10 | INFO     | medical_ai | main.py:867 | ================================================================================
+2026-07-04 20:36:10 | INFO     | medical_ai | main.py:868 |    Base Directory: E:\downloads\Multiple-Disease-Prediction-Webapp-main\Multiple-Disease-Prediction-Webapp-main\backend
+2026-07-04 20:36:10 | INFO     | medical_ai | main.py:869 |    Models Directory: models
+2026-07-04 20:36:10 | INFO     | medical_ai | main.py:870 |    Database Directory: database
+2026-07-04 20:36:10 | INFO     | medical_ai | main.py:871 |    Log Directory: logs
+2026-07-04 20:36:10 | INFO     | medical_ai | main.py:872 |    Cache Directory: cache
+2026-07-04 20:36:10 | INFO     | medical_ai | main.py:873 |    Supported Diseases: ['diabetes', 'heart', 'breast']
+2026-07-04 20:36:10 | INFO     | medical_ai | main.py:874 |    Database Files: 7
+2026-07-04 20:36:10 | INFO     | medical_ai | main.py:875 |    Disease Configs: 3
+2026-07-04 20:36:10 | INFO     | medical_ai | main.py:876 | ================================================================================
+2026-07-04 20:36:10 | INFO     | medical_ai | main.py:877 | Block 2 will load all data and models
+2026-07-04 20:36:10 | INFO     | medical_ai | main.py:878 | Block 3 will implement the chat engine
+2026-07-04 20:36:10 | INFO     | medical_ai | main.py:879 | Block 4 will create FastAPI endpoints
+2026-07-04 20:36:10 | INFO     | medical_ai | main.py:880 | ================================================================================
+2026-07-04 20:36:10 | INFO     | medical_ai | main.py:1216 | ================================================================================
+2026-07-04 20:36:10 | INFO     | medical_ai | main.py:1217 | BLOCK 2: Initializing Medical AI Assistant (DATA-DRIVEN VERSION)
+2026-07-04 20:36:10 | INFO     | medical_ai | main.py:1218 | ================================================================================
+2026-07-04 20:36:10 | INFO     | medical_ai | main.py:1232 | 
+Loading Datasets...
+2026-07-04 20:36:10 | INFO     | medical_ai | main.py:956 | Loading dataset: healthcare
+2026-07-04 20:36:10 | INFO     | medical_ai | main.py:962 |    Loaded 25000 rows, 6 columns
+2026-07-04 20:36:10 | INFO     | medical_ai | main.py:987 |    Target: None
+2026-07-04 20:36:10 | INFO     | medical_ai | main.py:956 | Loading dataset: disease_description
+2026-07-04 20:36:10 | INFO     | medical_ai | main.py:962 |    Loaded 42 rows, 2 columns
+2026-07-04 20:36:10 | INFO     | medical_ai | main.py:987 |    Target: None
+2026-07-04 20:36:10 | INFO     | medical_ai | main.py:956 | Loading dataset: disease_precaution
+2026-07-04 20:36:10 | INFO     | medical_ai | main.py:962 |    Loaded 42 rows, 5 columns
+2026-07-04 20:36:10 | INFO     | medical_ai | main.py:987 |    Target: None
+2026-07-04 20:36:10 | INFO     | medical_ai | main.py:956 | Loading dataset: symptom_severity
+2026-07-04 20:36:10 | INFO     | medical_ai | main.py:962 |    Loaded 134 rows, 2 columns
+2026-07-04 20:36:10 | INFO     | medical_ai | main.py:987 |    Target: None
+2026-07-04 20:36:10 | INFO     | medical_ai | main.py:956 | Loading dataset: heart
+2026-07-04 20:36:10 | INFO     | medical_ai | main.py:962 |    Loaded 1025 rows, 14 columns
+2026-07-04 20:36:10 | INFO     | medical_ai | main.py:987 |    Target: target
+2026-07-04 20:36:10 | INFO     | medical_ai | main.py:956 | Loading dataset: diabetes
+2026-07-04 20:36:10 | INFO     | medical_ai | main.py:962 |    Loaded 768 rows, 9 columns
+2026-07-04 20:36:10 | INFO     | medical_ai | main.py:987 |    Target: Outcome
+2026-07-04 20:36:10 | INFO     | medical_ai | main.py:956 | Loading dataset: breast_cancer
+2026-07-04 20:36:10 | INFO     | medical_ai | main.py:962 |    Loaded 569 rows, 32 columns
+2026-07-04 20:36:10 | INFO     | medical_ai | main.py:987 |    Target: diagnosis
+2026-07-04 20:36:10 | INFO     | medical_ai | main.py:1252 | 
+Building Knowledge Base...
+2026-07-04 20:36:12 | INFO     | medical_ai | main.py:1058 | Built symptom index: 0 symptoms, 0 diseases
+2026-07-04 20:36:12 | INFO     | medical_ai | main.py:1147 |    Added 9 common diseases with symptoms.
+2026-07-04 20:36:12 | INFO     | medical_ai | main.py:1154 | Generating symptom synonyms...
+2026-07-04 20:36:12 | INFO     | medical_ai | main.py:1201 |    Synonyms generated for 44 symptoms
+2026-07-04 20:36:12 | INFO     | medical_ai | main.py:1353 | 
+Loading Models...
+2026-07-04 20:36:12 | INFO     | medical_ai | main.py:1377 |    Model loaded: diabetes
+2026-07-04 20:36:12 | INFO     | medical_ai | main.py:1401 |    Preprocessor loaded: diabetes
+2026-07-04 20:36:12 | INFO     | medical_ai | main.py:1408 |    Scaler loaded: diabetes
+2026-07-04 20:36:12 | INFO     | medical_ai | main.py:1377 |    Model loaded: heart
+2026-07-04 20:36:12 | INFO     | medical_ai | main.py:1401 |    Preprocessor loaded: heart
+2026-07-04 20:36:12 | INFO     | medical_ai | main.py:1408 |    Scaler loaded: heart
+2026-07-04 20:36:12 | INFO     | medical_ai | main.py:1413 |    Scanning for additional models...
+2026-07-04 20:36:12 | INFO     | medical_ai | main.py:1421 |    Model loaded from file: breast
+2026-07-04 20:36:12 | INFO     | medical_ai | main.py:1447 |    Preprocessor loaded from file: breast
+2026-07-04 20:36:12 | INFO     | medical_ai | main.py:1459 |    Scaler loaded from file: breast
+2026-07-04 20:36:12 | INFO     | medical_ai | main.py:1471 | 
+Generating Embeddings...
+2026-07-04 20:36:22 | INFO     | medical_ai | main.py:1478 |    Embedding model loaded
+2026-07-04 20:36:22 | INFO     | medical_ai | main.py:1484 | 
+Computing feature defaults for missing values...
+2026-07-04 20:36:22 | INFO     | medical_ai | main.py:1499 |    Defaults for diabetes: 8 features
+2026-07-04 20:36:22 | INFO     | medical_ai | main.py:1499 |    Defaults for heart: 13 features
+2026-07-04 20:36:22 | INFO     | medical_ai | main.py:1502 | 
+================================================================================
+2026-07-04 20:36:22 | INFO     | medical_ai | main.py:1503 | BLOCK 2: Initialization Complete (DATA-DRIVEN VERSION)
+2026-07-04 20:36:22 | INFO     | medical_ai | main.py:1504 | ================================================================================
+2026-07-04 20:36:22 | INFO     | medical_ai | main.py:1505 |    DATASETS LOADED: 7
+2026-07-04 20:36:22 | INFO     | medical_ai | main.py:1506 |    MODELS LOADED: 3
+2026-07-04 20:36:22 | INFO     | medical_ai | main.py:1507 |    SCALERS LOADED: 3
+2026-07-04 20:36:22 | INFO     | medical_ai | main.py:1508 |    SYMPTOMS INDEXED: 44
+2026-07-04 20:36:22 | INFO     | medical_ai | main.py:1509 |    DISEASES INDEXED: 9
+2026-07-04 20:36:22 | INFO     | medical_ai | main.py:1510 |    SYNONYMS: 44
+2026-07-04 20:36:22 | INFO     | medical_ai | main.py:1511 |    FEATURE DEFAULTS: 2 diseases
+2026-07-04 20:36:22 | INFO     | medical_ai | main.py:1512 |    INITIALIZATION TIME: 11.50s
+2026-07-04 20:36:22 | INFO     | medical_ai | main.py:1513 | ================================================================================
+2026-07-04 20:36:22 | INFO     | medical_ai | main.py:1550 | Final SYMPTOM_INDEX symptom count: 44
+2026-07-04 20:36:22 | INFO     | medical_ai | main.py:1551 | Final SYMPTOM_SYNONYMS keys: 44
+2026-07-04 20:36:31 | INFO     | medical_ai | main.py:1571 |  Brain tumor model loaded from models\Brain_Tumor_Detection_model.h5
+2026-07-04 20:36:31 | INFO     | medical_ai | main.py:1621 | Loading Lung Tokenizer...
+2026-07-04 20:36:32 | INFO     | medical_ai | main.py:1623 |  Tokenizer loaded
+2026-07-04 20:36:32 | INFO     | medical_ai | main.py:1625 | Loading Lung Model...
+2026-07-04 20:36:32 | INFO     | medical_ai | main.py:1627 |  Model loaded
+2026-07-04 20:36:32 | INFO     | medical_ai | main.py:1629 | Loading Label Encoder...
+2026-07-04 20:36:32 | INFO     | medical_ai | main.py:1631 |  Label Encoder loaded
+2026-07-04 20:36:32 | INFO     | medical_ai | main.py:1636 |  Lung NLP model loaded from models\Lung_Model
+2026-07-04 20:36:32 | INFO     | medical_ai | main.py:1637 | Classes: 19
+2026-07-04 20:36:32 | INFO     | medical_ai.chat_engine | main.py:2106 | ChatSessionManager initialized (FINAL WITH FORCED RESET)
+2026-07-04 20:36:32 | INFO     | medical_ai.chat_engine | main.py:2625 | Medical Chat Engine initialized (FINAL WITH FORCED RESET)
+2026-07-04 20:36:32 | INFO     | medical_ai.chat_engine | main.py:2676 | Medical Chat Engine is ready (FINAL WITH FORCED RESET)
+2026-07-04 20:36:41 | INFO     | medical_ai | main.py:3116 | Chat request: session_id=SESS-836FFF60, patient_id=patient_1782408092142
+2026-07-04 20:36:41 | INFO     | medical_ai | main.py:2213 | ============================================================
+2026-07-04 20:36:41 | INFO     | medical_ai | main.py:2214 | Processing message: 'اه...'
+2026-07-04 20:36:41 | INFO     | medical_ai | main.py:2215 | Session ID: SESS-836FFF60
+2026-07-04 20:36:41 | INFO     | medical_ai | main.py:2148 | Created new session: SESS-0FE0CCDE
+2026-07-04 20:36:41 | INFO     | medical_ai | main.py:2222 | Session state: initial, Follow-ups: 0
+2026-07-04 20:36:41 | INFO     | medical_ai | main.py:1885 |    Very short message; skipping symptom extraction.
+2026-07-04 20:36:41 | INFO     | medical_ai | main.py:2227 | Detected intent: general_chat
+2026-07-04 20:36:41 | INFO     | medical_ai | main.py:2649 | Response: state=initial, symptoms=[]
+2026-07-04 20:36:51 | INFO     | medical_ai | main.py:3116 | Chat request: session_id=SESS-0FE0CCDE, patient_id=patient_1782408092142
+2026-07-04 20:36:51 | INFO     | medical_ai | main.py:2213 | ============================================================
+2026-07-04 20:36:51 | INFO     | medical_ai | main.py:2214 | Processing message: 'Tell me about diabetes...'
+2026-07-04 20:36:51 | INFO     | medical_ai | main.py:2215 | Session ID: SESS-0FE0CCDE
+2026-07-04 20:36:51 | INFO     | medical_ai | main.py:2112 | Reusing existing session: SESS-0FE0CCDE
+2026-07-04 20:36:51 | INFO     | medical_ai | main.py:2222 | Session state: initial, Follow-ups: 0
+2026-07-04 20:36:51 | INFO     | medical_ai | main.py:2227 | Detected intent: disease_info
+2026-07-04 20:36:51 | INFO     | medical_ai | main.py:2649 | Response: state=disease_info, symptoms=[]
+2026-07-04 20:39:40 | INFO     | medical_ai | main.py:3116 | Chat request: session_id=SESS-0FE0CCDE, patient_id=patient_1782408092142
+2026-07-04 20:39:40 | INFO     | medical_ai | main.py:2213 | ============================================================
+2026-07-04 20:39:40 | INFO     | medical_ai | main.py:2214 | Processing message: 'i have back pain...'
+2026-07-04 20:39:40 | INFO     | medical_ai | main.py:2215 | Session ID: SESS-0FE0CCDE
+2026-07-04 20:39:40 | INFO     | medical_ai | main.py:2112 | Reusing existing session: SESS-0FE0CCDE
+2026-07-04 20:39:40 | INFO     | medical_ai | main.py:2222 | Session state: disease_info, Follow-ups: 0
+2026-07-04 20:39:40 | INFO     | medical_ai | main.py:1888 | Extracting symptoms from: 'i have back pain...'
+2026-07-04 20:39:40 | INFO     | medical_ai | main.py:1907 |    Exact match: 'back pain'
+2026-07-04 20:39:40 | INFO     | medical_ai | main.py:1948 |    Fuzzy match: 'visual disturbances' (token='back', score=75.0)
+2026-07-04 20:39:40 | INFO     | medical_ai | main.py:1948 |    Fuzzy match: 'abdominal pain' (token='pain', score=100.0)
+2026-07-04 20:39:40 | INFO     | medical_ai | main.py:1967 |    Extracted 3 symptoms
+2026-07-04 20:39:40 | INFO     | medical_ai | main.py:2227 | Detected intent: symptom_diagnosis
+2026-07-04 20:39:40 | INFO     | medical_ai | main.py:2371 | Added symptom: back pain
+2026-07-04 20:39:40 | INFO     | medical_ai | main.py:2371 | Added symptom: visual disturbances
+2026-07-04 20:39:40 | INFO     | medical_ai | main.py:2371 | Added symptom: abdominal pain
+2026-07-04 20:39:40 | INFO     | medical_ai | main.py:2497 | Continue diagnosis. Symptoms: ['back pain', 'visual disturbances', 'abdominal pain']
+2026-07-04 20:39:40 | INFO     | medical_ai | main.py:1986 | Ranking diseases for symptoms: ['back pain', 'visual disturbances', 'abdominal pain']
+2026-07-04 20:39:40 | INFO     | medical_ai | main.py:2031 |    Urinary Tract Infection: confidence=0.31, matched=['abdominal pain']
+2026-07-04 20:39:40 | INFO     | medical_ai | main.py:2031 |    Gastroenteritis: confidence=0.29, matched=['abdominal pain']
+2026-07-04 20:39:40 | INFO     | medical_ai | main.py:2031 |    Migraine: confidence=0.31, matched=['visual disturbances']
+2026-07-04 20:39:40 | INFO     | medical_ai | main.py:2649 | Response: state=follow_up, symptoms=['back pain', 'visual disturbances', 'abdominal pain']
+2026-07-04 20:39:47 | INFO     | medical_ai | main.py:3116 | Chat request: session_id=SESS-0FE0CCDE, patient_id=patient_1782408092142
+2026-07-04 20:39:47 | INFO     | medical_ai | main.py:2213 | ============================================================
+2026-07-04 20:39:47 | INFO     | medical_ai | main.py:2214 | Processing message: 'i have...'
+2026-07-04 20:39:47 | INFO     | medical_ai | main.py:2215 | Session ID: SESS-0FE0CCDE
+2026-07-04 20:39:47 | INFO     | medical_ai | main.py:2112 | Reusing existing session: SESS-0FE0CCDE
+2026-07-04 20:39:47 | INFO     | medical_ai | main.py:2222 | Session state: follow_up, Follow-ups: 1
+2026-07-04 20:39:47 | INFO     | medical_ai | main.py:2227 | Detected intent: confirmation_yes
+2026-07-04 20:39:47 | INFO     | medical_ai | main.py:2350 | Confirmed symptom via yes: burning micturition
+2026-07-04 20:39:47 | INFO     | medical_ai | main.py:2497 | Continue diagnosis. Symptoms: ['back pain', 'visual disturbances', 'abdominal pain', 'burning micturition']
+2026-07-04 20:39:47 | INFO     | medical_ai | main.py:1986 | Ranking diseases for symptoms: ['back pain', 'visual disturbances', 'abdominal pain', 'burning micturition']
+2026-07-04 20:39:47 | INFO     | medical_ai | main.py:2031 |    Urinary Tract Infection: confidence=0.43, matched=['burning micturition', 'abdominal pain']
+2026-07-04 20:39:47 | INFO     | medical_ai | main.py:2031 |    Gastroenteritis: confidence=0.29, matched=['abdominal pain']
+2026-07-04 20:39:47 | INFO     | medical_ai | main.py:2031 |    Migraine: confidence=0.31, matched=['visual disturbances']
+2026-07-04 20:39:47 | INFO     | medical_ai | main.py:2649 | Response: state=follow_up, symptoms=['back pain', 'visual disturbances', 'abdominal pain', 'burning micturition']
+2026-07-04 20:39:49 | INFO     | medical_ai | main.py:3116 | Chat request: session_id=SESS-0FE0CCDE, patient_id=patient_1782408092142
+2026-07-04 20:39:49 | INFO     | medical_ai | main.py:2213 | ============================================================
+2026-07-04 20:39:49 | INFO     | medical_ai | main.py:2214 | Processing message: 'no...'
+2026-07-04 20:39:49 | INFO     | medical_ai | main.py:2215 | Session ID: SESS-0FE0CCDE
+2026-07-04 20:39:49 | INFO     | medical_ai | main.py:2112 | Reusing existing session: SESS-0FE0CCDE
+2026-07-04 20:39:49 | INFO     | medical_ai | main.py:2222 | Session state: follow_up, Follow-ups: 2
+2026-07-04 20:39:49 | INFO     | medical_ai | main.py:2227 | Detected intent: confirmation_no
+2026-07-04 20:39:49 | INFO     | medical_ai | main.py:2361 | Denied symptom via no: frequent urination
+2026-07-04 20:39:49 | INFO     | medical_ai | main.py:2497 | Continue diagnosis. Symptoms: ['back pain', 'visual disturbances', 'abdominal pain', 'burning micturition']
+2026-07-04 20:39:49 | INFO     | medical_ai | main.py:1986 | Ranking diseases for symptoms: ['back pain', 'visual disturbances', 'abdominal pain', 'burning micturition']
+2026-07-04 20:39:49 | INFO     | medical_ai | main.py:2031 |    Urinary Tract Infection: confidence=0.43, matched=['burning micturition', 'abdominal pain']
+2026-07-04 20:39:49 | INFO     | medical_ai | main.py:2031 |    Gastroenteritis: confidence=0.29, matched=['abdominal pain']
+2026-07-04 20:39:49 | INFO     | medical_ai | main.py:2031 |    Migraine: confidence=0.31, matched=['visual disturbances']
+2026-07-04 20:39:49 | INFO     | medical_ai | main.py:2649 | Response: state=follow_up, symptoms=['back pain', 'visual disturbances', 'abdominal pain', 'burning micturition']
+2026-07-04 20:39:51 | INFO     | medical_ai | main.py:3116 | Chat request: session_id=SESS-0FE0CCDE, patient_id=patient_1782408092142
+2026-07-04 20:39:51 | INFO     | medical_ai | main.py:2213 | ============================================================
+2026-07-04 20:39:51 | INFO     | medical_ai | main.py:2214 | Processing message: ' no...'
+2026-07-04 20:39:51 | INFO     | medical_ai | main.py:2215 | Session ID: SESS-0FE0CCDE
+2026-07-04 20:39:51 | INFO     | medical_ai | main.py:2112 | Reusing existing session: SESS-0FE0CCDE
+2026-07-04 20:39:51 | INFO     | medical_ai | main.py:2222 | Session state: follow_up, Follow-ups: 3
+2026-07-04 20:39:51 | INFO     | medical_ai | main.py:2227 | Detected intent: confirmation_no
+2026-07-04 20:39:51 | INFO     | medical_ai | main.py:2361 | Denied symptom via no: fever
+2026-07-04 20:39:51 | INFO     | medical_ai | main.py:2497 | Continue diagnosis. Symptoms: ['back pain', 'visual disturbances', 'abdominal pain', 'burning micturition']
+2026-07-04 20:39:51 | INFO     | medical_ai | main.py:1986 | Ranking diseases for symptoms: ['back pain', 'visual disturbances', 'abdominal pain', 'burning micturition']
+2026-07-04 20:39:51 | INFO     | medical_ai | main.py:2031 |    Urinary Tract Infection: confidence=0.43, matched=['burning micturition', 'abdominal pain']
+2026-07-04 20:39:51 | INFO     | medical_ai | main.py:2031 |    Gastroenteritis: confidence=0.29, matched=['abdominal pain']
+2026-07-04 20:39:51 | INFO     | medical_ai | main.py:2031 |    Migraine: confidence=0.31, matched=['visual disturbances']
+2026-07-04 20:39:51 | INFO     | medical_ai | main.py:2649 | Response: state=follow_up, symptoms=['back pain', 'visual disturbances', 'abdominal pain', 'burning micturition']
+2026-07-04 20:39:53 | INFO     | medical_ai | main.py:3116 | Chat request: session_id=SESS-0FE0CCDE, patient_id=patient_1782408092142
+2026-07-04 20:39:53 | INFO     | medical_ai | main.py:2213 | ============================================================
+2026-07-04 20:39:53 | INFO     | medical_ai | main.py:2214 | Processing message: 'no...'
+2026-07-04 20:39:53 | INFO     | medical_ai | main.py:2215 | Session ID: SESS-0FE0CCDE
+2026-07-04 20:39:53 | INFO     | medical_ai | main.py:2112 | Reusing existing session: SESS-0FE0CCDE
+2026-07-04 20:39:53 | INFO     | medical_ai | main.py:2222 | Session state: follow_up, Follow-ups: 4
+2026-07-04 20:39:53 | INFO     | medical_ai | main.py:2227 | Detected intent: confirmation_no
+2026-07-04 20:39:53 | INFO     | medical_ai | main.py:2361 | Denied symptom via no: foul smell of urine
+2026-07-04 20:39:53 | INFO     | medical_ai | main.py:2497 | Continue diagnosis. Symptoms: ['back pain', 'visual disturbances', 'abdominal pain', 'burning micturition']
+2026-07-04 20:39:53 | INFO     | medical_ai | main.py:1986 | Ranking diseases for symptoms: ['back pain', 'visual disturbances', 'abdominal pain', 'burning micturition']
+2026-07-04 20:39:53 | INFO     | medical_ai | main.py:2031 |    Urinary Tract Infection: confidence=0.43, matched=['burning micturition', 'abdominal pain']
+2026-07-04 20:39:53 | INFO     | medical_ai | main.py:2031 |    Gastroenteritis: confidence=0.29, matched=['abdominal pain']
+2026-07-04 20:39:53 | INFO     | medical_ai | main.py:2031 |    Migraine: confidence=0.31, matched=['visual disturbances']
+2026-07-04 20:39:53 | INFO     | medical_ai | main.py:2649 | Response: state=follow_up, symptoms=['back pain', 'visual disturbances', 'abdominal pain', 'burning micturition']
+2026-07-04 20:39:55 | INFO     | medical_ai | main.py:3116 | Chat request: session_id=SESS-0FE0CCDE, patient_id=patient_1782408092142
+2026-07-04 20:39:55 | INFO     | medical_ai | main.py:2213 | ============================================================
+2026-07-04 20:39:55 | INFO     | medical_ai | main.py:2214 | Processing message: 'no...'
+2026-07-04 20:39:55 | INFO     | medical_ai | main.py:2215 | Session ID: SESS-0FE0CCDE
+2026-07-04 20:39:55 | INFO     | medical_ai | main.py:2112 | Reusing existing session: SESS-0FE0CCDE
+2026-07-04 20:39:55 | INFO     | medical_ai | main.py:2222 | Session state: follow_up, Follow-ups: 5
+2026-07-04 20:39:55 | INFO     | medical_ai | main.py:2227 | Detected intent: confirmation_no
+2026-07-04 20:39:55 | INFO     | medical_ai | main.py:2361 | Denied symptom via no: fatigue
+2026-07-04 20:39:55 | INFO     | medical_ai | main.py:2497 | Continue diagnosis. Symptoms: ['back pain', 'visual disturbances', 'abdominal pain', 'burning micturition']
+2026-07-04 20:39:55 | INFO     | medical_ai | main.py:1986 | Ranking diseases for symptoms: ['back pain', 'visual disturbances', 'abdominal pain', 'burning micturition']
+2026-07-04 20:39:55 | INFO     | medical_ai | main.py:2031 |    Urinary Tract Infection: confidence=0.43, matched=['burning micturition', 'abdominal pain']
+2026-07-04 20:39:55 | INFO     | medical_ai | main.py:2031 |    Gastroenteritis: confidence=0.29, matched=['abdominal pain']
+2026-07-04 20:39:55 | INFO     | medical_ai | main.py:2031 |    Migraine: confidence=0.31, matched=['visual disturbances']
+2026-07-04 20:39:55 | INFO     | medical_ai | main.py:2649 | Response: state=result, symptoms=['back pain', 'visual disturbances', 'abdominal pain', 'burning micturition']
+2026-07-04 20:40:03 | INFO     | medical_ai | main.py:3116 | Chat request: session_id=SESS-0FE0CCDE, patient_id=patient_1782408092142
+2026-07-04 20:40:03 | INFO     | medical_ai | main.py:2213 | ============================================================
+2026-07-04 20:40:03 | INFO     | medical_ai | main.py:2214 | Processing message: 'i have joint pain...'
+2026-07-04 20:40:03 | INFO     | medical_ai | main.py:2215 | Session ID: SESS-0FE0CCDE
+2026-07-04 20:40:03 | INFO     | medical_ai | main.py:2112 | Reusing existing session: SESS-0FE0CCDE
+2026-07-04 20:40:03 | INFO     | medical_ai | main.py:2222 | Session state: result, Follow-ups: 5
+2026-07-04 20:40:03 | INFO     | medical_ai | main.py:1888 | Extracting symptoms from: 'i have joint pain...'
+2026-07-04 20:40:03 | INFO     | medical_ai | main.py:1907 |    Exact match: 'joint pain'
+2026-07-04 20:40:03 | INFO     | medical_ai | main.py:1948 |    Fuzzy match: 'abdominal pain' (token='pain', score=100.0)
+2026-07-04 20:40:03 | INFO     | medical_ai | main.py:1967 |    Extracted 2 symptoms
+2026-07-04 20:40:03 | INFO     | medical_ai | main.py:2227 | Detected intent: symptom_diagnosis
+2026-07-04 20:40:03 | INFO     | medical_ai | main.py:2371 | Added symptom: joint pain
+2026-07-04 20:40:03 | INFO     | medical_ai | main.py:2497 | Continue diagnosis. Symptoms: ['back pain', 'visual disturbances', 'abdominal pain', 'burning micturition', 'joint pain']
+2026-07-04 20:40:03 | INFO     | medical_ai | main.py:1986 | Ranking diseases for symptoms: ['back pain', 'visual disturbances', 'abdominal pain', 'burning micturition', 'joint pain']
+2026-07-04 20:40:03 | INFO     | medical_ai | main.py:2031 |    Urinary Tract Infection: confidence=0.43, matched=['burning micturition', 'abdominal pain']
+2026-07-04 20:40:03 | INFO     | medical_ai | main.py:2031 |    Gastroenteritis: confidence=0.29, matched=['abdominal pain']
+2026-07-04 20:40:03 | INFO     | medical_ai | main.py:2031 |    Migraine: confidence=0.31, matched=['visual disturbances']
+2026-07-04 20:40:03 | INFO     | medical_ai | main.py:2649 | Response: state=result, symptoms=['back pain', 'visual disturbances', 'abdominal pain', 'burning micturition', 'joint pain']
+2026-07-04 20:42:19 | INFO     | medical_ai | main.py:3116 | Chat request: session_id=SESS-0FE0CCDE, patient_id=patient_1782408092142
+2026-07-04 20:42:19 | INFO     | medical_ai | main.py:2213 | ============================================================
+2026-07-04 20:42:19 | INFO     | medical_ai | main.py:2214 | Processing message: 'i have headache ...'
+2026-07-04 20:42:19 | INFO     | medical_ai | main.py:2215 | Session ID: SESS-0FE0CCDE
+2026-07-04 20:42:19 | INFO     | medical_ai | main.py:2112 | Reusing existing session: SESS-0FE0CCDE
+2026-07-04 20:42:19 | INFO     | medical_ai | main.py:2222 | Session state: result, Follow-ups: 5
+2026-07-04 20:42:19 | INFO     | medical_ai | main.py:1888 | Extracting symptoms from: 'i have headache ...'
+2026-07-04 20:42:19 | INFO     | medical_ai | main.py:1907 |    Exact match: 'headache'
+2026-07-04 20:42:19 | INFO     | medical_ai | main.py:1967 |    Extracted 1 symptoms
+2026-07-04 20:42:19 | INFO     | medical_ai | main.py:2227 | Detected intent: symptom_diagnosis
+2026-07-04 20:42:19 | INFO     | medical_ai | main.py:2371 | Added symptom: headache
+2026-07-04 20:42:19 | INFO     | medical_ai | main.py:2497 | Continue diagnosis. Symptoms: ['back pain', 'visual disturbances', 'abdominal pain', 'burning micturition', 'joint pain', 'headache']
+2026-07-04 20:42:19 | INFO     | medical_ai | main.py:1986 | Ranking diseases for symptoms: ['back pain', 'visual disturbances', 'abdominal pain', 'burning micturition', 'joint pain', 'headache']
+2026-07-04 20:42:19 | INFO     | medical_ai | main.py:2031 |    Urinary Tract Infection: confidence=0.43, matched=['burning micturition', 'abdominal pain']
+2026-07-04 20:42:19 | INFO     | medical_ai | main.py:2031 |    COVID-19: confidence=0.27, matched=['headache']
+2026-07-04 20:42:19 | INFO     | medical_ai | main.py:2031 |    Influenza (Flu): confidence=0.28, matched=['headache']
+2026-07-04 20:42:19 | INFO     | medical_ai | main.py:2031 |    Gastroenteritis: confidence=0.29, matched=['abdominal pain']
+2026-07-04 20:42:19 | INFO     | medical_ai | main.py:2031 |    Migraine: confidence=0.43, matched=['headache', 'visual disturbances']
+2026-07-04 20:42:19 | INFO     | medical_ai | main.py:2649 | Response: state=result, symptoms=['back pain', 'visual disturbances', 'abdominal pain', 'burning micturition', 'joint pain', 'headache']
