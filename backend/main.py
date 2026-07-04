@@ -1604,7 +1604,7 @@ def predict_brain_tumor(image_bytes: bytes) -> dict:
     }
 
 # ============================================================================
-# 7. LUNG NLP MODEL (BERT)
+# 7. LUNG NLP MODEL (BERT) – with improved error handling
 # ============================================================================
 
 import torch
@@ -1627,8 +1627,10 @@ if LUNG_MODEL_PATH.exists() and LUNG_LABEL_ENCODER_PATH.exists():
         logger.info(f"   Classes: {len(LUNG_ENCODER.classes_)}")
     except Exception as e:
         logger.error(f"Failed to load lung NLP model: {e}")
+        LUNG_MODEL = None
 else:
     logger.warning(f"Lung model files not found at {LUNG_MODEL_PATH} or label_encoder.pkl missing")
+    LUNG_MODEL = None
 
 def predict_lung_disease(text: str, top_k: int = 3) -> list:
     if LUNG_MODEL is None or LUNG_TOKENIZER is None or LUNG_ENCODER is None:
@@ -1680,7 +1682,7 @@ except ImportError:
 logger = logging.getLogger("medical_ai.chat_engine")
 
 # ----------------------------------------------------------------------------
-# Data classes (unchanged)
+# Data classes
 # ----------------------------------------------------------------------------
 @dataclass
 class ConversationMessage:
@@ -1753,7 +1755,7 @@ class ChatSession:
         }
 
 # ----------------------------------------------------------------------------
-# Conversation states (unchanged)
+# Conversation states
 # ----------------------------------------------------------------------------
 class ConversationState:
     INITIAL = "initial"
@@ -1766,7 +1768,7 @@ class ConversationState:
     DISEASE_INFO = "disease_info"
 
 # ----------------------------------------------------------------------------
-# NLP Pipeline (unchanged)
+# NLP Pipeline
 # ----------------------------------------------------------------------------
 class NLPPipeline:
     def __init__(self):
@@ -1848,7 +1850,7 @@ class NLPPipeline:
         }
 
 # ----------------------------------------------------------------------------
-# Symptom Extractor (enhanced with more fuzzy + keyword detection)
+# Symptom Extractor (enhanced)
 # ----------------------------------------------------------------------------
 class SymptomExtractor:
     def __init__(self):
@@ -1909,17 +1911,15 @@ class SymptomExtractor:
                         logger.info(f"   Synonym match: '{symptom}' from '{synonym}'")
                         break
 
-        # 3. FUZZY MATCHING (token-based) – more aggressive
+        # 3. FUZZY MATCHING (token-based)
         if RAPIDFUZZ_AVAILABLE and len(detected) < 10:
             tokens = normalized_text.split()
             for token in tokens:
                 if len(token) < 3:
                     continue
-                # try matching each token against symptom list
                 for symptom in self.symptom_list:
                     if symptom in found_symptoms:
                         continue
-                    # use partial_ratio for phrases
                     score = fuzz.partial_ratio(token, symptom)
                     if score >= 75:  # lowered threshold
                         severity = self.symptom_severity.get(symptom, 3)
@@ -1934,17 +1934,13 @@ class SymptomExtractor:
                         logger.info(f"   Fuzzy match: '{symptom}' (token='{token}', score={score})")
                         break
 
-        # 4. If still no symptoms, check for common symptom-indicating phrases
+        # 4. KEYWORD FALLBACK – if no symptoms yet, check for common symptom indicators
         if not detected:
             indicator_patterns = [
                 r'\b(have|feel|suffer|experience|am having|got)\b.*\b(pain|ache|cough|fever|headache|nausea|fatigue|dizziness|rash|swelling|numbness|shortness of breath|chest pain|back pain|joint pain|sore throat|runny nose|chills|sweating|vomiting|diarrhea|constipation|insomnia|anxiety|depression)\b'
             ]
             for pattern in indicator_patterns:
-                matches = re.findall(pattern, text.lower())
-                if matches:
-                    # Treat as a symptom description even if we didn't match exact name
-                    logger.info("   Symptom-indicating keywords found, but no exact match; will trigger reset.")
-                    # We'll add a dummy symptom to force reset
+                if re.search(pattern, text.lower()):
                     detected.append(DetectedSymptom(
                         symptom="symptom_description",
                         confidence=0.5,
@@ -1958,7 +1954,7 @@ class SymptomExtractor:
         return detected
 
 # ----------------------------------------------------------------------------
-# Disease Ranker (unchanged)
+# Disease Ranker
 # ----------------------------------------------------------------------------
 class DiseaseRanker:
     def __init__(self):
@@ -2052,7 +2048,7 @@ class DiseaseRanker:
             return f"Continue monitoring your condition. Consult a doctor if symptoms worsen."
 
 # ----------------------------------------------------------------------------
-# Question Engine (unchanged)
+# Question Engine
 # ----------------------------------------------------------------------------
 class QuestionEngine:
     def __init__(self):
@@ -2080,7 +2076,7 @@ class QuestionEngine:
         return None
 
 # ----------------------------------------------------------------------------
-# Chat Session Manager (with forced reset, enhanced post-diagnosis handling)
+# Chat Session Manager (with forced reset, enhanced post-diagnosis)
 # ----------------------------------------------------------------------------
 class ChatSessionManager:
     def __init__(self):
@@ -2244,24 +2240,37 @@ class ChatSessionManager:
     # ----- Handlers -----
     def _handle_disease_info(self, message: str, session: ChatSession) -> Dict[str, Any]:
         disease_name = self._extract_disease_name(message)
-        if disease_name and disease_name in DISEASE_DESCRIPTIONS:
-            response = f"**{disease_name.title()}**\n\n"
-            response += f"{DISEASE_DESCRIPTIONS.get(disease_name, '')}\n\n"
-            symptoms = DISEASE_SYMPTOMS.get(disease_name, [])
-            if symptoms:
-                response += "**Common Symptoms:**\n"
-                for s in symptoms[:5]:
-                    response += f"• {s}\n"
-                response += "\n"
-            precautions = DISEASE_PRECAUTIONS.get(disease_name, [])
-            if precautions:
-                response += "**Precautions:**\n"
-                for p in precautions[:3]:
-                    response += f"• {p}\n"
-                response += "\n"
-            response += "---\n*This information is for educational purposes only.*"
+        # Fallback descriptions
+        fallback = {
+            "diabetes": "Diabetes is a chronic condition that affects how your body turns food into energy. There are two main types: Type 1 and Type 2.",
+            "heart disease": "Heart disease refers to several types of heart conditions, including coronary artery disease, heart attacks, and heart failure.",
+            "breast cancer": "Breast cancer is a type of cancer that forms in the cells of the breast. Early detection through screening is important.",
+            "covid-19": "COVID-19 is a disease caused by the SARS-CoV-2 virus. Symptoms include fever, cough, and loss of taste or smell.",
+            "influenza": "Influenza (flu) is a contagious respiratory illness caused by influenza viruses. It can cause mild to severe illness.",
+            "pneumonia": "Pneumonia is an infection that inflames the air sacs in one or both lungs, which may fill with fluid.",
+            "tuberculosis": "Tuberculosis (TB) is a bacterial infection that primarily affects the lungs. It spreads through the air.",
+            "common cold": "The common cold is a viral infection of your nose and throat. It's usually harmless.",
+            "migraine": "A migraine is a headache that can cause severe throbbing pain or a pulsing sensation, usually on one side of the head.",
+            "urinary tract infection": "A urinary tract infection (UTI) is an infection in any part of your urinary system — your kidneys, ureters, bladder and urethra.",
+            "gastroenteritis": "Gastroenteritis is inflammation of the digestive tract, often causing diarrhea, vomiting, and abdominal pain.",
+            "bronchitis": "Bronchitis is an inflammation of the lining of your bronchial tubes, which carry air to and from your lungs.",
+        }
+        if disease_name:
+            description = DISEASE_DESCRIPTIONS.get(disease_name) or fallback.get(disease_name)
+            if description:
+                response = f"**{disease_name.title()}**\n\n{description}\n\n"
+                symptoms = DISEASE_SYMPTOMS.get(disease_name, [])
+                if symptoms:
+                    response += "**Common Symptoms:**\n" + "\n".join(f"• {s}" for s in symptoms[:5]) + "\n\n"
+                precautions = DISEASE_PRECAUTIONS.get(disease_name, [])
+                if precautions:
+                    response += "**Precautions:**\n" + "\n".join(f"• {p}" for p in precautions[:3]) + "\n\n"
+                response += "---\n*This information is for educational purposes only.*"
+            else:
+                response = "I don't have detailed information about that condition. Would you like to describe your symptoms instead?"
         else:
             response = "I don't have detailed information about that condition. Would you like to describe your symptoms instead?"
+
         self._add_message(session, 'assistant', response)
         session.state = ConversationState.DISEASE_INFO
         return {
@@ -2274,10 +2283,52 @@ class ChatSessionManager:
 
     def _extract_disease_name(self, text: str) -> Optional[str]:
         text_lower = text.lower().strip()
-        for disease in DISEASE_DESCRIPTIONS.keys():
+        # Remove common question words
+        for word in ["what", "is", "are", "tell", "me", "about", "explain", "describe", "information", "on", "the", "a", "an"]:
+            text_lower = text_lower.replace(word, "")
+        text_lower = text_lower.strip()
+
+        # Check exact match in DISEASE_DESCRIPTIONS and fallback keys
+        all_diseases = set(DISEASE_DESCRIPTIONS.keys()).union(set(fallback.keys()))
+        for disease in all_diseases:
             if disease.lower() in text_lower:
                 return disease
+
+        # Hardcoded aliases
+        aliases = {
+            "diabetes": ["diabetes", "sugar", "high sugar", "diabetic"],
+            "heart disease": ["heart disease", "cardiac", "cardiovascular", "coronary", "heart attack"],
+            "breast cancer": ["breast cancer", "breast tumor", "breast mass"],
+            "covid-19": ["covid", "coronavirus", "sars-cov-2"],
+            "influenza": ["flu", "influenza"],
+            "pneumonia": ["pneumonia"],
+            "tuberculosis": ["tb", "tuberculosis"],
+            "common cold": ["cold", "common cold"],
+            "migraine": ["migraine"],
+            "urinary tract infection": ["uti", "urinary tract infection"],
+            "gastroenteritis": ["gastroenteritis", "stomach flu"],
+            "bronchitis": ["bronchitis"],
+        }
+        for disease, alias_list in aliases.items():
+            if any(alias in text_lower for alias in alias_list):
+                return disease
         return None
+
+    # Define fallback dict for use in _extract_disease_name
+    fallback = {
+        "diabetes": "",
+        "heart disease": "",
+        "breast cancer": "",
+        "covid-19": "",
+        "influenza": "",
+        "pneumonia": "",
+        "tuberculosis": "",
+        "common cold": "",
+        "migraine": "",
+        "urinary tract infection": "",
+        "gastroenteritis": "",
+        "bronchitis": "",
+    }
 
     def _handle_confirmation_yes(self, message: str, session: ChatSession) -> Dict[str, Any]:
         if session.last_question_symptom:
@@ -2348,7 +2399,7 @@ class ChatSessionManager:
                 'state': session.state
             }
 
-        # 2. Extract symptoms (will use enhanced extractor)
+        # 2. Extract symptoms (enhanced)
         detected = self.symptom_extractor.extract_symptoms(message)
         logger.info(f"Extracted symptoms: {[s.symptom for s in detected]}")
 
@@ -2356,7 +2407,6 @@ class ChatSessionManager:
         if detected:
             logger.info("Symptoms detected – resetting session for new analysis.")
             self._reset_session_for_new_diagnosis(session)
-            # Add the detected symptoms (even the dummy one)
             for symptom in detected:
                 if symptom.symptom not in session.confirmed_symptoms:
                     session.confirmed_symptoms.append(symptom.symptom)
@@ -2364,12 +2414,11 @@ class ChatSessionManager:
                     logger.info(f"Added symptom after reset: {symptom.symptom}")
             return self._continue_diagnosis(session)
 
-        # 4. If no symptoms, check for symptom-describing keywords (more aggressive)
+        # 4. If no symptoms, check for symptom-describing keywords
         symptom_keywords = ['have', 'feel', 'my', 'pain', 'ache', 'symptom', 'hurt', 'suffering', 'experiencing', 'swell', 'swelling', 'ache', 'cough', 'fever', 'headache', 'nausea', 'dizziness', 'rash', 'itching', 'burning', 'numbness', 'tingling', 'weakness', 'fatigue', 'tired', 'shortness of breath', 'chest tightness', 'palpitations', 'indigestion', 'vomiting', 'diarrhea', 'constipation', 'insomnia']
         if any(word in message.lower() for word in symptom_keywords):
             logger.info("Symptom description detected but no specific symptoms extracted – resetting anyway.")
             self._reset_session_for_new_diagnosis(session)
-            # Add a dummy symptom to avoid empty diagnosis
             dummy = DetectedSymptom(
                 symptom="symptom_description",
                 confidence=0.4,
@@ -2386,7 +2435,6 @@ class ChatSessionManager:
         return self._handle_general_chat(message, session)
 
     def _reset_session_for_new_diagnosis(self, session: ChatSession):
-        """Reset all diagnosis-related fields, keeping the session active."""
         session.confirmed_symptoms = []
         session.detected_symptoms = []
         session.predicted_diseases = []
@@ -2399,7 +2447,7 @@ class ChatSessionManager:
         logger.info(f"Session reset for new diagnosis. Session ID: {session.session_id}")
 
     # -------------------------------------------------------------------------
-    #  POST-DIAGNOSIS ANSWER GENERATOR (unchanged)
+    #  POST-DIAGNOSIS ANSWER GENERATOR
     # -------------------------------------------------------------------------
     def _generate_post_diagnosis_answer(self, message: str, session: ChatSession) -> str:
         text_lower = message.lower().strip()
@@ -2432,7 +2480,7 @@ class ChatSessionManager:
                "You can ask about symptoms, risk levels, or what to do next."
 
     # -------------------------------------------------------------------------
-    #  CONTINUE DIAGNOSIS (unchanged)
+    #  CONTINUE DIAGNOSIS
     # -------------------------------------------------------------------------
     def _continue_diagnosis(self, session: ChatSession) -> Dict[str, Any]:
         symptoms = session.confirmed_symptoms
@@ -2685,7 +2733,7 @@ app.add_middleware(
 )
 
 # ----------------------------------------------------------------------------
-# Feature mapping (exact order from training) – now used only as fallback
+# Feature mapping – used only as fallback
 # ----------------------------------------------------------------------------
 DISEASE_FEATURES = {
     "diabetes": [
@@ -2796,10 +2844,8 @@ def prepare_features_for_prediction(disease: str, data: Dict[str, Any]) -> pd.Da
 
     for name in feature_names:
         # Check if the input data contains this feature (case-insensitive, normalize spaces)
-        # Try to find the key in data by normalizing both names (remove underscores/spaces, lower)
         val = None
         for key, value in data.items():
-            # Normalize both to compare: remove spaces and underscores, lower
             key_norm = re.sub(r'[_\s]+', '', key.lower())
             name_norm = re.sub(r'[_\s]+', '', name.lower())
             if key_norm == name_norm:
@@ -2807,9 +2853,7 @@ def prepare_features_for_prediction(disease: str, data: Dict[str, Any]) -> pd.Da
                 break
 
         if val is not None:
-            # Convert value to float/int
             if isinstance(val, str):
-                # Try mapping for categorical features (if any)
                 mapping = SELECT_MAPPING.get(name)
                 if mapping and val in mapping:
                     val = mapping[val]
@@ -2824,7 +2868,6 @@ def prepare_features_for_prediction(disease: str, data: Dict[str, Any]) -> pd.Da
                 except:
                     val = 0.0
         else:
-            # Feature missing: use default (median from training)
             val = defaults.get(name, 0.0)
             missing.append(name)
 
@@ -2833,10 +2876,11 @@ def prepare_features_for_prediction(disease: str, data: Dict[str, Any]) -> pd.Da
     if missing:
         logger.warning(f"Missing features for {disease}: {missing} – using defaults (medians).")
 
-    # Build DataFrame with one row
     df = pd.DataFrame([row])
-    # Ensure columns are in the exact order expected by the preprocessor (if needed)
-    # The preprocessor uses column names, so order doesn't matter, but we ensure all columns present.
+    for col in feature_names:
+        if col not in df.columns:
+            df[col] = defaults.get(col, 0.0)
+
     return df
 
 # ----------------------------------------------------------------------------
@@ -2865,7 +2909,6 @@ def get_model_and_transformer(disease: str):
             try:
                 preprocessor = joblib.load(preprocessor_path)
                 PREPROCESSORS[disease] = preprocessor
-                # Also store feature names if not already
                 if disease not in PREPROCESSOR_FEATURES:
                     if hasattr(preprocessor, 'feature_names_'):
                         PREPROCESSOR_FEATURES[disease] = preprocessor.feature_names_
@@ -3096,7 +3139,6 @@ if __name__ == "__main__":
     import os
     import uvicorn
 
-    # Use environment variable PORT (for Render, Hugging Face, etc.) or default to 7860
     port = int(os.environ.get("PORT", 7860))
     uvicorn.run(
         "main:app",
