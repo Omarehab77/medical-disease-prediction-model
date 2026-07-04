@@ -4,27 +4,12 @@ venv/
 __pycache__/
 *.pyc
 
+# Logs
+logs/
+
 # Node
 node_modules/
-npm-debug.log
 
-# Vite
-dist/
-
-# Cache
-.cache/
-.pytest_cache/
-
-# OS
-.DS_Store
-Thumbs.db
-
+# Environment
 .env
 .env.local
-
-# AI Models
-backend/models/**/*.h5
-backend/models/**/*.safetensors
-backend/models/**/*.bin
-backend/models/**/*.pkl
-backend/models/Lung_Model/

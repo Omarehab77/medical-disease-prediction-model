@@ -38,6 +38,7 @@ const diseaseFields = {
     { name: 'thal', label: 'Thalassemia', type: 'select', options: [{ value: 0, label: 'Normal' }, { value: 1, label: 'Fixed Defect' }, { value: 2, label: 'Reversible Defect' }, { value: 3, label: 'Not Described' }] },
   ],
   breast: [
+    // ---- Mean values (10) ----
     { name: 'radius_mean', label: 'Radius (mean)', type: 'number', step: 0.01 },
     { name: 'texture_mean', label: 'Texture (mean)', type: 'number', step: 0.01 },
     { name: 'perimeter_mean', label: 'Perimeter (mean)', type: 'number', step: 0.01 },
@@ -48,6 +49,28 @@ const diseaseFields = {
     { name: 'concave_points_mean', label: 'Concave Points (mean)', type: 'number', step: 0.001 },
     { name: 'symmetry_mean', label: 'Symmetry (mean)', type: 'number', step: 0.001 },
     { name: 'fractal_dimension_mean', label: 'Fractal Dimension (mean)', type: 'number', step: 0.001 },
+    // ---- Standard Error values (10) ----
+    { name: 'radius_se', label: 'Radius (se)', type: 'number', step: 0.01 },
+    { name: 'texture_se', label: 'Texture (se)', type: 'number', step: 0.01 },
+    { name: 'perimeter_se', label: 'Perimeter (se)', type: 'number', step: 0.01 },
+    { name: 'area_se', label: 'Area (se)', type: 'number', step: 0.1 },
+    { name: 'smoothness_se', label: 'Smoothness (se)', type: 'number', step: 0.001 },
+    { name: 'compactness_se', label: 'Compactness (se)', type: 'number', step: 0.001 },
+    { name: 'concavity_se', label: 'Concavity (se)', type: 'number', step: 0.001 },
+    { name: 'concave_points_se', label: 'Concave Points (se)', type: 'number', step: 0.001 },
+    { name: 'symmetry_se', label: 'Symmetry (se)', type: 'number', step: 0.001 },
+    { name: 'fractal_dimension_se', label: 'Fractal Dimension (se)', type: 'number', step: 0.001 },
+    // ---- Worst values (10) ----
+    { name: 'radius_worst', label: 'Radius (worst)', type: 'number', step: 0.01 },
+    { name: 'texture_worst', label: 'Texture (worst)', type: 'number', step: 0.01 },
+    { name: 'perimeter_worst', label: 'Perimeter (worst)', type: 'number', step: 0.01 },
+    { name: 'area_worst', label: 'Area (worst)', type: 'number', step: 0.1 },
+    { name: 'smoothness_worst', label: 'Smoothness (worst)', type: 'number', step: 0.001 },
+    { name: 'compactness_worst', label: 'Compactness (worst)', type: 'number', step: 0.001 },
+    { name: 'concavity_worst', label: 'Concavity (worst)', type: 'number', step: 0.001 },
+    { name: 'concave_points_worst', label: 'Concave Points (worst)', type: 'number', step: 0.001 },
+    { name: 'symmetry_worst', label: 'Symmetry (worst)', type: 'number', step: 0.001 },
+    { name: 'fractal_dimension_worst', label: 'Fractal Dimension (worst)', type: 'number', step: 0.001 },
   ],
 };
 

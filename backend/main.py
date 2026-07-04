@@ -1658,7 +1658,7 @@ def predict_lung_disease(text: str, top_k: int = 3) -> list:
 logger.info("✅ All models loaded (Brain TF + Lung NLP)")
 
 # ============================================================================
-# BLOCK 3: Medical Chat Engine - FINAL WITH FORCED RESET
+# BLOCK 3: Medical Chat Engine - FINAL WITH FORCED RESET (UPDATED)
 # ============================================================================
 
 import re
@@ -1680,7 +1680,7 @@ except ImportError:
 logger = logging.getLogger("medical_ai.chat_engine")
 
 # ----------------------------------------------------------------------------
-# Data classes
+# Data classes (unchanged)
 # ----------------------------------------------------------------------------
 @dataclass
 class ConversationMessage:
@@ -1753,7 +1753,7 @@ class ChatSession:
         }
 
 # ----------------------------------------------------------------------------
-# Conversation states
+# Conversation states (unchanged)
 # ----------------------------------------------------------------------------
 class ConversationState:
     INITIAL = "initial"
@@ -1766,7 +1766,7 @@ class ConversationState:
     DISEASE_INFO = "disease_info"
 
 # ----------------------------------------------------------------------------
-# NLP Pipeline
+# NLP Pipeline (unchanged)
 # ----------------------------------------------------------------------------
 class NLPPipeline:
     def __init__(self):
@@ -1848,7 +1848,7 @@ class NLPPipeline:
         }
 
 # ----------------------------------------------------------------------------
-# Symptom Extractor
+# Symptom Extractor (enhanced with more fuzzy + keyword detection)
 # ----------------------------------------------------------------------------
 class SymptomExtractor:
     def __init__(self):
@@ -1909,39 +1909,56 @@ class SymptomExtractor:
                         logger.info(f"   Synonym match: '{symptom}' from '{synonym}'")
                         break
 
-        # 3. FUZZY MATCHING (token-based)
-        if RAPIDFUZZ_AVAILABLE and len(detected) < 5:
+        # 3. FUZZY MATCHING (token-based) – more aggressive
+        if RAPIDFUZZ_AVAILABLE and len(detected) < 10:
             tokens = normalized_text.split()
-            if len(tokens) >= 3 and all(len(t) >= 3 for t in tokens):
-                try:
-                    for symptom in self.symptom_list:
-                        if symptom in found_symptoms:
-                            continue
-                        for token in tokens:
-                            if len(token) < 3:
-                                continue
-                            threshold = 90 if len(token) <= 4 else 80
-                            score = fuzz.partial_ratio(token, symptom)
-                            if score >= threshold:
-                                severity = self.symptom_severity.get(symptom, 3)
-                                detected.append(DetectedSymptom(
-                                    symptom=symptom,
-                                    confidence=0.7,
-                                    source='fuzzy',
-                                    original_text=text,
-                                    severity=severity
-                                ))
-                                found_symptoms.add(symptom)
-                                logger.info(f"   Fuzzy match: '{symptom}' (token='{token}', score={score})")
-                                break
-                except Exception as e:
-                    logger.warning(f"Fuzzy matching error: {e}")
+            for token in tokens:
+                if len(token) < 3:
+                    continue
+                # try matching each token against symptom list
+                for symptom in self.symptom_list:
+                    if symptom in found_symptoms:
+                        continue
+                    # use partial_ratio for phrases
+                    score = fuzz.partial_ratio(token, symptom)
+                    if score >= 75:  # lowered threshold
+                        severity = self.symptom_severity.get(symptom, 3)
+                        detected.append(DetectedSymptom(
+                            symptom=symptom,
+                            confidence=0.65,
+                            source='fuzzy',
+                            original_text=text,
+                            severity=severity
+                        ))
+                        found_symptoms.add(symptom)
+                        logger.info(f"   Fuzzy match: '{symptom}' (token='{token}', score={score})")
+                        break
+
+        # 4. If still no symptoms, check for common symptom-indicating phrases
+        if not detected:
+            indicator_patterns = [
+                r'\b(have|feel|suffer|experience|am having|got)\b.*\b(pain|ache|cough|fever|headache|nausea|fatigue|dizziness|rash|swelling|numbness|shortness of breath|chest pain|back pain|joint pain|sore throat|runny nose|chills|sweating|vomiting|diarrhea|constipation|insomnia|anxiety|depression)\b'
+            ]
+            for pattern in indicator_patterns:
+                matches = re.findall(pattern, text.lower())
+                if matches:
+                    # Treat as a symptom description even if we didn't match exact name
+                    logger.info("   Symptom-indicating keywords found, but no exact match; will trigger reset.")
+                    # We'll add a dummy symptom to force reset
+                    detected.append(DetectedSymptom(
+                        symptom="symptom_description",
+                        confidence=0.5,
+                        source='keyword',
+                        original_text=text,
+                        severity=3
+                    ))
+                    break
 
         logger.info(f"   Extracted {len(detected)} symptoms")
         return detected
 
 # ----------------------------------------------------------------------------
-# Disease Ranker
+# Disease Ranker (unchanged)
 # ----------------------------------------------------------------------------
 class DiseaseRanker:
     def __init__(self):
@@ -2035,7 +2052,7 @@ class DiseaseRanker:
             return f"Continue monitoring your condition. Consult a doctor if symptoms worsen."
 
 # ----------------------------------------------------------------------------
-# Question Engine
+# Question Engine (unchanged)
 # ----------------------------------------------------------------------------
 class QuestionEngine:
     def __init__(self):
@@ -2063,7 +2080,7 @@ class QuestionEngine:
         return None
 
 # ----------------------------------------------------------------------------
-# Chat Session Manager (with forced reset)
+# Chat Session Manager (with forced reset, enhanced post-diagnosis handling)
 # ----------------------------------------------------------------------------
 class ChatSessionManager:
     def __init__(self):
@@ -2312,7 +2329,7 @@ class ChatSessionManager:
         }
 
     # -------------------------------------------------------------------------
-    #  POST-DIAGNOSIS HANDLER (FORCED RESET)
+    #  POST-DIAGNOSIS HANDLER (FORCED RESET) – enhanced
     # -------------------------------------------------------------------------
     def _handle_post_diagnosis(self, message: str, session: ChatSession) -> Dict[str, Any]:
         logger.info(f"Post-diagnosis handling: '{message}'")
@@ -2331,7 +2348,7 @@ class ChatSessionManager:
                 'state': session.state
             }
 
-        # 2. Extract symptoms
+        # 2. Extract symptoms (will use enhanced extractor)
         detected = self.symptom_extractor.extract_symptoms(message)
         logger.info(f"Extracted symptoms: {[s.symptom for s in detected]}")
 
@@ -2339,6 +2356,7 @@ class ChatSessionManager:
         if detected:
             logger.info("Symptoms detected – resetting session for new analysis.")
             self._reset_session_for_new_diagnosis(session)
+            # Add the detected symptoms (even the dummy one)
             for symptom in detected:
                 if symptom.symptom not in session.confirmed_symptoms:
                     session.confirmed_symptoms.append(symptom.symptom)
@@ -2346,11 +2364,21 @@ class ChatSessionManager:
                     logger.info(f"Added symptom after reset: {symptom.symptom}")
             return self._continue_diagnosis(session)
 
-        # 4. If no symptoms, check for symptom-describing keywords
-        symptom_keywords = ['have', 'feel', 'my', 'pain', 'ache', 'symptom', 'hurt', 'suffering', 'experiencing', 'swell', 'swelling', 'ache']
+        # 4. If no symptoms, check for symptom-describing keywords (more aggressive)
+        symptom_keywords = ['have', 'feel', 'my', 'pain', 'ache', 'symptom', 'hurt', 'suffering', 'experiencing', 'swell', 'swelling', 'ache', 'cough', 'fever', 'headache', 'nausea', 'dizziness', 'rash', 'itching', 'burning', 'numbness', 'tingling', 'weakness', 'fatigue', 'tired', 'shortness of breath', 'chest tightness', 'palpitations', 'indigestion', 'vomiting', 'diarrhea', 'constipation', 'insomnia']
         if any(word in message.lower() for word in symptom_keywords):
             logger.info("Symptom description detected but no specific symptoms extracted – resetting anyway.")
             self._reset_session_for_new_diagnosis(session)
+            # Add a dummy symptom to avoid empty diagnosis
+            dummy = DetectedSymptom(
+                symptom="symptom_description",
+                confidence=0.4,
+                source='keyword',
+                original_text=message,
+                severity=3
+            )
+            session.confirmed_symptoms.append("symptom_description")
+            session.detected_symptoms.append(dummy)
             return self._continue_diagnosis(session)
 
         # 5. Otherwise, treat as general chat
@@ -2358,6 +2386,7 @@ class ChatSessionManager:
         return self._handle_general_chat(message, session)
 
     def _reset_session_for_new_diagnosis(self, session: ChatSession):
+        """Reset all diagnosis-related fields, keeping the session active."""
         session.confirmed_symptoms = []
         session.detected_symptoms = []
         session.predicted_diseases = []
@@ -2370,7 +2399,7 @@ class ChatSessionManager:
         logger.info(f"Session reset for new diagnosis. Session ID: {session.session_id}")
 
     # -------------------------------------------------------------------------
-    #  POST-DIAGNOSIS ANSWER GENERATOR
+    #  POST-DIAGNOSIS ANSWER GENERATOR (unchanged)
     # -------------------------------------------------------------------------
     def _generate_post_diagnosis_answer(self, message: str, session: ChatSession) -> str:
         text_lower = message.lower().strip()
@@ -2403,7 +2432,7 @@ class ChatSessionManager:
                "You can ask about symptoms, risk levels, or what to do next."
 
     # -------------------------------------------------------------------------
-    #  CONTINUE DIAGNOSIS
+    #  CONTINUE DIAGNOSIS (unchanged)
     # -------------------------------------------------------------------------
     def _continue_diagnosis(self, session: ChatSession) -> Dict[str, Any]:
         symptoms = session.confirmed_symptoms
@@ -2656,7 +2685,98 @@ app.add_middleware(
 )
 
 # ----------------------------------------------------------------------------
-# Feature preparation with default imputation
+# Feature mapping (exact order from training) – now used only as fallback
+# ----------------------------------------------------------------------------
+DISEASE_FEATURES = {
+    "diabetes": [
+        "Pregnancies", "Glucose", "BloodPressure", "SkinThickness",
+        "Insulin", "BMI", "DiabetesPedigreeFunction", "Age"
+    ],
+    "heart": [
+        "age", "sex", "cp", "trestbps", "chol", "fbs",
+        "restecg", "thalach", "exang", "oldpeak", "slope", "ca", "thal"
+    ],
+    "parkinson": [
+        "MDVP_Fo_Hz", "MDVP_Fhi_Hz", "MDVP_Flo_Hz",
+        "MDVP_Jitter_percent", "MDVP_Jitter_Abs", "MDVP_RAP",
+        "MDVP_PPQ", "Jitter_DDP", "MDVP_Shimmer",
+        "MDVP_Shimmer_dB", "Shimmer_APQ3", "Shimmer_APQ5",
+        "MDVP_APQ", "Shimmer_DDA", "NHR", "HNR",
+        "RPDE", "DFA", "spread1", "spread2", "D2", "PPE"
+    ],
+    "liver": [
+        "Sex", "age", "Total_Bilirubin", "Direct_Bilirubin",
+        "Alkaline_Phosphotase", "Alamine_Aminotransferase",
+        "Aspartate_Aminotransferase", "Total_Protiens",
+        "Albumin", "Albumin_and_Globulin_Ratio"
+    ],
+    "hepatitis": [
+        "Age", "Sex", "ALB", "ALP", "ALT", "AST", "BIL",
+        "CHE", "CHOL", "CREA", "GGT", "PROT"
+    ],
+    "lung": [
+        "GENDER", "AGE", "SMOKING", "YELLOW_FINGERS",
+        "ANXIETY", "PEER_PRESSURE", "CHRONIC_DISEASE",
+        "FATIGUE", "ALLERGY", "WHEEZING", "ALCOHOL_CONSUMING",
+        "COUGHING", "SHORTNESS_OF_BREATH", "SWALLOWING_DIFFICULTY",
+        "CHEST_PAIN"
+    ],
+    "kidney": [
+        "age", "bp", "sg", "al", "su", "rbc", "pc", "pcc",
+        "ba", "bgr", "bu", "sc", "sod", "pot", "hemo",
+        "pcv", "wc", "rc", "htn", "dm", "cad", "appet",
+        "pe", "ane"
+    ],
+    "breast": [
+        "radius_mean", "texture_mean", "perimeter_mean", "area_mean",
+        "smoothness_mean", "compactness_mean", "concavity_mean",
+        "concave_points_mean", "symmetry_mean", "fractal_dimension_mean",
+        "radius_se", "texture_se", "perimeter_se", "area_se",
+        "smoothness_se", "compactness_se", "concavity_se",
+        "concave_points_se", "symmetry_se", "fractal_dimension_se",
+        "radius_worst", "texture_worst", "perimeter_worst", "area_worst",
+        "smoothness_worst", "compactness_worst", "concavity_worst",
+        "concave_points_worst", "symmetry_worst", "fractal_dimension_worst"
+    ]
+}
+
+SELECT_MAPPING = {
+    "sex": {"Female": 0, "Male": 1},
+    "Sex": {"Female": 0, "Male": 1},
+    "GENDER": {"Female": 0, "Male": 1},
+    "fbs": {"No": 0, "Yes": 1},
+    "exang": {"No": 0, "Yes": 1},
+    "cp": {"Typical Angina": 0, "Atypical Angina": 1, "Non-anginal Pain": 2, "Asymptomatic": 3},
+    "restecg": {"Normal": 0, "ST-T Wave Abnormality": 1, "Left Ventricular Hypertrophy": 2},
+    "slope": {"Upsloping": 0, "Flat": 1, "Downsloping": 2},
+    "thal": {"Normal": 0, "Fixed Defect": 1, "Reversible Defect": 2},
+    "SMOKING": {"No": 0, "Yes": 1},
+    "YELLOW_FINGERS": {"No": 0, "Yes": 1},
+    "ANXIETY": {"No": 0, "Yes": 1},
+    "PEER_PRESSURE": {"No": 0, "Yes": 1},
+    "CHRONIC_DISEASE": {"No": 0, "Yes": 1},
+    "FATIGUE": {"No": 0, "Yes": 1},
+    "ALLERGY": {"No": 0, "Yes": 1},
+    "WHEEZING": {"No": 0, "Yes": 1},
+    "ALCOHOL_CONSUMING": {"No": 0, "Yes": 1},
+    "COUGHING": {"No": 0, "Yes": 1},
+    "SHORTNESS_OF_BREATH": {"No": 0, "Yes": 1},
+    "SWALLOWING_DIFFICULTY": {"No": 0, "Yes": 1},
+    "CHEST_PAIN": {"No": 0, "Yes": 1},
+    "rbc": {"Normal": 0, "Abnormal": 1},
+    "pc": {"Normal": 0, "Abnormal": 1},
+    "pcc": {"Present": 1, "Not Present": 0},
+    "ba": {"Present": 1, "Not Present": 0},
+    "htn": {"No": 0, "Yes": 1},
+    "dm": {"No": 0, "Yes": 1},
+    "cad": {"No": 0, "Yes": 1},
+    "appet": {"Good": 0, "Poor": 1},
+    "pe": {"No": 0, "Yes": 1},
+    "ane": {"No": 0, "Yes": 1},
+}
+
+# ----------------------------------------------------------------------------
+# Feature preparation with default imputation (using preprocessor's actual column names)
 # ----------------------------------------------------------------------------
 def prepare_features_for_prediction(disease: str, data: Dict[str, Any]) -> pd.DataFrame:
     """
@@ -2973,5 +3093,14 @@ async def reset_conversation(request: Dict[str, str]):
 # Run server
 # ============================================================================
 if __name__ == "__main__":
+    import os
     import uvicorn
-    uvicorn.run(app, host="0.0.0.0", port=7860, log_level="info")
+
+    # Use environment variable PORT (for Render, Hugging Face, etc.) or default to 7860
+    port = int(os.environ.get("PORT", 7860))
+    uvicorn.run(
+        "main:app",
+        host="0.0.0.0",
+        port=port,
+        reload=False
+    )
