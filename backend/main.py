@@ -1627,14 +1627,30 @@ if LUNG_MODEL_PATH.exists() and LUNG_LABEL_ENCODER_PATH.exists():
         logger.info("✅ Model loaded")
 
         logger.info("Loading Label Encoder...")
-        LUNG_ENCODER = joblib.load(LUNG_LABEL_ENCODER_PATH)
-        logger.info("✅ Label Encoder loaded")
+        # Try loading with explicit numpy version compatibility
+        try:
+            LUNG_ENCODER = joblib.load(LUNG_LABEL_ENCODER_PATH)
+            logger.info("✅ Label Encoder loaded")
+        except ModuleNotFoundError as e:
+            if "numpy._core" in str(e):
+                logger.warning(
+                    "⚠️ NumPy version mismatch while loading label encoder. "
+                    "Please ensure numpy<2.0 is installed (e.g., numpy==1.26.4). "
+                    "Skipping lung NLP model."
+                )
+                LUNG_ENCODER = None
+            else:
+                raise e
 
-        if torch.cuda.is_available():
+        if LUNG_ENCODER is not None and torch.cuda.is_available():
             LUNG_MODEL.to("cuda")
 
-        logger.info(f"✅ Lung NLP model loaded from {LUNG_MODEL_PATH}")
-        logger.info(f"Classes: {len(LUNG_ENCODER.classes_)}")
+        if LUNG_ENCODER is not None:
+            logger.info(f"✅ Lung NLP model loaded from {LUNG_MODEL_PATH}")
+            logger.info(f"Classes: {len(LUNG_ENCODER.classes_)}")
+        else:
+            LUNG_MODEL = None
+            LUNG_TOKENIZER = None
 
     except Exception as e:
         import traceback
@@ -1672,6 +1688,60 @@ def predict_lung_disease(text: str, top_k: int = 3) -> list:
             "confidence": float(probs[idx])
         })
     return results
+
+# ============================================================================
+# FALLBACK DISEASE DESCRIPTIONS (from user's dataset)
+# ============================================================================
+FALLBACK_DESCRIPTIONS = {
+    "AIDS": "Acquired immunodeficiency syndrome (AIDS) is a chronic, potentially life-threatening condition caused by the human immunodeficiency virus (HIV). By damaging your immune system, HIV interferes with your body's ability to fight infection and disease.",
+    "Acne": "Acne vulgaris is the formation of comedones, papules, pustules, nodules, and/or cysts as a result of obstruction and inflammation of pilosebaceous units (hair follicles and their accompanying sebaceous gland). Acne develops on the face and upper trunk. It most often affects adolescents.",
+    "Alcoholic hepatitis": "Alcoholic hepatitis is a diseased, inflammatory condition of the liver caused by heavy alcohol consumption over an extended period. It's also aggravated by binge drinking and ongoing alcohol use. If you develop this condition, you must stop drinking alcohol",
+    "Allergy": "An allergy is an immune system response to a foreign substance that's not typically harmful to your body.They can include certain foods, pollen, or pet dander. Your immune system's job is to keep you healthy by fighting harmful pathogens.",
+    "Arthritis": "Arthritis is the swelling and tenderness of one or more of your joints. The main symptoms of arthritis are joint pain and stiffness, which typically worsen with age. The most common types of arthritis are osteoarthritis and rheumatoid arthritis.",
+    "Bronchial Asthma": "Bronchial asthma is a medical condition which causes the airway path of the lungs to swell and narrow. Due to this swelling, the air path produces excess mucus making it hard to breathe, which results in coughing, short breath, and wheezing. The disease is chronic and interferes with daily working.",
+    "Cervical spondylosis": "Cervical spondylosis is a general term for age-related wear and tear affecting the spinal disks in your neck. As the disks dehydrate and shrink, signs of osteoarthritis develop, including bony projections along the edges of bones (bone spurs).",
+    "Chicken pox": "Chickenpox is a highly contagious disease caused by the varicella-zoster virus (VZV). It can cause an itchy, blister-like rash. The rash first appears on the chest, back, and face, and then spreads over the entire body, causing between 250 and 500 itchy blisters.",
+    "Chronic cholestasis": "Chronic cholestatic diseases, whether occurring in infancy, childhood or adulthood, are characterized by defective bile acid transport from the liver to the intestine, which is caused by primary damage to the biliary epithelium in most cases",
+    "Common Cold": "The common cold is a viral infection of your nose and throat (upper respiratory tract). It's usually harmless, although it might not feel that way. Many types of viruses can cause a common cold.",
+    "Covid": "COVID-19 (Corona Virus) affects different people in different ways. It affects the lungs. Most infected people will develop mild to moderate illness and recover without hospitalization.",
+    "Dengue": "an acute infectious disease caused by a flavivirus (species Dengue virus of the genus Flavivirus), transmitted by aedes mosquitoes, and characterized by headache, severe joint pain, and a rash. — called also breakbone fever, dengue fever.",
+    "Diabetes": "Diabetes is a disease that occurs when your blood glucose, also called blood sugar, is too high. Blood glucose is your main source of energy and comes from the food you eat. Insulin, a hormone made by the pancreas, helps glucose from food get into your cells to be used for energy.",
+    "Dimorphic hemorrhoids(piles)": "Hemorrhoids, also spelled haemorrhoids, are vascular structures in the anal canal. In their ... Other names, Haemorrhoids, piles, hemorrhoidal disease .",
+    "Drug Reaction": "An adverse drug reaction (ADR) is an injury caused by taking medication. ADRs may occur following a single dose or prolonged administration of a drug or result from the combination of two or more drugs.",
+    "Fungal infection": "In humans, fungal infections occur when an invading fungus takes over an area of the body and is too much for the immune system to handle. Fungi can live in the air, soil, water, and plants. Some fungi live naturally in the human body. Like many microbes, there are helpful fungi and harmful fungi.",
+    "GERD": "Gastroesophageal reflux disease, or GERD, is a digestive disorder that affects the lower oesophagal sphincter (LES), the ring of muscle between the oesophagus and stomach. Many people, including pregnant women, suffer from heartburn or acid indigestion caused by GERD.",
+    "Gastroenteritis": "Gastroenteritis is an inflammation of the digestive tract, particularly the stomach, and large and small intestines. Viral and bacterial gastroenteritis are intestinal infections associated with symptoms of diarrhea , abdominal cramps, nausea , and vomiting .",
+    "Heart attack": "The death of heart muscle due to the loss of blood supply. The loss of blood supply is usually caused by a complete blockage of a coronary artery, one of the arteries that supply blood to the heart muscle.",
+    "Hepatitis A": "Hepatitis A is a highly contagious liver infection caused by the hepatitis A virus. The virus is one of several types of hepatitis viruses that cause inflammation and affect your liver's ability to function.",
+    "Hepatitis B": "Hepatitis B is an infection of your liver. It can cause scarring of the organ, liver failure, and cancer. It can be fatal if it isn't treated. It's spread when people come in contact with the blood, open sores, or body fluids of someone who has the hepatitis B virus.",
+    "Hepatitis C": "Inflammation of the liver due to the hepatitis C virus (HCV), which is usually spread via blood transfusion (rare), hemodialysis, and needle sticks. The damage hepatitis C does to the liver can lead to cirrhosis and its complications as well as cancer.",
+    "Hepatitis D": "Hepatitis D, also known as the hepatitis delta virus, is an infection that causes the liver to become inflamed. This swelling can impair liver function and cause long-term liver problems, including liver scarring and cancer. The condition is caused by the hepatitis D virus (HDV).",
+    "Hepatitis E": "A rare form of liver inflammation caused by infection with the hepatitis E virus (HEV). It is transmitted via food or drinks handled by an infected person or through infected water supplies in areas where the faecal matter may get into the water. Hepatitis E does not cause chronic liver disease.",
+    "Hypertension": "Hypertension (HTN or HT), also known as high blood pressure (HBP), is a long-term medical condition in which the blood pressure in the arteries is persistently elevated. High blood pressure typically does not cause symptoms.",
+    "Hyperthyroidism": "Hyperthyroidism (overactive thyroid) occurs when your thyroid gland produces too much of the hormone thyroxine. Hyperthyroidism can accelerate your body's metabolism, causing unintentional weight loss and a rapid or irregular heartbeat.",
+    "Hypoglycemia": "Hypoglycemia is a condition in which your blood sugar (glucose) level is lower than normal. Glucose is your body's main energy source. Hypoglycemia is often related to diabetes treatment. But other drugs and a variety of conditions — many rare — can cause low blood sugar in people who don't have diabetes.",
+    "Hypothyroidism": "Hypothyroidism, also called underactive thyroid or low thyroid, is a disorder of the endocrine system in which the thyroid gland does not produce enough thyroid hormone.",
+    "Impetigo": "Impetigo (im-puh-TIE-go) is a common and highly contagious skin infection that mainly affects infants and children. Impetigo usually appears as red sores on the face, especially around a child's nose and mouth, and on hands and feet. The sores burst and develop honey-coloured crusts.",
+    "Jaundice": "Yellow staining of the skin and sclerae (the whites of the eyes) by abnormally high blood levels of the bile pigment bilirubin. The yellowing extends to other tissues and body fluids. Jaundice was once called the \"Morbus regius\" (the regal disease) in the belief that only the touch of a king could cure it",
+    "Malaria": "An infectious disease caused by protozoan parasites from the Plasmodium family that can be transmitted by the bite of the Anopheles mosquito or by a contaminated needle or transfusion. Falciparum malaria is the most deadly type.",
+    "Migraine": "A migraine can cause severe throbbing pain or a pulsing sensation, usually on one side of the head. It's often accompanied by nausea, vomiting, and extreme sensitivity to light and sound. Migraine attacks can last for hours to days, and the pain can be so severe that it interferes with your daily activities.",
+    "Osteoarthritis": "Osteoarthritis is the most common form of arthritis, affecting millions of people worldwide. It occurs when the protective cartilage that cushions the ends of your bones wears down over time.",
+    "Paralysis (brain haemorrhage)": "Intracerebral haemorrhage (ICH) is when blood suddenly bursts into brain tissue, causing damage to your brain. Symptoms usually appear suddenly during ICH. They include headache, weakness, confusion, and paralysis, particularly on one side of your body.",
+    "Paroxysmal Positional Vertigo": "Benign paroxysmal positional vertigo (BPPV) is one of the most common causes of vertigo — the sudden sensation that you're spinning or that the inside of your head is spinning. Benign paroxysmal positional vertigo causes brief episodes of mild to intense dizziness.",
+    "Peptic ulcer disease": "Peptic ulcer disease (PUD) is a break in the inner lining of the stomach, the first part of the small intestine, or sometimes the lower oesophagus. An ulcer in the stomach is called a gastric ulcer, while one in the first part of the intestines is a duodenal ulcer.",
+    "Pneumonia": "Pneumonia is an infection in one or both lungs. Bacteria, viruses, and fungi cause it. The infection causes inflammation in the air sacs in your lungs, which are called alveoli. The alveoli fill with fluid or pus, making it difficult to breathe.",
+    "Psoriasis": "Psoriasis is a common skin disorder that forms thick, red, bumpy patches covered with silvery scales. They can pop up anywhere, but most appear on the scalp, elbows, knees, and lower back. Psoriasis can't be passed from person to person. It does sometimes happen in members of the same family.",
+    "Tuberculosis": "Tuberculosis (TB) is an infectious disease usually caused by Mycobacterium tuberculosis (MTB) bacteria. Tuberculosis generally affects the lungs, but can also affect other parts of the body. Most infections show no symptoms, in which case it is known as latent tuberculosis.",
+    "Typhoid": "An acute illness characterized by fever caused by infection with the bacterium Salmonella typhi. Typhoid fever has an insidious onset, with fever, headache, constipation, malaise, chills, and muscle pain. Diarrhoea is uncommon, and vomiting is not usually severe.",
+    "Urinary tract infection": "Urinary tract infection: An infection of the kidney, ureter, bladder, or urethra. Abbreviated UTI. Not everyone with a UTI has symptoms, but common symptoms include a frequent urge to urinate and pain or burning when urinating.",
+    "Varicose veins": "A vein that has enlarged and twisted, often appearing as a bulging, blue blood vessel that is clearly visible through the skin. Varicose veins are most common in older adults, particularly women, and occur especially on the legs.",
+}
+
+# Merge fallback into DISEASE_DESCRIPTIONS
+for k, v in FALLBACK_DESCRIPTIONS.items():
+    if k not in DISEASE_DESCRIPTIONS:
+        DISEASE_DESCRIPTIONS[k] = v
+logger.info(f"Added {len(FALLBACK_DESCRIPTIONS)} fallback disease descriptions.")
 
 # ============================================================================
 # BLOCK 3: Medical Chat Engine - FINAL WITH FORCED RESET (UPDATED)
@@ -1864,7 +1934,7 @@ class NLPPipeline:
         }
 
 # ----------------------------------------------------------------------------
-# Symptom Extractor (enhanced)
+# Symptom Extractor (enhanced - NO FUZZY MATCHING)
 # ----------------------------------------------------------------------------
 class SymptomExtractor:
     def __init__(self):
@@ -1890,7 +1960,7 @@ class SymptomExtractor:
         detected = []
         found_symptoms = set()
 
-        # 1. EXACT MATCHING
+        # 1. EXACT MATCHING – symptom appears as a substring and all its words are present
         for symptom in self.symptom_list:
             if symptom in normalized_text:
                 symptom_words = symptom.lower().split()
@@ -1906,7 +1976,7 @@ class SymptomExtractor:
                     found_symptoms.add(symptom)
                     logger.info(f"   Exact match: '{symptom}'")
 
-        # 2. SYNONYM MATCHING
+        # 2. SYNONYM MATCHING – exact match of a synonym
         if len(text) > 5:
             for symptom, synonyms in self.symptom_synonyms.items():
                 if symptom in found_symptoms:
@@ -1925,30 +1995,7 @@ class SymptomExtractor:
                         logger.info(f"   Synonym match: '{symptom}' from '{synonym}'")
                         break
 
-        # 3. FUZZY MATCHING (token-based)
-        if RAPIDFUZZ_AVAILABLE and len(detected) < 10:
-            tokens = normalized_text.split()
-            for token in tokens:
-                if len(token) < 3:
-                    continue
-                for symptom in self.symptom_list:
-                    if symptom in found_symptoms:
-                        continue
-                    score = fuzz.partial_ratio(token, symptom)
-                    if score >= 75:  # lowered threshold
-                        severity = self.symptom_severity.get(symptom, 3)
-                        detected.append(DetectedSymptom(
-                            symptom=symptom,
-                            confidence=0.65,
-                            source='fuzzy',
-                            original_text=text,
-                            severity=severity
-                        ))
-                        found_symptoms.add(symptom)
-                        logger.info(f"   Fuzzy match: '{symptom}' (token='{token}', score={score})")
-                        break
-
-        # 4. KEYWORD FALLBACK – if no symptoms yet, check for common symptom indicators
+        # 3. KEYWORD FALLBACK – if no symptoms yet, check for common symptom indicators
         if not detected:
             indicator_patterns = [
                 r'\b(have|feel|suffer|experience|am having|got)\b.*\b(pain|ache|cough|fever|headache|nausea|fatigue|dizziness|rash|swelling|numbness|shortness of breath|chest pain|back pain|joint pain|sore throat|runny nose|chills|sweating|vomiting|diarrhea|constipation|insomnia|anxiety|depression)\b'
@@ -2190,6 +2237,7 @@ class ChatSessionManager:
                 return {'intent': 'symptom_diagnosis', 'symptoms': symptoms}
             return {'intent': 'general_chat'}
 
+        # For other states, check for disease info queries
         patterns = [
             r'what is (?:a|an)?\s*[\w\s]+',
             r'tell me about (?:a|an)?\s*[\w\s]+',
@@ -2208,119 +2256,33 @@ class ChatSessionManager:
             return {'intent': 'reset'}
         return {'intent': 'general_chat'}
 
-    def process_user_message(self, message: str, user_id: Optional[str] = None,
-                            session_id: Optional[str] = None) -> Dict[str, Any]:
-        logger.info("=" * 60)
-        logger.info(f"Processing message: '{message[:50]}...'")
-        logger.info(f"Session ID: {session_id}")
-        if not message or len(message.strip()) < 1:
-            return {
-                'text': "Could you please describe your symptoms or ask a question?",
-                'error': 'Empty message'
-            }
-        session = self.get_or_create_session(user_id, session_id)
-        logger.info(f"Session state: {session.state}, Follow-ups: {session.follow_up_count}")
-        self._add_message(session, 'user', message)
-        try:
-            intent_result = self._detect_intent(message, session)
-            intent = intent_result.get('intent')
-            logger.info(f"Detected intent: {intent}")
-            if intent == 'reset':
-                self.reset_conversation(session.session_id)
-                session = self.get_session(session.session_id)
-                return self._handle_general_chat(message, session)
-            elif intent == 'disease_info':
-                return self._handle_disease_info(message, session)
-            elif intent == 'confirmation_yes':
-                return self._handle_confirmation_yes(message, session)
-            elif intent == 'confirmation_no':
-                return self._handle_confirmation_no(message, session)
-            elif intent == 'symptom_diagnosis':
-                symptoms = intent_result.get('symptoms', [])
-                return self._handle_symptom_diagnosis(message, session, symptoms)
-            elif session.state == ConversationState.RESULT:
-                return self._handle_post_diagnosis(message, session)
-            else:
-                return self._handle_general_chat(message, session)
-        except Exception as e:
-            logger.error(f"Error processing message: {e}")
-            import traceback
-            traceback.print_exc()
-            return {
-                'text': "I apologize, but I encountered an error. Please try again.",
-                'error': str(e)
-            }
-
-    # ----- Handlers -----
-    def _handle_disease_info(self, message: str, session: ChatSession) -> Dict[str, Any]:
-        try:
-            disease_name = self._extract_disease_name(message)
-            # Fallback descriptions (used if CSV fails)
-            fallback = {
-                "diabetes": "Diabetes is a chronic condition that affects how your body turns food into energy. There are two main types: Type 1 and Type 2.",
-                "heart disease": "Heart disease refers to several types of heart conditions, including coronary artery disease, heart attacks, and heart failure.",
-                "breast cancer": "Breast cancer is a type of cancer that forms in the cells of the breast. Early detection through screening is important.",
-                "covid-19": "COVID-19 is a disease caused by the SARS-CoV-2 virus. Symptoms include fever, cough, and loss of taste or smell.",
-                "influenza": "Influenza (flu) is a contagious respiratory illness caused by influenza viruses. It can cause mild to severe illness.",
-                "pneumonia": "Pneumonia is an infection that inflames the air sacs in one or both lungs, which may fill with fluid.",
-                "tuberculosis": "Tuberculosis (TB) is a bacterial infection that primarily affects the lungs. It spreads through the air.",
-                "common cold": "The common cold is a viral infection of your nose and throat. It's usually harmless.",
-                "migraine": "A migraine is a headache that can cause severe throbbing pain or a pulsing sensation, usually on one side of the head.",
-                "urinary tract infection": "A urinary tract infection (UTI) is an infection in any part of your urinary system — your kidneys, ureters, bladder and urethra.",
-                "gastroenteritis": "Gastroenteritis is inflammation of the digestive tract, often causing diarrhea, vomiting, and abdominal pain.",
-                "bronchitis": "Bronchitis is an inflammation of the lining of your bronchial tubes, which carry air to and from your lungs.",
-            }
-            if disease_name:
-                description = DISEASE_DESCRIPTIONS.get(disease_name) or fallback.get(disease_name)
-                if description:
-                    response = f"**{disease_name.title()}**\n\n{description}\n\n"
-                    symptoms = DISEASE_SYMPTOMS.get(disease_name, [])
-                    if symptoms:
-                        response += "**Common Symptoms:**\n" + "\n".join(f"• {s}" for s in symptoms[:5]) + "\n\n"
-                    precautions = DISEASE_PRECAUTIONS.get(disease_name, [])
-                    if precautions:
-                        response += "**Precautions:**\n" + "\n".join(f"• {p}" for p in precautions[:3]) + "\n\n"
-                    response += "---\n*This information is for educational purposes only.*"
-                else:
-                    response = "I don't have detailed information about that condition. Would you like to describe your symptoms instead?"
-            else:
-                response = "I don't have detailed information about that condition. Would you like to describe your symptoms instead?"
-
-            self._add_message(session, 'assistant', response)
-            session.state = ConversationState.DISEASE_INFO
-            return {
-                'text': response,
-                'intent': 'disease_info',
-                'is_emergency': False,
-                'session_id': session.session_id,
-                'state': session.state
-            }
-        except Exception as e:
-            logger.error(f"Error in disease info: {e}")
-            response = "I'm sorry, I couldn't process your request. Please try describing your symptoms instead."
-            self._add_message(session, 'assistant', response)
-            session.state = ConversationState.DISEASE_INFO
-            return {
-                'text': response,
-                'intent': 'disease_info',
-                'is_emergency': False,
-                'session_id': session.session_id,
-                'state': session.state
-            }
-
     def _extract_disease_name(self, text: str) -> Optional[str]:
+        """Extract disease name using exact and fuzzy matching (RapidFuzz)."""
         text_lower = text.lower().strip()
         # Remove common question words
         for word in ["what", "is", "are", "tell", "me", "about", "explain", "describe", "information", "on", "the", "a", "an"]:
             text_lower = text_lower.replace(word, "")
         text_lower = text_lower.strip()
 
-        # Check exact match in DISEASE_DESCRIPTIONS (loaded from CSV)
+        # Try exact match first
         for disease in DISEASE_DESCRIPTIONS.keys():
-            if disease.lower() in text_lower:
+            if disease.lower() == text_lower:
                 return disease
 
-        # Hardcoded aliases (fallback if CSV is missing)
+        # Fuzzy match using RapidFuzz
+        if RAPIDFUZZ_AVAILABLE:
+            best_match = None
+            best_score = 0
+            for disease in DISEASE_DESCRIPTIONS.keys():
+                score = fuzz.ratio(text_lower, disease.lower())
+                if score > best_score and score >= 70:  # threshold
+                    best_score = score
+                    best_match = disease
+            if best_match:
+                logger.info(f"Fuzzy matched disease: '{best_match}' (score={best_score})")
+                return best_match
+
+        # Fallback: hardcoded aliases (keep for completeness)
         aliases = {
             "diabetes": ["diabetes", "sugar", "high sugar", "diabetic"],
             "heart disease": ["heart disease", "cardiac", "cardiovascular", "coronary", "heart attack"],
@@ -2339,6 +2301,108 @@ class ChatSessionManager:
             if any(alias in text_lower for alias in alias_list):
                 return disease
         return None
+
+    def _extract_symptom_from_query(self, text: str) -> Optional[str]:
+        """Find the most likely symptom mention using RapidFuzz."""
+        if not RAPIDFUZZ_AVAILABLE:
+            return None
+        text_clean = self.symptom_extractor.nlp.normalize_text(text)
+        symptom_list = SYMPTOM_INDEX.get('symptom_list', [])
+        if not symptom_list:
+            return None
+
+        best_match = None
+        best_score = 0
+        for symptom in symptom_list:
+            # Try exact or partial matching
+            score = fuzz.partial_ratio(text_clean, symptom)
+            if score > best_score and score >= 75:
+                best_score = score
+                best_match = symptom
+        if best_match:
+            logger.info(f"Extracted symptom from query: '{best_match}' (score={best_score})")
+            return best_match
+        return None
+
+    def _handle_disease_info(self, message: str, session: ChatSession) -> Dict[str, Any]:
+        try:
+            disease_name = self._extract_disease_name(message)
+
+            # If we found a disease, return its info
+            if disease_name:
+                description = DISEASE_DESCRIPTIONS.get(disease_name)
+                if description:
+                    response = f"**{disease_name.title()}**\n\n{description}\n\n"
+                    symptoms = DISEASE_SYMPTOMS.get(disease_name, [])
+                    if symptoms:
+                        response += "**Common Symptoms:**\n" + "\n".join(f"• {s}" for s in symptoms[:5]) + "\n\n"
+                    precautions = DISEASE_PRECAUTIONS.get(disease_name, [])
+                    if precautions:
+                        response += "**Precautions:**\n" + "\n".join(f"• {p}" for p in precautions[:3]) + "\n\n"
+                    response += "---\n*This information is for educational purposes only.*"
+                else:
+                    response = "I don't have detailed information about that condition. Would you like to describe your symptoms instead?"
+                self._add_message(session, 'assistant', response)
+                session.state = ConversationState.DISEASE_INFO
+                return {
+                    'text': response,
+                    'intent': 'disease_info',
+                    'is_emergency': False,
+                    'session_id': session.session_id,
+                    'state': session.state
+                }
+
+            # Not a disease – try to interpret as a symptom
+            symptom_match = self._extract_symptom_from_query(message)
+            if symptom_match:
+                # Find diseases that have this symptom
+                matching_diseases = []
+                for disease, sym_list in DISEASE_SYMPTOMS.items():
+                    if symptom_match in sym_list:
+                        matching_diseases.append(disease)
+                if matching_diseases:
+                    response = f"**'{symptom_match}'** is a symptom associated with:\n\n"
+                    for disease in matching_diseases[:5]:  # limit to 5
+                        desc = DISEASE_DESCRIPTIONS.get(disease, "No description available.")
+                        response += f"• **{disease}** – {desc[:200]}...\n\n"
+                    response += "---\n*This is for educational purposes. Consult a doctor for medical advice.*"
+                else:
+                    response = f"I couldn't find any disease linked to '{symptom_match}'. Could you describe your symptoms in more detail?"
+                self._add_message(session, 'assistant', response)
+                session.state = ConversationState.DISEASE_INFO
+                return {
+                    'text': response,
+                    'intent': 'disease_info',
+                    'is_emergency': False,
+                    'session_id': session.session_id,
+                    'state': session.state
+                }
+
+            # Nothing found
+            response = "I don't have information on that. Please describe your symptoms or ask about a specific disease."
+            self._add_message(session, 'assistant', response)
+            session.state = ConversationState.DISEASE_INFO
+            return {
+                'text': response,
+                'intent': 'disease_info',
+                'is_emergency': False,
+                'session_id': session.session_id,
+                'state': session.state
+            }
+        except Exception as e:
+            logger.error(f"Error in disease info: {e}")
+            import traceback
+            traceback.print_exc()
+            response = "I'm sorry, I couldn't process your request. Please try describing your symptoms instead."
+            self._add_message(session, 'assistant', response)
+            session.state = ConversationState.DISEASE_INFO
+            return {
+                'text': response,
+                'intent': 'disease_info',
+                'is_emergency': False,
+                'session_id': session.session_id,
+                'state': session.state
+            }
 
     def _handle_confirmation_yes(self, message: str, session: ChatSession) -> Dict[str, Any]:
         if session.last_question_symptom:
@@ -2364,6 +2428,9 @@ class ChatSessionManager:
 
     def _handle_symptom_diagnosis(self, message: str, session: ChatSession,
                                  detected_symptoms: List[DetectedSymptom]) -> Dict[str, Any]:
+        # If diagnosis was already completed, reset the session for a new analysis
+        if session.diagnosis_complete:
+            self._reset_session_for_new_diagnosis(session)
         for symptom in detected_symptoms:
             if symptom.symptom not in session.confirmed_symptoms:
                 session.confirmed_symptoms.append(symptom.symptom)
@@ -2390,32 +2457,15 @@ class ChatSessionManager:
         }
 
     # -------------------------------------------------------------------------
-    #  POST-DIAGNOSIS HANDLER (FORCED RESET) – enhanced
+    #  POST-DIAGNOSIS HANDLER (IMPROVED) – always reset on new symptoms
     # -------------------------------------------------------------------------
     def _handle_post_diagnosis(self, message: str, session: ChatSession) -> Dict[str, Any]:
         logger.info(f"Post-diagnosis handling: '{message}'")
 
-        # 1. Check if it's a question (answer without reset)
-        question_keywords = ['what', 'how', 'why', 'should', 'can', 'tell', 'explain', 'describe', 'about']
-        is_question = any(kw in message.lower() for kw in question_keywords)
-        if is_question:
-            logger.info("Message is a question – answering based on current diagnosis.")
-            response = self._generate_post_diagnosis_answer(message, session)
-            self._add_message(session, 'assistant', response)
-            return {
-                'text': response,
-                'is_emergency': False,
-                'session_id': session.session_id,
-                'state': session.state
-            }
-
-        # 2. Extract symptoms (enhanced)
+        # 1. First check for symptom extraction – if any symptoms found, reset immediately.
         detected = self.symptom_extractor.extract_symptoms(message)
-        logger.info(f"Extracted symptoms: {[s.symptom for s in detected]}")
-
-        # 3. If ANY symptom is detected, reset and start fresh diagnosis
         if detected:
-            logger.info("Symptoms detected – resetting session for new analysis.")
+            logger.info("Symptoms detected – resetting session for new diagnosis.")
             self._reset_session_for_new_diagnosis(session)
             for symptom in detected:
                 if symptom.symptom not in session.confirmed_symptoms:
@@ -2424,11 +2474,38 @@ class ChatSessionManager:
                     logger.info(f"Added symptom after reset: {symptom.symptom}")
             return self._continue_diagnosis(session)
 
-        # 4. If no symptoms, check for symptom-describing keywords
-        symptom_keywords = ['have', 'feel', 'my', 'pain', 'ache', 'symptom', 'hurt', 'suffering', 'experiencing', 'swell', 'swelling', 'ache', 'cough', 'fever', 'headache', 'nausea', 'dizziness', 'rash', 'itching', 'burning', 'numbness', 'tingling', 'weakness', 'fatigue', 'tired', 'shortness of breath', 'chest tightness', 'palpitations', 'indigestion', 'vomiting', 'diarrhea', 'constipation', 'insomnia']
+        # 2. Check if it's a question about the current diagnosis (e.g., "what should I do?")
+        question_keywords = ['what', 'how', 'why', 'should', 'can', 'tell', 'explain', 'describe', 'about']
+        is_question = any(kw in message.lower() for kw in question_keywords)
+        if is_question:
+            # Check if the question seems to reference the current diagnosis (contains disease name, "precautions", etc.)
+            current_disease = session.predicted_diseases[0].disease if session.predicted_diseases else None
+            if current_disease and (current_disease.lower() in message.lower() or
+                any(word in message.lower() for word in ['recommendation', 'precaution', 'symptom', 'risk', 'serious'])):
+                logger.info("Message is a follow‑up question about the current diagnosis.")
+                response = self._generate_post_diagnosis_answer(message, session)
+                self._add_message(session, 'assistant', response)
+                return {
+                    'text': response,
+                    'is_emergency': False,
+                    'session_id': session.session_id,
+                    'state': session.state
+                }
+            # If it's a question but not about the current diagnosis, treat as new symptom query.
+            # We'll fall through to symptom keyword detection.
+
+        # 3. Check for symptom‑describing keywords (even if extractor missed them)
+        symptom_keywords = [
+            'have', 'feel', 'my', 'pain', 'ache', 'symptom', 'hurt', 'suffering', 'experiencing',
+            'swell', 'swelling', 'cough', 'fever', 'headache', 'nausea', 'dizziness', 'rash',
+            'itching', 'burning', 'numbness', 'tingling', 'weakness', 'fatigue', 'tired',
+            'shortness of breath', 'chest tightness', 'palpitations', 'indigestion', 'vomiting',
+            'diarrhea', 'constipation', 'insomnia', 'anxiety', 'depression', 'stress'
+        ]
         if any(word in message.lower() for word in symptom_keywords):
-            logger.info("Symptom description detected but no specific symptoms extracted – resetting anyway.")
+            logger.info("Symptom‑describing keywords found – resetting and starting new diagnosis.")
             self._reset_session_for_new_diagnosis(session)
+            # Add a dummy symptom to trigger the collection state
             dummy = DetectedSymptom(
                 symptom="symptom_description",
                 confidence=0.4,
@@ -2440,8 +2517,8 @@ class ChatSessionManager:
             session.detected_symptoms.append(dummy)
             return self._continue_diagnosis(session)
 
-        # 5. Otherwise, treat as general chat
-        logger.info("No symptoms or keywords – treating as general chat.")
+        # 4. If none of the above, treat as general chat (greetings, thanks, etc.)
+        logger.info("No symptoms or relevant keywords – treating as general chat.")
         return self._handle_general_chat(message, session)
 
     def _reset_session_for_new_diagnosis(self, session: ChatSession):
@@ -2612,6 +2689,63 @@ class ChatSessionManager:
             logger.info(f"Reset conversation for session: {session_id}")
             return True
         return False
+
+    # -------------------------------------------------------------------------
+    # MAIN PROCESSING WITH ROBUST ERROR HANDLING
+    # -------------------------------------------------------------------------
+    def process_user_message(self, message: str, user_id: Optional[str] = None,
+                            session_id: Optional[str] = None) -> Dict[str, Any]:
+        try:
+            logger.info("=" * 60)
+            logger.info(f"Processing message: '{message[:50]}...'")
+            logger.info(f"Session ID: {session_id}")
+            if not message or len(message.strip()) < 1:
+                return {
+                    'text': "Could you please describe your symptoms or ask a question?",
+                    'error': 'Empty message'
+                }
+            session = self.get_or_create_session(user_id, session_id)
+            logger.info(f"Session state: {session.state}, Follow-ups: {session.follow_up_count}")
+            self._add_message(session, 'user', message)
+            try:
+                intent_result = self._detect_intent(message, session)
+                intent = intent_result.get('intent')
+                logger.info(f"Detected intent: {intent}")
+                if intent == 'reset':
+                    self.reset_conversation(session.session_id)
+                    session = self.get_session(session.session_id)
+                    return self._handle_general_chat(message, session)
+                elif intent == 'disease_info':
+                    return self._handle_disease_info(message, session)
+                elif intent == 'confirmation_yes':
+                    return self._handle_confirmation_yes(message, session)
+                elif intent == 'confirmation_no':
+                    return self._handle_confirmation_no(message, session)
+                elif intent == 'symptom_diagnosis':
+                    symptoms = intent_result.get('symptoms', [])
+                    return self._handle_symptom_diagnosis(message, session, symptoms)
+                elif session.state == ConversationState.RESULT:
+                    return self._handle_post_diagnosis(message, session)
+                else:
+                    return self._handle_general_chat(message, session)
+            except Exception as e:
+                logger.error(f"Error in handler: {e}")
+                import traceback
+                traceback.print_exc()
+                # Return a friendly error message
+                return {
+                    'text': "I apologize, but I encountered an error while processing your request. Please try again or rephrase your question.",
+                    'error': str(e),
+                    'session_id': session.session_id
+                }
+        except Exception as e:
+            logger.error(f"Critical error in process_user_message: {e}")
+            import traceback
+            traceback.print_exc()
+            return {
+                'text': "I'm sorry, something went wrong. Please start a new session or try again later.",
+                'error': str(e)
+            }
 
 # ----------------------------------------------------------------------------
 # Medical Chat Engine
@@ -3131,8 +3265,8 @@ async def chat(request: ChatRequest):
         )
         return response
     except Exception as e:
-        logger.error(f"Chat error: {e}")
-        raise HTTPException(status_code=500, detail=str(e))
+        logger.exception(f"Chat endpoint error: {e}")
+        raise HTTPException(status_code=500, detail=f"Internal server error: {str(e)}")
 
 @app.post("/api/reset")
 async def reset_conversation(request: Dict[str, str]):
@@ -3149,7 +3283,7 @@ if __name__ == "__main__":
     import os
     import uvicorn
 
-    port = int(os.environ.get("PORT", 7860))
+    port = int(os.environ.get("PORT", 7680))
     uvicorn.run(
         "main:app",
         host="0.0.0.0",

@@ -88,3 +88,6 @@ Exception encountered: Could not locate function 'softmax_v2'. Make sure custom 
 2026-07-01 05:16:48 | ERROR    | medical_ai | main.py:2822 |  Preprocessor transform failed: columns are missing: {'concave points_worst', 'concave points_mean', 'concave points_se'}. Falling back to raw features.
 2026-07-01 05:18:02 | ERROR    | medical_ai | main.py:2822 |  Preprocessor transform failed: columns are missing: {'concave points_worst', 'concave points_mean', 'concave points_se'}. Falling back to raw features.
 2026-07-01 05:18:18 | ERROR    | medical_ai | main.py:2822 |  Preprocessor transform failed: columns are missing: {'concave points_worst', 'concave points_mean', 'concave points_se'}. Falling back to raw features.
+2026-07-05 13:38:11 | ERROR    | medical_ai | main.py:3202 | Chat error: 'ChatSessionManager' object has no attribute 'process_user_message'
+2026-07-05 13:39:07 | ERROR    | medical_ai | main.py:3202 | Chat error: 'ChatSessionManager' object has no attribute 'process_user_message'
+2026-07-05 13:46:37 | ERROR    | medical_ai | main.py:3202 | Chat error: 'ChatSessionManager' object has no attribute 'process_user_message'
