@@ -1608,6 +1608,8 @@ def predict_brain_tumor(image_bytes: bytes) -> dict:
 # ============================================================================
 
 import torch
+import pickle
+import numpy as np
 from transformers import AutoTokenizer, AutoModelForSequenceClassification
 
 LUNG_MODEL_PATH = settings.MODELS_DIR / "Lung_Model"
@@ -1615,6 +1617,25 @@ LUNG_LABEL_ENCODER_PATH = settings.MODELS_DIR / "label_encoder.pkl"
 LUNG_TOKENIZER = None
 LUNG_MODEL = None
 LUNG_ENCODER = None
+
+def load_label_encoder(path):
+    """
+    Custom unpickler that maps `numpy._core` to `numpy.core` for NumPy version compatibility.
+    """
+    class CustomUnpickler(pickle.Unpickler):
+        def find_class(self, module, name):
+            # Redirect numpy._core -> numpy.core (for older numpy versions)
+            if module == 'numpy._core':
+                module = 'numpy.core'
+            # Also handle deeper paths like numpy._core.multiarray
+            if module.startswith('numpy._core.'):
+                module = module.replace('numpy._core.', 'numpy.core.')
+            try:
+                return super().find_class(module, name)
+            except ModuleNotFoundError:
+                raise
+    with open(path, 'rb') as f:
+        return CustomUnpickler(f).load()
 
 if LUNG_MODEL_PATH.exists() and LUNG_LABEL_ENCODER_PATH.exists():
     try:
@@ -1627,30 +1648,14 @@ if LUNG_MODEL_PATH.exists() and LUNG_LABEL_ENCODER_PATH.exists():
         logger.info("✅ Model loaded")
 
         logger.info("Loading Label Encoder...")
-        # Try loading with explicit numpy version compatibility
-        try:
-            LUNG_ENCODER = joblib.load(LUNG_LABEL_ENCODER_PATH)
-            logger.info("✅ Label Encoder loaded")
-        except ModuleNotFoundError as e:
-            if "numpy._core" in str(e):
-                logger.warning(
-                    "⚠️ NumPy version mismatch while loading label encoder. "
-                    "Please ensure numpy<2.0 is installed (e.g., numpy==1.26.4). "
-                    "Skipping lung NLP model."
-                )
-                LUNG_ENCODER = None
-            else:
-                raise e
+        LUNG_ENCODER = load_label_encoder(LUNG_LABEL_ENCODER_PATH)
+        logger.info("✅ Label Encoder loaded")
 
-        if LUNG_ENCODER is not None and torch.cuda.is_available():
+        if torch.cuda.is_available():
             LUNG_MODEL.to("cuda")
 
-        if LUNG_ENCODER is not None:
-            logger.info(f"✅ Lung NLP model loaded from {LUNG_MODEL_PATH}")
-            logger.info(f"Classes: {len(LUNG_ENCODER.classes_)}")
-        else:
-            LUNG_MODEL = None
-            LUNG_TOKENIZER = None
+        logger.info(f"✅ Lung NLP model loaded from {LUNG_MODEL_PATH}")
+        logger.info(f"Classes: {len(LUNG_ENCODER.classes_)}")
 
     except Exception as e:
         import traceback
@@ -1660,7 +1665,6 @@ if LUNG_MODEL_PATH.exists() and LUNG_LABEL_ENCODER_PATH.exists():
         LUNG_TOKENIZER = None
         LUNG_ENCODER = None
 else:
-    # Use debug level to avoid warning noise
     logger.debug(f"Lung model files not found at {LUNG_MODEL_PATH} or label_encoder.pkl missing")
     LUNG_MODEL = None
 
